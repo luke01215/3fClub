@@ -1,0 +1,389 @@
+<title>3F Member Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Archivo:wght@400;500;600;700&display=swap">
+<style>
+/* Members-only area, drawn in Direction A's tokens so the private side
+   reads as the same institution as the public one. */
+:root{
+  --green-900:#0C1A13; --green-800:#12241B; --green-700:#172F23; --green-600:#1E3D2D;
+  --ivory:#E9E6D9; --ivory-2:#B9B9AB; --ivory-3:#868A80;
+  --brass:#B0894A; --brass-hi:#C79E5C;
+  --rule:rgba(176,137,74,.24); --rule-soft:rgba(233,230,217,.11);
+  --ok:#5FA97C; --ok-bg:rgba(95,169,124,.13);
+  --warn:#D9A441; --warn-bg:rgba(217,164,65,.13);
+  --crit:#C4685A; --crit-bg:rgba(196,104,90,.13);
+}
+*{box-sizing:border-box}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--green-900);color:var(--ivory);
+  font-family:"Archivo",-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--brass);outline-offset:2px;border-radius:3px}
+.serif{font-family:"EB Garamond",Georgia,serif}
+.lbl{font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ivory-3)}
+.num{font-variant-numeric:tabular-nums}
+
+/* app frame */
+.app{display:grid;min-height:100vh;grid-template-columns:minmax(0,1fr)}
+@media(min-width:1024px){.app{grid-template-columns:242px minmax(0,1fr)}}
+
+/* sidebar */
+aside{background:var(--green-800);border-right:1px solid var(--rule);padding:20px 0;
+  display:flex;flex-direction:column;gap:22px}
+@media(max-width:1023px){aside{border-right:0;border-bottom:1px solid var(--rule);padding-bottom:14px}}
+.brand{display:flex;align-items:center;gap:11px;padding:0 20px}
+.brand .mk{width:34px;height:34px;border:1.5px solid var(--brass);border-radius:50%;display:grid;place-items:center;
+  font-family:"EB Garamond",serif;font-weight:600;font-size:15px;color:var(--ivory);flex:none}
+.brand b{font-family:"EB Garamond",serif;font-weight:600;font-size:16.5px;line-height:1.1;display:block}
+.brand span{font-size:9px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--ivory-3)}
+nav.side{display:flex;flex-direction:column;gap:1px;padding:0 12px;overflow-x:auto}
+@media(max-width:1023px){nav.side{flex-direction:row;gap:4px;padding:0 14px}}
+nav.side .grp{padding:16px 8px 6px}
+@media(max-width:1023px){nav.side .grp{display:none}}
+nav.side a{display:flex;align-items:center;gap:11px;padding:9px 10px;border-radius:5px;
+  font-size:14px;color:var(--ivory-2);white-space:nowrap}
+nav.side a svg{flex:none;opacity:.75}
+nav.side a:hover{background:var(--green-700);color:var(--ivory)}
+nav.side a.on{background:var(--green-600);color:var(--ivory);font-weight:600}
+nav.side a.on svg{opacity:1;color:var(--brass)}
+nav.side a .dotr{margin-left:auto;width:7px;height:7px;border-radius:50%;background:var(--warn);flex:none}
+.side-foot{margin-top:auto;padding:16px 20px 0;border-top:1px solid var(--rule-soft);font-size:12.5px;color:var(--ivory-3)}
+@media(max-width:1023px){.side-foot{display:none}}
+
+/* main */
+main{min-width:0;display:flex;flex-direction:column}
+.topbar{display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:16px 26px;
+  border-bottom:1px solid var(--rule);background:var(--green-800)}
+.topbar h1{margin:0;font-family:"EB Garamond",serif;font-weight:600;font-size:23px;letter-spacing:.005em}
+.topbar .who{margin-left:auto;display:flex;align-items:center;gap:11px}
+.avatar{width:34px;height:34px;border-radius:50%;background:var(--green-600);border:1px solid var(--rule);
+  display:grid;place-items:center;font-family:"EB Garamond",serif;font-size:14px;color:var(--brass);flex:none}
+.who .nm b{display:block;font-size:13.5px;font-weight:600;line-height:1.2}
+.who .nm span{font-size:11.5px;color:var(--ivory-3);letter-spacing:.04em}
+.content{padding:26px;display:flex;flex-direction:column;gap:20px;max-width:1280px;width:100%;min-width:0}
+
+/* banner */
+.banner{display:flex;flex-wrap:wrap;gap:16px;align-items:center;padding:18px 22px;border-radius:6px;
+  border:1px solid var(--warn);border-left-width:4px;background:var(--warn-bg)}
+.banner .bi{color:var(--warn);flex:none}
+.banner .bt{flex:1;min-width:230px}
+.banner h2{margin:0 0 4px;font-size:15.5px;font-weight:600;font-family:"Archivo",sans-serif}
+.banner p{margin:0;font-size:13.5px;color:var(--ivory-2);max-width:64ch}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:4px;
+  font-size:12.5px;font-weight:600;letter-spacing:.05em;border:1px solid transparent;white-space:nowrap;cursor:pointer}
+.btn-p{background:var(--brass);color:var(--green-900);border-color:var(--brass)}
+.btn-p:hover{background:var(--brass-hi)}
+.btn-s{border-color:var(--rule);color:var(--ivory)}
+.btn-s:hover{border-color:var(--brass);color:var(--brass)}
+.btn-xs{padding:6px 12px;font-size:11.5px}
+
+/* grid */
+.grid{display:grid;gap:20px}
+@media(min-width:900px){.grid.g2{grid-template-columns:340px minmax(0,1fr)}}
+@media(min-width:1180px){.grid.g3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:760px) and (max-width:1179px){.grid.g3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.panel{background:var(--green-800);border:1px solid var(--rule-soft);border-radius:8px;overflow:hidden;min-width:0;
+  display:flex;flex-direction:column}
+.p-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--rule-soft)}
+.p-head h3{margin:0;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--brass)}
+.p-head a{margin-left:auto;font-size:12px;color:var(--ivory-3)}
+.p-head a:hover{color:var(--brass)}
+.p-body{padding:18px;display:flex;flex-direction:column;gap:14px;flex:1}
+.p-body.tight{padding:0}
+
+/* membership card */
+.mcard{background:linear-gradient(148deg,var(--green-600),var(--green-700) 62%);
+  border:1px solid var(--rule);border-radius:8px;padding:22px;position:relative;overflow:hidden}
+.mcard::after{content:"";position:absolute;right:-42px;top:-42px;width:170px;height:170px;border-radius:50%;
+  border:1px solid var(--rule);pointer-events:none}
+.mcard::before{content:"";position:absolute;right:-16px;top:-16px;width:118px;height:118px;border-radius:50%;
+  border:1px solid var(--rule-soft);pointer-events:none}
+.mcard .top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:26px;position:relative}
+.mcard .crest{width:40px;height:40px;border:1.5px solid var(--brass);border-radius:50%;display:grid;place-items:center;
+  font-family:"EB Garamond",serif;font-size:17px;font-weight:600;color:var(--brass)}
+.mcard .status{font-size:10px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
+  padding:4px 10px;border-radius:20px;color:var(--ok);background:var(--ok-bg);border:1px solid var(--ok)}
+.mcard .nmx{font-family:"EB Garamond",serif;font-size:27px;font-weight:600;line-height:1.1;margin-bottom:3px;position:relative}
+.mcard .role{font-size:12px;color:var(--ivory-2);margin-bottom:22px;position:relative}
+.mcard .rows{display:flex;gap:26px;flex-wrap:wrap;position:relative}
+.mcard .rows div dt{margin:0 0 3px}
+.mcard .rows div dd{margin:0;font-family:"EB Garamond",serif;font-size:18px;letter-spacing:.02em}
+
+/* status list */
+.slist{display:flex;flex-direction:column}
+.srow{display:flex;align-items:center;gap:13px;padding:14px 18px;border-bottom:1px solid var(--rule-soft)}
+.srow:last-child{border-bottom:0}
+.srow .ind{width:9px;height:9px;border-radius:50%;flex:none}
+.srow .txt{flex:1;min-width:0}
+.srow .txt b{display:block;font-size:14px;font-weight:600;line-height:1.3}
+.srow .txt span{font-size:12.5px;color:var(--ivory-3);line-height:1.4;display:block}
+.tag{font-size:10px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;padding:3px 9px;
+  border-radius:4px;white-space:nowrap;border:1px solid}
+.t-ok{color:var(--ok);background:var(--ok-bg);border-color:var(--ok)}
+.t-warn{color:var(--warn);background:var(--warn-bg);border-color:var(--warn)}
+.t-crit{color:var(--crit);background:var(--crit-bg);border-color:var(--crit)}
+.t-mute{color:var(--ivory-3);background:transparent;border-color:var(--rule-soft)}
+
+/* events */
+.ev{display:flex;gap:14px;padding:14px 18px;border-bottom:1px solid var(--rule-soft);align-items:center}
+.ev:last-child{border-bottom:0}
+.date{width:48px;flex:none;text-align:center;border:1px solid var(--rule-soft);border-radius:5px;padding:6px 0;background:var(--green-700)}
+.date b{display:block;font-family:"EB Garamond",serif;font-size:19px;line-height:1}
+.date span{display:block;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--brass);margin-top:2px}
+.ev .info{flex:1;min-width:0}
+.ev .info b{display:block;font-size:14px;font-weight:600;line-height:1.3}
+.ev .info span{font-size:12.5px;color:var(--ivory-3)}
+.ev .rsvp{flex:none}
+
+/* table */
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:420px;font-size:13.5px}
+th,td{text-align:left;padding:11px 18px;border-bottom:1px solid var(--rule-soft)}
+thead th{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ivory-3);
+  background:var(--green-700);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+tbody tr.you{background:rgba(176,137,74,.08)}
+tbody tr.you td{color:var(--ivory);font-weight:600}
+td.r{text-align:right;font-variant-numeric:tabular-nums}
+.pos{color:var(--brass);font-family:"EB Garamond",serif;font-size:16px;width:32px}
+
+/* docs */
+.doc{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid var(--rule-soft)}
+.doc:last-child{border-bottom:0}
+.doc:hover{background:var(--green-700)}
+.doc svg{color:var(--ivory-3);flex:none}
+.doc .dn{flex:1;min-width:0}
+.doc .dn b{display:block;font-size:13.5px;font-weight:500}
+.doc .dn span{font-size:11.5px;color:var(--ivory-3);letter-spacing:.03em}
+
+/* sponsor request */
+.spon{padding:18px;display:flex;flex-direction:column;gap:13px}
+.spon .req{border:1px solid var(--rule-soft);border-radius:6px;padding:15px;background:var(--green-700)}
+.spon .req b{display:block;font-family:"EB Garamond",serif;font-size:18px;margin-bottom:2px}
+.spon .req .meta{font-size:12.5px;color:var(--ivory-3);margin-bottom:12px}
+.spon .req .acts{display:flex;gap:8px;flex-wrap:wrap}
+.empty{font-size:13px;color:var(--ivory-3);text-align:center;padding:16px 0}
+
+/* pheasant */
+.ord{padding:18px;display:flex;flex-direction:column;gap:15px}
+.ord .big{display:flex;align-items:baseline;gap:10px}
+.ord .big b{font-family:"EB Garamond",serif;font-size:40px;line-height:1;color:var(--brass)}
+.ord .big span{font-size:13px;color:var(--ivory-2)}
+.bar{height:6px;border-radius:3px;background:var(--green-700);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--brass);border-radius:3px}
+.ord .legend{display:flex;justify-content:space-between;font-size:12px;color:var(--ivory-3)}
+.rel{display:flex;flex-wrap:wrap;gap:6px}
+.rel span{font-size:11px;padding:4px 9px;border-radius:4px;border:1px solid var(--rule-soft);color:var(--ivory-2)}
+.rel span.next{border-color:var(--brass);color:var(--brass)}
+</style>
+
+<div class="app">
+
+<aside>
+  <div class="brand">
+    <span class="mk">3F</span>
+    <span><b>Member Portal</b><span>Fin, Feather &amp; Fur</span></span>
+  </div>
+  <nav class="side" aria-label="Portal">
+    <span class="grp lbl">Overview</span>
+    <a class="on" href="#"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="9" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="2" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="9" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/></svg> Dashboard</a>
+    <a href="#"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="1.6" y="3.4" width="12.8" height="9.2" rx="1.4" stroke="currentColor" stroke-width="1.3"/><path d="M1.6 6.6h12.8" stroke="currentColor" stroke-width="1.3"/></svg> My Membership</a>
+    <span class="grp lbl">Access</span>
+    <a href="#"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="8" r="2.2" stroke="currentColor" stroke-width="1.3"/></svg> Range Access <span class="dotr" title="Action needed"></span></a>
+    <a href="#"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.6 13 5v6L8 14.4 3 11V5l5-3.4Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><circle cx="8" cy="8" r="1.6" fill="currentColor"/></svg> Hunt Sign-In</a>
+    <a href="#"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2c2.6 2 4.2 4 4.2 6.2S10.4 12 8 12 3.8 10.4 3.8 8.2 5.4 4 8 2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M8 6v8.2" stroke="currentColor" stroke-width="1.3"/></svg> Pheasant Program</a>
+    <span class="grp lbl">Club Life</span>
+    <a href="#"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="1.8" y="3" width="12.4" height="11" rx="1.4" stroke="currentColor" stroke-width="1.3"/><path d="M1.8 6.2h12.4M5.2 1.6v2.6M10.8 1.6v2.6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg> Events &amp; RSVPs</a>
+    <a href="#"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.4 13V8M6.8 13V4M11.2 13V6M2.4 13h11.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg> Leagues &amp; Scores</a>
+    <a href="#"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.4 2h6l3.4 3.4V14H3.4V2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M9.2 2v3.6h3.4" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg> Documents</a>
+    <a href="#"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="5.6" r="2.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 13.4c0-2.4 2.2-4.2 5-4.2s5 1.8 5 4.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg> Member Directory</a>
+    <a href="#"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg> Sponsor an Application <span class="dotr" style="background:var(--brass)"></span></a>
+  </nav>
+  <div class="side-foot">
+    Clubhouse (716) 754-2293<br>
+    Open today until 9:00 pm
+  </div>
+</aside>
+
+<main>
+  <div class="topbar">
+    <h1>Good evening, Ray</h1>
+    <div class="who">
+      <span class="nm"><b>Raymond Kessler</b><span class="num">Member No. 1187</span></span>
+      <span class="avatar">RK</span>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <div class="banner">
+      <span class="bi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9.4" stroke="currentColor" stroke-width="1.6"/><path d="M12 7.4v5.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="16.2" r="1.1" fill="currentColor"/></svg></span>
+      <span class="bt">
+        <h2>Your range key card is inactive</h2>
+        <p>The outdoor range rules were revised in July 2025. Cards stay off until the current revision is signed &mdash; read them here and your card reactivates within the hour. No phone call needed.</p>
+      </span>
+      <a class="btn btn-p" href="#">Read &amp; Sign Rules</a>
+    </div>
+
+    <div class="grid g2">
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <div class="mcard">
+          <div class="top">
+            <span class="crest">3F</span>
+            <span class="status">Dues current</span>
+          </div>
+          <div class="nmx">Raymond Kessler</div>
+          <div class="role">Full member &middot; Range committee</div>
+          <dl class="rows">
+            <div><dt class="lbl">Member No.</dt><dd class="num">1187</dd></div>
+            <div><dt class="lbl">Member since</dt><dd class="num">2009</dd></div>
+            <div><dt class="lbl">Paid through</dt><dd class="num">Mar 2027</dd></div>
+          </dl>
+        </div>
+
+        <div class="panel">
+          <div class="p-head"><h3>Your standing</h3></div>
+          <div class="p-body tight">
+            <div class="slist">
+              <div class="srow">
+                <span class="ind" style="background:var(--ok)"></span>
+                <span class="txt"><b>Annual dues</b><span>Paid February 14, 2026</span></span>
+                <span class="tag t-ok">Current</span>
+              </div>
+              <div class="srow">
+                <span class="ind" style="background:var(--warn)"></span>
+                <span class="txt"><b>Range rules acknowledgment</b><span>Signed rev. 03/2024 &mdash; rev. 07/2025 is outstanding</span></span>
+                <span class="tag t-warn">Stale</span>
+              </div>
+              <div class="srow">
+                <span class="ind" style="background:var(--crit)"></span>
+                <span class="txt"><b>Gate key card</b><span>Card 1187-B &middot; deactivated Aug 4</span></span>
+                <span class="tag t-crit">Inactive</span>
+              </div>
+              <div class="srow">
+                <span class="ind" style="background:var(--ok)"></span>
+                <span class="txt"><b>Pistol permit recertification</b><span>Recertified with NYS on Jan 8, 2024</span></span>
+                <span class="tag t-ok">On file</span>
+              </div>
+              <div class="srow">
+                <span class="ind" style="background:var(--ivory-3)"></span>
+                <span class="txt"><b>Hunt sign-in</b><span>Not currently on the property</span></span>
+                <span class="tag t-mute">Signed out</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <div class="grid g3">
+          <div class="panel">
+            <div class="p-head"><h3>Upcoming</h3><a href="#">Calendar</a></div>
+            <div class="p-body tight">
+              <div class="ev">
+                <span class="date"><b>23</b><span>Aug</span></span>
+                <span class="info"><b>Kids Fishing Derby</b><span>8:00 am &middot; 32-acre pond</span></span>
+                <span class="rsvp"><button class="btn btn-p btn-xs">RSVP</button></span>
+              </div>
+              <div class="ev">
+                <span class="date"><b>15</b><span>Sep</span></span>
+                <span class="info"><b>General Club Meeting</b><span>7:00 pm &middot; Clubhouse</span></span>
+                <span class="rsvp"><button class="btn btn-s btn-xs">RSVP</button></span>
+              </div>
+              <div class="ev">
+                <span class="date"><b>27</b><span>Sep</span></span>
+                <span class="info"><b>Fall Gun Raffle</b><span>6:00 pm &middot; Pavilion</span></span>
+                <span class="rsvp"><span class="tag t-ok">Going</span></span>
+              </div>
+              <div class="ev">
+                <span class="date"><b>10</b><span>Nov</span></span>
+                <span class="info"><b>General Club Meeting</b><span>7:00 pm &middot; second Tuesday, hunting season</span></span>
+                <span class="rsvp"><button class="btn btn-s btn-xs">RSVP</button></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="p-head"><h3>Pheasant program</h3><a href="#">Order</a></div>
+            <div class="ord">
+              <div class="big"><b class="num">12</b><span>birds remaining<br>of a 20-bird package</span></div>
+              <div class="bar"><i style="width:60%"></i></div>
+              <div class="legend"><span>8 released</span><span>60% left</span></div>
+              <div>
+                <span class="lbl" style="display:block;margin-bottom:7px">Release days</span>
+                <div class="rel">
+                  <span class="next">Sat 23rd</span><span>Sun 24th</span><span>Tue 26th</span><span>Thu 28th</span>
+                </div>
+              </div>
+              <button class="btn btn-s btn-xs" style="align-self:flex-start">Schedule a release</button>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="p-head"><h3>Sponsorship requests</h3></div>
+            <div class="spon">
+              <div class="req">
+                <b>Daniel Ochab</b>
+                <div class="meta">Applied Aug 12 &middot; asks you as first sponsor<br>Nephew of member No. 0834</div>
+                <div class="acts">
+                  <button class="btn btn-p btn-xs">Confirm sponsorship</button>
+                  <button class="btn btn-s btn-xs">Decline</button>
+                </div>
+              </div>
+              <div class="empty">No other requests waiting.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid" style="grid-template-columns:1fr">
+          <div class="panel">
+            <div class="p-head"><h3>Summer skeet league &middot; week 6 of 10</h3><a href="#">Full standings</a></div>
+            <div class="tw"><table>
+              <thead><tr><th></th><th>Shooter</th><th>Class</th><th class="r">Wk 5</th><th class="r">Wk 6</th><th class="r">Average</th></tr></thead>
+              <tbody>
+                <tr><td class="pos">1</td><td>C. Peacock</td><td>AA</td><td class="r">98</td><td class="r">100</td><td class="r">98.4</td></tr>
+                <tr><td class="pos">2</td><td>C. Tietjen</td><td>AA</td><td class="r">99</td><td class="r">97</td><td class="r">97.8</td></tr>
+                <tr><td class="pos">3</td><td>M. Kelley</td><td>A</td><td class="r">96</td><td class="r">98</td><td class="r">96.2</td></tr>
+                <tr class="you"><td class="pos">4</td><td>R. Kessler &mdash; you</td><td>B</td><td class="r">93</td><td class="r">95</td><td class="r">93.6</td></tr>
+                <tr><td class="pos">5</td><td>F. Ochab</td><td>B</td><td class="r">92</td><td class="r">91</td><td class="r">92.0</td></tr>
+                <tr><td class="pos">6</td><td>C. Lombardo</td><td>C</td><td class="r">88</td><td class="r">90</td><td class="r">88.7</td></tr>
+              </tbody>
+            </table></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="p-head"><h3>Documents</h3><a href="#">All documents</a></div>
+          <div class="p-body tight">
+            <a class="doc" href="#">
+              <svg width="17" height="17" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.4 2h6l3.4 3.4V14H3.4V2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M9.2 2v3.6h3.4" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+              <span class="dn"><b>Outdoor Range Rules &mdash; rev. 07/2025</b><span class="num">PDF &middot; 4 pages &middot; signature required</span></span>
+              <span class="tag t-warn">Unsigned</span>
+            </a>
+            <a class="doc" href="#">
+              <svg width="17" height="17" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.4 2h6l3.4 3.4V14H3.4V2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M9.2 2v3.6h3.4" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+              <span class="dn"><b>Club bylaws</b><span class="num">PDF &middot; amended March 2023</span></span>
+            </a>
+            <a class="doc" href="#">
+              <svg width="17" height="17" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.4 2h6l3.4 3.4V14H3.4V2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M9.2 2v3.6h3.4" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+              <span class="dn"><b>General meeting minutes &mdash; July 2026</b><span class="num">PDF &middot; posted Jul 22</span></span>
+            </a>
+            <a class="doc" href="#">
+              <svg width="17" height="17" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.4 2h6l3.4 3.4V14H3.4V2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M9.2 2v3.6h3.4" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+              <span class="dn"><b>Pheasant program FAQ</b><span class="num">PDF &middot; 2026 season</span></span>
+            </a>
+            <a class="doc" href="#">
+              <svg width="17" height="17" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.4 2h6l3.4 3.4V14H3.4V2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M9.2 2v3.6h3.4" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+              <span class="dn"><b>Range committee contact list</b><span class="num">Members only &middot; updated Aug 2026</span></span>
+              <span class="tag t-mute">Private</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+</div>

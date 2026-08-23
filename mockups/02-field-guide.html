@@ -1,0 +1,548 @@
+<title>3F Field Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
+<style>
+/* Direction B - Field Guide. Committed to a single light world:
+   this is a printed park guide, and printed guides do not have a night mode. */
+:root{
+  --paper:#EEF0EA;
+  --paper-2:#E4E7DE;
+  --card:#F7F8F4;
+  --ink:#23302B;
+  --ink-2:#4E5C55;
+  --ink-3:#7C877F;
+  --sage:#7C9179;
+  --sage-deep:#4A6152;
+  --clay:#C9522B;
+  --clay-deep:#A63F1E;
+  --line:#CDD3C6;
+  --line-2:#B7BFAE;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Newsreader",Georgia,serif;font-size:17px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.shell{max-width:1200px;margin:0 auto;padding:0 28px}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--clay);outline-offset:3px;border-radius:2px}
+h1,h2,h3,h4,.g{font-family:"Familjen Grotesk",-apple-system,"Segoe UI",sans-serif;font-weight:600;letter-spacing:-.015em}
+.lbl{font-family:"Familjen Grotesk",sans-serif;font-size:11px;font-weight:600;letter-spacing:.17em;
+  text-transform:uppercase;color:var(--clay)}
+.lbl.sg{color:var(--sage-deep)}
+
+/* header */
+header.top{position:sticky;top:0;z-index:30;background:rgba(238,240,234,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line)}
+header.top .shell{display:flex;align-items:center;gap:18px;padding-top:13px;padding-bottom:13px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none}
+.brand b{font-family:"Familjen Grotesk",sans-serif;font-weight:700;font-size:16.5px;letter-spacing:-.02em}
+.brand span{font-family:"Familjen Grotesk",sans-serif;font-size:9.5px;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-3);border-left:1px solid var(--line-2);padding-left:11px}
+@media(max-width:620px){.brand span{display:none}}
+nav.n{margin-left:auto;display:none;gap:24px}
+@media(min-width:1000px){nav.n{display:flex}}
+nav.n a{font-family:"Familjen Grotesk",sans-serif;font-size:14px;font-weight:500;text-decoration:none;color:var(--ink-2);padding:4px 0;border-bottom:2px solid transparent}
+nav.n a:hover{color:var(--ink);border-bottom-color:var(--clay)}
+.actions{margin-left:auto;display:flex;gap:9px;align-items:center}
+@media(min-width:1000px){.actions{margin-left:22px}}
+.mini{font-family:"Familjen Grotesk",sans-serif;font-size:13px;font-weight:600;text-decoration:none;
+  padding:8px 14px;border-radius:999px;white-space:nowrap}
+.mini.ghost{color:var(--ink-2);border:1px solid var(--line-2)}
+.mini.ghost:hover{border-color:var(--ink-3);color:var(--ink)}
+.mini.solid{background:var(--clay);color:#FFF7F2}
+.mini.solid:hover{background:var(--clay-deep)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+#topo{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero .shell{position:relative;padding-top:92px;padding-bottom:82px}
+.hero-grid{display:grid;gap:38px;align-items:end}
+@media(min-width:940px){.hero-grid{grid-template-columns:1.35fr .65fr;gap:56px}}
+.hero h1{font-size:clamp(42px,7vw,80px);line-height:.99;letter-spacing:-.035em;margin:18px 0 22px;max-width:14ch;text-wrap:balance}
+.hero h1 i{font-family:"Newsreader",serif;font-style:italic;font-weight:400;letter-spacing:-.01em;color:var(--sage-deep)}
+.hero .lede{font-size:19.5px;line-height:1.55;color:var(--ink-2);max-width:44ch;margin:0 0 30px}
+.hero .cta{display:flex;gap:11px;flex-wrap:wrap}
+.btn{font-family:"Familjen Grotesk",sans-serif;font-size:14.5px;font-weight:600;text-decoration:none;
+  padding:13px 24px;border-radius:999px;display:inline-flex;align-items:center;gap:9px;border:1px solid transparent}
+.btn-p{background:var(--ink);color:var(--paper)}
+.btn-p:hover{background:var(--sage-deep)}
+.btn-s{border-color:var(--line-2);color:var(--ink)}
+.btn-s:hover{border-color:var(--ink);background:rgba(35,48,43,.04)}
+.locale{border-left:2px solid var(--clay);padding-left:16px}
+.locale div{margin-bottom:14px}
+.locale div:last-child{margin-bottom:0}
+.locale dt{font-family:"Familjen Grotesk",sans-serif;font-size:10.5px;font-weight:600;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:2px}
+.locale dd{margin:0;font-size:16px;color:var(--ink)}
+
+/* glance rail */
+.glance{background:var(--ink);color:var(--paper)}
+.glance .shell{display:flex;flex-wrap:wrap;gap:0;padding:0}
+.glance .g-cell{padding:20px 26px 20px 0;margin-right:26px;border-right:1px solid rgba(238,240,234,.16);display:flex;align-items:baseline;gap:11px}
+.glance .g-cell:last-child{border-right:0;margin-right:0;padding-right:0}
+.glance b{font-family:"Familjen Grotesk",sans-serif;font-size:26px;font-weight:600;letter-spacing:-.02em;
+  color:#F2B48F;font-variant-numeric:tabular-nums}
+.glance span{font-family:"Familjen Grotesk",sans-serif;font-size:12.5px;font-weight:500;letter-spacing:.03em;color:rgba(238,240,234,.72)}
+
+/* sections */
+section{padding:84px 0}
+.sec-head{display:grid;gap:16px;margin-bottom:44px;align-items:end}
+@media(min-width:900px){.sec-head{grid-template-columns:1fr 1fr;gap:56px}}
+.sec-head h2{font-size:clamp(30px,4.6vw,50px);line-height:1.04;letter-spacing:-.03em;margin:10px 0 0;text-wrap:balance}
+.sec-head p{margin:0;font-size:17.5px;color:var(--ink-2);max-width:48ch;line-height:1.58}
+
+/* index of grounds */
+.index{border-top:1.5px solid var(--ink)}
+.entry{display:grid;gap:6px 30px;padding:26px 0;border-bottom:1px solid var(--line);text-decoration:none;align-items:start}
+@media(min-width:860px){.entry{grid-template-columns:34px 250px 1fr 110px;align-items:center}}
+.entry .ic{color:var(--sage-deep);display:flex}
+.entry h3{margin:0;font-size:22.5px;letter-spacing:-.02em}
+.entry p{margin:0;font-size:16px;color:var(--ink-2);line-height:1.5;max-width:56ch}
+.entry .kv{font-family:"Familjen Grotesk",sans-serif;font-size:11.5px;font-weight:600;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--ink-3);white-space:nowrap;justify-self:start}
+@media(min-width:860px){.entry .kv{justify-self:end}}
+.entry:hover{background:rgba(124,145,121,.08)}
+.entry:hover h3{color:var(--clay-deep)}
+
+/* seasons */
+.seasons{background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.sgrid{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+@media(min-width:680px){.sgrid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1000px){.sgrid{grid-template-columns:repeat(4,1fr)}}
+.season{background:var(--card);padding:26px 24px 24px;display:flex;flex-direction:column;gap:13px}
+.season .sh{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:11px;border-bottom:1px solid var(--line)}
+.season h3{margin:0;font-size:20px;letter-spacing:-.02em}
+.season .mo{font-family:"Familjen Grotesk",sans-serif;font-size:10.5px;font-weight:600;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--clay)}
+.season ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+.season li{font-size:15.5px;color:var(--ink-2);line-height:1.45;padding-left:16px;position:relative}
+.season li::before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;border-radius:50%;
+  border:1.5px solid var(--sage)}
+.season li b{font-weight:500;color:var(--ink);font-family:"Newsreader",serif}
+
+/* youth split */
+.youth{display:grid;gap:40px;align-items:center}
+@media(min-width:920px){.youth{grid-template-columns:.9fr 1.1fr;gap:64px}}
+.youth h2{font-size:clamp(30px,4.4vw,46px);line-height:1.05;letter-spacing:-.03em;margin:12px 0 20px;text-wrap:balance}
+.youth p{color:var(--ink-2);margin:0 0 16px;max-width:50ch}
+.roster{background:var(--card);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.roster .rh{padding:16px 22px;border-bottom:1px solid var(--line);background:var(--paper-2);
+  display:flex;justify-content:space-between;align-items:center;gap:14px}
+.roster .rh h4{margin:0;font-size:14px;letter-spacing:-.01em}
+.roster .rh span{font-family:"Familjen Grotesk",sans-serif;font-size:10.5px;font-weight:600;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3)}
+.roster .rr{display:flex;align-items:center;gap:14px;padding:15px 22px;border-bottom:1px solid var(--line)}
+.roster .rr:last-child{border-bottom:0}
+.roster .medal{width:30px;height:30px;flex:none;border-radius:50%;border:1.5px solid var(--clay);
+  display:grid;place-items:center;color:var(--clay)}
+.roster .who{flex:1;min-width:0}
+.roster .who b{display:block;font-family:"Familjen Grotesk",sans-serif;font-weight:600;font-size:15px;letter-spacing:-.01em}
+.roster .who span{font-size:14px;color:var(--ink-2)}
+
+/* join */
+.join{border-top:1px solid var(--line)}
+.jwrap{display:grid;gap:36px}
+@media(min-width:920px){.jwrap{grid-template-columns:1fr 1fr;gap:64px;align-items:center}}
+.join h2{font-size:clamp(30px,4.4vw,48px);line-height:1.04;letter-spacing:-.03em;margin:12px 0 18px;text-wrap:balance}
+.join p{color:var(--ink-2);margin:0 0 22px;max-width:46ch}
+.timeline{border:1px solid var(--line);border-radius:4px;background:var(--card);overflow:hidden}
+.tstep{display:flex;gap:16px;padding:19px 24px;border-bottom:1px solid var(--line);align-items:flex-start}
+.tstep:last-child{border-bottom:0}
+.tstep .when{font-family:"Familjen Grotesk",sans-serif;font-size:12px;font-weight:700;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--ink);width:96px;flex:none;padding-top:3px}
+.tstep .what b{display:block;font-family:"Familjen Grotesk",sans-serif;font-size:15.5px;font-weight:600;letter-spacing:-.015em;margin-bottom:3px}
+.tstep .what span{font-size:15px;color:var(--ink-2);line-height:1.45}
+.tstep.live{background:#FBF0EA}
+.tstep.live .when{color:var(--clay-deep)}
+.tstep.live::before{content:"";width:3px;background:var(--clay);align-self:stretch;margin:-19px 0 -19px -24px;flex:none}
+
+/* news */
+.news{background:var(--paper-2);border-top:1px solid var(--line)}
+.ngrid{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+@media(min-width:700px){.ngrid{grid-template-columns:repeat(3,1fr)}}
+.npost{background:var(--card);padding:24px 22px;text-decoration:none;display:flex;flex-direction:column;gap:9px}
+.npost:hover{background:#FFF}
+.npost .nt{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.npost time{font-family:"Familjen Grotesk",sans-serif;font-size:11px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-3)}
+.npost .cat{font-family:"Familjen Grotesk",sans-serif;font-size:10px;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--clay);border:1px solid currentColor;padding:2px 7px;border-radius:999px}
+.npost h3{margin:0;font-size:20px;letter-spacing:-.02em;line-height:1.22}
+.npost p{margin:0;font-size:15.5px;color:var(--ink-2);line-height:1.5}
+.npost:hover h3{color:var(--clay-deep)}
+
+/* footer */
+footer{background:var(--ink);color:var(--paper);padding:62px 0 28px;font-family:"Familjen Grotesk",sans-serif;font-size:14.5px}
+.fg{display:grid;gap:36px;padding-bottom:40px;border-bottom:1px solid rgba(238,240,234,.16)}
+@media(min-width:780px){.fg{grid-template-columns:1.5fr 1fr 1fr 1.2fr}}
+.fg h4{margin:0 0 15px;font-size:10.5px;font-weight:600;letter-spacing:.17em;text-transform:uppercase;color:#F2B48F}
+.fg ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+.fg a{color:rgba(238,240,234,.76);text-decoration:none}
+.fg a:hover{color:var(--paper)}
+.fg p{margin:0 0 10px;color:rgba(238,240,234,.76);line-height:1.55;font-size:14.5px}
+.fhours{display:flex;flex-direction:column;gap:6px;font-variant-numeric:tabular-nums}
+.fhours div{display:flex;justify-content:space-between;gap:16px;color:rgba(238,240,234,.76)}
+.fhours b{font-weight:600;color:var(--paper)}
+.fbot{padding-top:22px;display:flex;flex-wrap:wrap;gap:10px 22px;font-size:12px;color:rgba(238,240,234,.5)}
+.fbot .sp{margin-left:auto}
+</style>
+
+<header class="top"><div class="shell">
+  <a class="brand" href="#">
+    <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true">
+      <circle cx="16" cy="16" r="15" fill="none" stroke="#23302B" stroke-width="1.6"/>
+      <path d="M16 1a15 15 0 0 1 0 30" fill="#C9522B" opacity=".9"/>
+      <text x="16" y="21" text-anchor="middle" font-family="Familjen Grotesk,sans-serif" font-size="13" font-weight="700" fill="#EEF0EA">3F</text>
+    </svg>
+    <b>Fin, Feather &amp; Fur</b>
+    <span>Lewiston, NY</span>
+  </a>
+  <nav class="n" aria-label="Main">
+    <a href="#grounds">The Grounds</a>
+    <a href="#seasons">Seasons</a>
+    <a href="#youth">Youth</a>
+    <a href="#news">News</a>
+    <a href="#join">Join</a>
+  </nav>
+  <div class="actions">
+    <a class="mini ghost" href="#">Sign In</a>
+    <a class="mini solid" href="#join">Apply</a>
+  </div>
+</div></header>
+
+<div class="hero">
+  <canvas id="topo" aria-hidden="true"></canvas>
+  <div class="shell">
+    <div class="hero-grid">
+      <div>
+        <span class="lbl">Fin, Feather &amp; Fur Conservation Society</span>
+        <h1>Four hundred and two acres, <i>kept well</i></h1>
+        <p class="lede">A private conservation club in the Town of Lewiston &mdash; ranges and archery, four ponds, hunting fields, a clubhouse, and members who look after all of it.</p>
+        <div class="cta">
+          <a class="btn btn-p" href="#grounds">Explore the grounds</a>
+          <a class="btn btn-s" href="#join">How membership works</a>
+        </div>
+      </div>
+      <dl class="locale">
+        <div><dt>Where</dt><dd>Town of Lewiston, Niagara County</dd></div>
+        <div><dt>Address</dt><dd>904 Swann Road, Youngstown NY</dd></div>
+        <div><dt>Open today</dt><dd>Noon &ndash; 9:00 pm</dd></div>
+      </dl>
+    </div>
+  </div>
+</div>
+
+<div class="glance"><div class="shell">
+  <div class="g-cell"><b>402</b><span>acres</span></div>
+  <div class="g-cell"><b>5</b><span>skeet fields</span></div>
+  <div class="g-cell"><b>2</b><span>trap fields</span></div>
+  <div class="g-cell"><b>4</b><span>ponds</span></div>
+  <div class="g-cell"><b>200</b><span>yard rifle line</span></div>
+  <div class="g-cell"><b>50</b><span>ft indoor range</span></div>
+</div></div>
+
+<section id="grounds"><div class="shell">
+  <div class="sec-head">
+    <div><span class="lbl sg">An index</span><h2>What's out there</h2></div>
+    <p>Eight things worth the drive. Each one is run by a committee of members, and most of them are open to your family the day you join.</p>
+  </div>
+  <div class="index">
+    <a class="entry" href="#">
+      <span class="ic"><svg width="26" height="26" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="1.6"/><circle cx="16" cy="16" r="6.5" stroke="currentColor" stroke-width="1.6"/><circle cx="16" cy="16" r="2.2" fill="currentColor"/></svg></span>
+      <h3>Skeet &amp; Trap</h3>
+      <p>Five skeet fields and two trap fields, with a 20-week winter league that ends in an awards banquet and a 10-week summer league that mixes both.</p>
+      <span class="kv">Leagues year-round</span>
+    </a>
+    <a class="entry" href="#">
+      <span class="ic"><svg width="26" height="26" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M4 24h24M8 24V13M14 24V17M20 24V9M26 24V19" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+      <h3>Outdoor Range</h3>
+      <p>A concrete firing line at 100 yards with a 200-yard line beyond it. Sign in at the gate, red light on, flag up &mdash; the rules are posted and enforced by members.</p>
+      <span class="kv">To 200 yards</span>
+    </a>
+    <a class="entry" href="#">
+      <span class="ic"><svg width="26" height="26" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="4" y="8" width="24" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M10 8v16M16 8v16M22 8v16" stroke="currentColor" stroke-width="1.2" opacity=".55"/></svg></span>
+      <h3>Indoor Pistol Range</h3>
+      <p>Fifty feet, five stations, mechanical target carriers so nobody walks downrange to change a target. Well lit and properly ventilated.</p>
+      <span class="kv">5 stations</span>
+    </a>
+    <a class="entry" href="#">
+      <span class="ic"><svg width="26" height="26" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M26 6 9 23" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M26 6h-6M26 6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="6.5" cy="25.5" r="2" stroke="currentColor" stroke-width="1.6"/></svg></span>
+      <h3>Archery</h3>
+      <p>An indoor range for the off season and a 3-D course through pines and hardwoods, plus stationary targets at 20, 30 and 40 yards.</p>
+      <span class="kv">Indoor &amp; 3-D</span>
+    </a>
+    <a class="entry" href="#">
+      <span class="ic"><svg width="26" height="26" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M3 20c3-3 6-3 9 0s6 3 9 0 6-3 8 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M3 25c3-3 6-3 9 0s6 3 9 0 6-3 8 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M21 6c-4 0-7 2.6-7 5.6S17 17 21 17s7-2.4 7-5.4S25 6 21 6Z" stroke="currentColor" stroke-width="1.6"/></svg></span>
+      <h3>The Ponds</h3>
+      <p>Four of them. The largest is a 32-acre lake stocked with largemouth bass and pan fish; all four take waterfowl, dog training and bird watching.</p>
+      <span class="kv">32-acre lake</span>
+    </a>
+    <a class="entry" href="#">
+      <span class="ic"><svg width="26" height="26" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 4c5 4 8 8 8 12.5S20.6 25 16 25s-8-4-8-8.5S11 8 16 4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M16 11v17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+      <h3>Pheasant Program</h3>
+      <p>Buy a package of birds; they're released before your hunt. Because the society is non-profit, packages stay affordable. Releases Saturday, Sunday, Tuesday and Thursday.</p>
+      <span class="kv">Optional program</span>
+    </a>
+    <a class="entry" href="#">
+      <span class="ic"><svg width="26" height="26" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M6 20c0-5 4-9 9-9 4 0 7 2 8 5l4 2-4 1.5c-1 3-4 5-8 5H6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="19" cy="15.6" r="1.2" fill="currentColor"/></svg></span>
+      <h3>Bird Banding</h3>
+      <p>Purple martins every summer before they leave for Brazil, plus owls and migrants caught in mist nets. Data recorded, band fitted, bird released &mdash; and you can stand right there.</p>
+      <span class="kv">Spring &amp; summer</span>
+    </a>
+    <a class="entry" href="#">
+      <span class="ic"><svg width="26" height="26" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M3 14 16 5l13 9" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M6 14v13h20V14" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+      <h3>Clubhouse &amp; Pavilion</h3>
+      <p>A bar, a member restaurant, and a 40 by 100 foot pavilion that takes wedding receptions, company picnics and anything else that needs a roof and a crowd.</p>
+      <span class="kv">40 &times; 100 ft</span>
+    </a>
+  </div>
+</div></section>
+
+<section class="seasons" id="seasons"><div class="shell">
+  <div class="sec-head">
+    <div><span class="lbl sg">The club year</span><h2>Something in every season</h2></div>
+    <p>Membership is not a summer thing. The calendar runs continuously, and each quarter has its own reason to be here.</p>
+  </div>
+  <div class="sgrid">
+    <div class="season">
+      <div class="sh"><h3>Spring</h3><span class="mo">Mar &ndash; May</span></div>
+      <ul>
+        <li><b>Purple martin houses</b> go back up before the birds return</li>
+        <li><b>Songbird banding</b> through the spring migration</li>
+        <li><b>Youth Club</b> continues Mondays and Thursdays</li>
+        <li><b>3-D archery league</b> schedule posted</li>
+      </ul>
+    </div>
+    <div class="season">
+      <div class="sh"><h3>Summer</h3><span class="mo">Jun &ndash; Aug</span></div>
+      <ul>
+        <li><b>The 3F Summer Classic</b> &mdash; one of New York's top money shoots</li>
+        <li><b>Martin banding</b>, then the birds leave for Brazil</li>
+        <li><b>Kids Fishing Derby</b> on the big pond</li>
+        <li><b>Applications open</b> August 1</li>
+      </ul>
+    </div>
+    <div class="season">
+      <div class="sh"><h3>Fall</h3><span class="mo">Sep &ndash; Nov</span></div>
+      <ul>
+        <li><b>Pheasant releases</b> four days a week</li>
+        <li><b>Deer season</b> &mdash; tree stands signed in and mapped</li>
+        <li><b>Youth Day</b> and the mentored pheasant hunt</li>
+        <li><b>Fall gun raffle</b> and the deer processing service</li>
+      </ul>
+    </div>
+    <div class="season">
+      <div class="sh"><h3>Winter</h3><span class="mo">Dec &ndash; Feb</span></div>
+      <ul>
+        <li><b>Winter skeet league</b> &mdash; 20 weeks, then a banquet</li>
+        <li><b>Cross-country skiing</b> across the property</li>
+        <li><b>Indoor archery and pistol</b> when the weather turns</li>
+        <li><b>Christmas party</b> and the social calendar</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<section id="youth"><div class="shell">
+  <div class="youth">
+    <div>
+      <span class="lbl">Youth Club</span>
+      <h2>Where the next conservationists come from</h2>
+      <p>The Youth Club meets Mondays and Thursdays. Members teach marksmanship from the ground up &mdash; prone first, because it's the steadiest and the hardest to learn properly &mdash; along with how to care for a firearm and how to think about what's beyond the target.</p>
+      <p>Young members qualify for the Winchester/NRA Distinguished Expert award, which means a score of at least 190 out of 200 at fifty feet, ten separate times. Some have earned a New York State lifetime hunting license through the club's own fundraising.</p>
+      <a class="btn btn-s" href="#">About the Youth Club</a>
+    </div>
+    <div class="roster">
+      <div class="rh"><h4>Distinguished Expert &mdash; recent recipients</h4><span>CMP &amp; NRA</span></div>
+      <div class="rr">
+        <span class="medal"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></span>
+        <span class="who"><b>Stella Cooper</b><span>Distinguished Expert, prone position</span></span>
+      </div>
+      <div class="rr">
+        <span class="medal"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></span>
+        <span class="who"><b>Cole Hardy</b><span>Distinguished Expert, three positions</span></span>
+      </div>
+      <div class="rr">
+        <span class="medal"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></span>
+        <span class="who"><b>Julian Hardy</b><span>NYS lifetime hunting license, Youth Day</span></span>
+      </div>
+      <div class="rr">
+        <span class="medal"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></span>
+        <span class="who"><b>Trent Hess</b><span>Distinguished Expert, light rifle</span></span>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section class="join" id="join"><div class="shell">
+  <div class="jwrap">
+    <div>
+      <span class="lbl">Membership</span>
+      <h2>The door opens once a year</h2>
+      <p>Applications are accepted from August 1 through September 30 &mdash; and only then. The board reviews everything in October and notifies accepted members by December 1.</p>
+      <p>You'll want two current members to sponsor you. If you don't know two yet, send a letter of intent instead, and say so if you're related to a member.</p>
+      <a class="btn btn-p" href="#">Start an application</a>
+    </div>
+    <div class="timeline">
+      <div class="tstep live">
+        <span class="when">Aug 1 &ndash; Sep 30</span>
+        <span class="what"><b>Applications open</b><span>Apply online, name your two sponsors, and they confirm by email.</span></span>
+      </div>
+      <div class="tstep">
+        <span class="when">October</span>
+        <span class="what"><b>Board review</b><span>Every application is read at the October meeting.</span></span>
+      </div>
+      <div class="tstep">
+        <span class="when">By Dec 1</span>
+        <span class="what"><b>Decisions sent</b><span>Accepted members hear back in writing before December 1.</span></span>
+      </div>
+      <div class="tstep">
+        <span class="when">Next August</span>
+        <span class="what"><b>Or apply again</b><span>If you aren't accepted this year, you're welcome to reapply when the window reopens.</span></span>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section class="news" id="news"><div class="shell">
+  <div class="sec-head">
+    <div><span class="lbl sg">Latest</span><h2>From the clubhouse</h2></div>
+    <p>Range notices, event announcements and board statements &mdash; sorted, so you can find the one you need.</p>
+  </div>
+  <div class="ngrid">
+    <a class="npost" href="#">
+      <div class="nt"><time datetime="2026-08-04">Aug 4, 2026</time><span class="cat">Event</span></div>
+      <h3>Kids Fishing Derby, August 23rd</h3>
+      <p>Open to children and grandchildren of members, on the 32-acre pond. Prizes and lunch provided.</p>
+    </a>
+    <a class="npost" href="#">
+      <div class="nt"><time datetime="2026-08-04">Aug 4, 2026</time><span class="cat">Youth</span></div>
+      <h3>Learn how to trap</h3>
+      <p>Trapping lessons are being organized for the fall. Dates, instructors, and what to bring with you.</p>
+    </a>
+    <a class="npost" href="#">
+      <div class="nt"><time datetime="2026-03-18">Mar 18, 2026</time><span class="cat">League</span></div>
+      <h3>Summer 3-D archery schedule</h3>
+      <p>The full week-by-week schedule for the 2026 season, with sign-up at the clubhouse.</p>
+    </a>
+  </div>
+</div></section>
+
+<footer><div class="shell">
+  <div class="fg">
+    <div>
+      <h4>Fin, Feather &amp; Fur</h4>
+      <p>Conservation Society, Inc.<br>904 Swann Road<br>Youngstown, New York 14174</p>
+      <p><a href="tel:+17167542293">(716) 754-2293</a><br><a href="mailto:admin@3fclub.org">admin@3fclub.org</a></p>
+    </div>
+    <div>
+      <h4>Visit</h4>
+      <ul>
+        <li><a href="#grounds">The Grounds</a></li>
+        <li><a href="#seasons">Club Year</a></li>
+        <li><a href="#">Restaurant</a></li>
+        <li><a href="#">Pavilion Rental</a></li>
+        <li><a href="#">Directions</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Members</h4>
+      <ul>
+        <li><a href="#">Sign In</a></li>
+        <li><a href="#">Range Rules</a></li>
+        <li><a href="#">Hunt Sign-In</a></li>
+        <li><a href="#">Pheasant Orders</a></li>
+        <li><a href="#">Documents</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Club Hours</h4>
+      <div class="fhours">
+        <div><span>Mon &ndash; Tue</span><b>4 &ndash; 9 pm</b></div>
+        <div><span>Wednesday</span><b>Noon &ndash; 9 pm</b></div>
+        <div><span>Thursday</span><b>4 &ndash; 9 pm</b></div>
+        <div><span>Friday</span><b>4 &ndash; 10 pm</b></div>
+        <div><span>Saturday</span><b>Noon &ndash; 9 pm</b></div>
+        <div><span>Sunday</span><b>Noon &ndash; 8 pm</b></div>
+      </div>
+    </div>
+  </div>
+  <div class="fbot">
+    <span>&copy; 2026 Fin, Feather and Fur Conservation Society, Inc.</span>
+    <span>Closed major holidays &mdash; please call ahead.</span>
+    <span class="sp">Direction B &mdash; Field Guide</span>
+  </div>
+</div></footer>
+
+<script>
+(function(){
+  var c = document.getElementById('topo');
+  if(!c) return;
+  var ctx = c.getContext('2d');
+  // Hills as seeded, sine-perturbed nested rings - reads as a topographic survey
+  // of rolling ground rather than a generic gradient.
+  var hills = [
+    {x:.18, y:.86, r:.50, rings:13, s:1.7},
+    {x:.72, y:.20, r:.42, rings:11, s:3.1},
+    {x:1.02,y:.74, r:.38, rings:10, s:4.6},
+    {x:.44, y:.34, r:.20, rings:6,  s:2.2}
+  ];
+  function draw(){
+    // Measure the hero rather than the canvas: an absolutely positioned canvas
+    // can report zero width before first layout settles.
+    var host = c.parentElement || c;
+    var w = Math.round(host.clientWidth || c.clientWidth || window.innerWidth);
+    var h = Math.round(host.clientHeight || c.clientHeight);
+    if(!w || !h){ return false; }
+    var dpr = Math.min(window.devicePixelRatio||1, 2);
+    c.width = w*dpr; c.height = h*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,w,h);
+    var base = Math.max(w,h);
+    hills.forEach(function(hill){
+      var cx = hill.x*w, cy = hill.y*h;
+      for(var i=1;i<=hill.rings;i++){
+        var t = i/hill.rings;
+        var rad = hill.r*base*t;
+        ctx.beginPath();
+        for(var a=0;a<=Math.PI*2+0.001;a+=Math.PI/90){
+          var wob = 1
+            + 0.085*Math.sin(a*3 + hill.s)
+            + 0.055*Math.sin(a*5 - hill.s*1.7)
+            + 0.030*Math.sin(a*8 + hill.s*2.3 + t*1.4);
+          var rr = rad*wob;
+          var px = cx + Math.cos(a)*rr, py = cy + Math.sin(a)*rr*0.74;
+          if(a===0) ctx.moveTo(px,py); else ctx.lineTo(px,py);
+        }
+        ctx.closePath();
+        // index contours every fifth ring sit heavier, as on a real survey sheet
+        var idx = (i % 5 === 0);
+        ctx.strokeStyle = idx ? 'rgba(124,145,121,0.42)' : 'rgba(124,145,121,0.22)';
+        ctx.lineWidth = idx ? 1.5 : 1;
+        ctx.stroke();
+      }
+    });
+    return true;
+  }
+
+  // Draw as soon as the hero has real dimensions, and again whenever it changes.
+  if(!draw()){
+    requestAnimationFrame(draw);
+    window.addEventListener('load', draw, {once:true});
+  }
+  if(window.ResizeObserver){
+    var t;
+    new ResizeObserver(function(){
+      clearTimeout(t); t = setTimeout(draw, 120);
+    }).observe(c.parentElement || c);
+  } else {
+    var t2;
+    window.addEventListener('resize', function(){ clearTimeout(t2); t2 = setTimeout(draw, 140); });
+  }
+})();
+</script>

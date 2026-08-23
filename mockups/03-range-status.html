@@ -1,0 +1,516 @@
+<title>3F Range Status</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Direction C - Range Status. A control-panel world, committed to dark:
+   this is the board on the wall at the gate, and it reads the same at noon. */
+:root{
+  --bg:#0E1113;
+  --surf:#171B1E;
+  --surf-2:#1F2427;
+  --raise:#272D31;
+  --line:#2E353A;
+  --line-2:#3B4348;
+  --ink:#E9EEF0;
+  --ink-2:#9BA6AC;
+  --ink-3:#6B767C;
+  --orange:#FF5C1F;
+  --orange-dim:#3A1F12;
+  --green:#4ADE80;
+  --green-dim:#12291B;
+  --amber:#FBBF24;
+  --amber-dim:#2E2410;
+  --red:#F87171;
+  --red-dim:#331A1A;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:"IBM Plex Sans",-apple-system,"Segoe UI",sans-serif;font-size:15.5px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.shell{max-width:1240px;margin:0 auto;padding:0 24px}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--orange);outline-offset:2px;border-radius:3px}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.lbl{font-family:"IBM Plex Mono",monospace;font-size:10.5px;font-weight:500;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--ink-3)}
+
+/* header */
+header.top{border-bottom:1px solid var(--line);background:var(--surf);position:sticky;top:0;z-index:40}
+header.top .shell{display:flex;align-items:center;gap:16px;padding-top:11px;padding-bottom:11px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand .mk{width:30px;height:30px;border:1.5px solid var(--orange);border-radius:4px;display:grid;place-items:center;
+  font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:12px;color:var(--orange);flex:none}
+.brand b{font-weight:600;font-size:15px;letter-spacing:-.01em;white-space:nowrap}
+.brand span{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-3);border-left:1px solid var(--line-2);padding-left:10px}
+@media(max-width:700px){.brand span{display:none}}
+nav.n{margin-left:auto;display:none;gap:4px}
+@media(min-width:1060px){nav.n{display:flex}}
+nav.n a{font-size:13.5px;font-weight:500;text-decoration:none;color:var(--ink-2);padding:7px 12px;border-radius:5px}
+nav.n a:hover{color:var(--ink);background:var(--surf-2)}
+.hactions{margin-left:auto;display:flex;gap:8px;align-items:center}
+@media(min-width:1060px){.hactions{margin-left:14px}}
+.b{font-size:13.5px;font-weight:600;text-decoration:none;padding:8px 15px;border-radius:6px;
+  display:inline-flex;align-items:center;gap:8px;white-space:nowrap;border:1px solid transparent}
+.b-ghost{border-color:var(--line-2);color:var(--ink-2)}
+.b-ghost:hover{border-color:var(--ink-3);color:var(--ink)}
+.b-solid{background:var(--orange);color:#120803}
+.b-solid:hover{background:#FF7440}
+
+/* status hero */
+.board{border-bottom:1px solid var(--line);background:
+  radial-gradient(ellipse 70% 100% at 12% 0%,rgba(255,92,31,.10),transparent 62%),var(--bg)}
+.board .shell{padding-top:44px;padding-bottom:40px}
+.btop{display:grid;gap:28px;align-items:start;margin-bottom:34px}
+@media(min-width:900px){.btop{grid-template-columns:1fr auto;gap:44px}}
+.now{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+.beacon{width:15px;height:15px;border-radius:50%;flex:none;position:relative}
+.beacon::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:1.5px solid currentColor;opacity:.35}
+.st-open .beacon{background:var(--green);color:var(--green)}
+.st-closed .beacon{background:var(--ink-3);color:var(--ink-3)}
+.now .word{font-size:clamp(38px,6.5vw,62px);font-weight:600;letter-spacing:-.035em;line-height:1}
+.st-open .word{color:var(--green)}
+.st-closed .word{color:var(--ink-2)}
+.now .until{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--ink-2);letter-spacing:.04em;
+  border-left:1px solid var(--line-2);padding-left:16px;align-self:stretch;display:flex;align-items:center}
+.board h1{font-size:clamp(21px,2.6vw,27px);font-weight:600;letter-spacing:-.02em;line-height:1.28;
+  margin:0 0 12px;max-width:24ch;text-wrap:balance}
+.board .sub{color:var(--ink-2);margin:0;max-width:52ch;font-size:15.5px}
+.clock{background:var(--surf);border:1px solid var(--line);border-radius:8px;padding:16px 20px;min-width:210px}
+.clock .lbl{display:block;margin-bottom:7px}
+.clock .t{font-family:"IBM Plex Mono",monospace;font-size:32px;font-weight:500;letter-spacing:-.02em;line-height:1;
+  font-variant-numeric:tabular-nums;margin-bottom:5px}
+.clock .d{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--ink-2);letter-spacing:.05em}
+
+/* status tiles */
+.tiles{display:grid;gap:10px}
+@media(min-width:560px){.tiles{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:900px){.tiles{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1140px){.tiles{grid-template-columns:repeat(6,1fr)}}
+.tile{background:var(--surf);border:1px solid var(--line);border-radius:8px;padding:15px 16px 14px;
+  display:flex;flex-direction:column;gap:9px;position:relative;overflow:hidden;text-decoration:none}
+.tile::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px}
+.tile.ok::before{background:var(--green)}
+.tile.hot::before{background:var(--orange)}
+.tile.warn::before{background:var(--amber)}
+.tile.off::before{background:var(--line-2)}
+.tile .tn{font-size:13.5px;font-weight:600;letter-spacing:-.005em}
+.tile .badge{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;padding:3px 8px;border-radius:4px;align-self:flex-start}
+.tile.ok .badge{color:var(--green);background:var(--green-dim)}
+.tile.hot .badge{color:var(--orange);background:var(--orange-dim)}
+.tile.warn .badge{color:var(--amber);background:var(--amber-dim)}
+.tile.off .badge{color:var(--ink-3);background:var(--surf-2)}
+.tile .det{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-3);letter-spacing:.02em;margin-top:auto}
+
+/* sections */
+section{padding:64px 0}
+.sec-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px 20px;margin-bottom:24px;
+  padding-bottom:14px;border-bottom:1px solid var(--line)}
+.sec-head h2{margin:0;font-size:20px;font-weight:600;letter-spacing:-.02em}
+.sec-head .lbl{margin-right:auto}
+.sec-head a{font-size:13px;color:var(--ink-2);text-decoration:none;font-weight:500}
+.sec-head a:hover{color:var(--orange)}
+.sec-head .hgroup{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-right:auto}
+
+/* schedule */
+.sched{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surf)}
+.srow{display:grid;gap:4px 18px;padding:14px 18px;border-bottom:1px solid var(--line);align-items:center}
+@media(min-width:760px){.srow{grid-template-columns:120px 1fr 150px 90px}}
+.srow:last-child{border-bottom:0}
+.srow:hover{background:var(--surf-2)}
+.srow .tm{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--ink);letter-spacing:.03em;font-weight:500}
+.srow .ev b{display:block;font-weight:600;font-size:14.5px;letter-spacing:-.005em}
+.srow .ev span{font-size:13px;color:var(--ink-3)}
+.srow .loc{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-2);letter-spacing:.04em}
+.chip{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;
+  padding:3px 8px;border-radius:4px;justify-self:start;white-space:nowrap}
+@media(min-width:760px){.chip{justify-self:end}}
+.c-open{color:var(--green);background:var(--green-dim)}
+.c-mem{color:var(--amber);background:var(--amber-dim)}
+.c-pub{color:var(--ink-2);background:var(--surf-2)}
+
+/* member panel */
+.mpanel{background:var(--surf);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.mp-head{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:var(--surf-2)}
+.mp-head h3{margin:0;font-size:15.5px;font-weight:600;display:flex;align-items:center;gap:9px}
+.mp-head h3 svg{color:var(--amber)}
+.mp-head p{margin:0;font-size:13px;color:var(--ink-3);width:100%}
+.mp-head .b{margin-left:auto}
+.mgrid{display:grid;gap:1px;background:var(--line)}
+@media(min-width:620px){.mgrid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:980px){.mgrid{grid-template-columns:repeat(4,1fr)}}
+.mcell{background:var(--surf);padding:20px;display:flex;flex-direction:column;gap:8px;position:relative}
+.mcell .lbl{display:flex;align-items:center;gap:7px}
+.mcell .val{font-size:19px;font-weight:600;letter-spacing:-.02em;filter:blur(5px);user-select:none;color:var(--ink-2)}
+.mcell .val.clear{filter:none;color:var(--ink)}
+.mcell .note{font-size:12.5px;color:var(--ink-3);line-height:1.4}
+
+/* facilities */
+.fac{display:grid;gap:10px}
+@media(min-width:600px){.fac{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1000px){.fac{grid-template-columns:repeat(4,1fr)}}
+.fcard{background:var(--surf);border:1px solid var(--line);border-radius:8px;padding:20px;
+  text-decoration:none;display:flex;flex-direction:column;gap:9px}
+.fcard:hover{border-color:var(--line-2);background:var(--surf-2)}
+.fcard .fi{color:var(--orange)}
+.fcard h3{margin:0;font-size:15.5px;font-weight:600;letter-spacing:-.01em}
+.fcard p{margin:0;font-size:13.5px;color:var(--ink-2);line-height:1.5;flex:1}
+.fcard .stat{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-3);letter-spacing:.06em;
+  padding-top:10px;border-top:1px solid var(--line)}
+
+/* join */
+.join{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--surf)}
+.jrow{display:grid;gap:28px;align-items:center}
+@media(min-width:880px){.jrow{grid-template-columns:1fr auto;gap:48px}}
+.jrow h2{margin:10px 0 12px;font-size:clamp(24px,3.4vw,34px);font-weight:600;letter-spacing:-.028em;line-height:1.14;text-wrap:balance}
+.jrow p{margin:0;color:var(--ink-2);max-width:56ch}
+.wgate{display:flex;flex-wrap:wrap;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.wgate div{background:var(--surf-2);padding:14px 20px;min-width:118px}
+.wgate dt{margin:0 0 4px}
+.wgate dd{margin:0;font-family:"IBM Plex Mono",monospace;font-size:15px;font-weight:500;letter-spacing:.02em;white-space:nowrap}
+.wgate dd.hot{color:var(--orange)}
+
+/* footer */
+footer{padding:52px 0 26px;font-size:14px}
+.fg{display:grid;gap:32px;padding-bottom:34px;border-bottom:1px solid var(--line)}
+@media(min-width:780px){.fg{grid-template-columns:1.5fr 1fr 1fr 1.2fr}}
+.fg h4{margin:0 0 14px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;font-weight:500;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--orange)}
+.fg ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.fg a{color:var(--ink-2);text-decoration:none}
+.fg a:hover{color:var(--ink)}
+.fg p{margin:0 0 9px;color:var(--ink-2);line-height:1.55}
+.fh{display:flex;flex-direction:column;gap:5px}
+.fh div{display:flex;justify-content:space-between;gap:16px;color:var(--ink-2);font-family:"IBM Plex Mono",monospace;font-size:12.5px}
+.fh b{color:var(--ink);font-weight:500}
+.fh div.today{color:var(--green)}
+.fh div.today b{color:var(--green)}
+.fbot{padding-top:20px;display:flex;flex-wrap:wrap;gap:9px 20px;font-family:"IBM Plex Mono",monospace;
+  font-size:11px;color:var(--ink-3);letter-spacing:.05em}
+.fbot .sp{margin-left:auto}
+</style>
+
+<header class="top"><div class="shell">
+  <a class="brand" href="#"><span class="mk">3F</span><b>Fin, Feather &amp; Fur</b><span>Lewiston NY</span></a>
+  <nav class="n" aria-label="Main">
+    <a href="#status">Status</a>
+    <a href="#tonight">Today</a>
+    <a href="#facilities">Facilities</a>
+    <a href="#members">Members</a>
+    <a href="#join">Join</a>
+  </nav>
+  <div class="hactions">
+    <a class="b b-ghost" href="#">Sign In</a>
+    <a class="b b-solid" href="#join">Apply</a>
+  </div>
+</div></header>
+
+<div class="board" id="status"><div class="shell">
+  <div class="btop">
+    <div>
+      <div class="now st-open" id="statusNow">
+        <span class="beacon" aria-hidden="true"></span>
+        <span class="word" id="statusWord">Open</span>
+        <span class="until" id="statusUntil">until 9:00 PM</span>
+      </div>
+      <h1>The club, the ranges and the kitchen &mdash; current status, updated as things change.</h1>
+      <p class="sub">402 acres in the Town of Lewiston. Check before you drive out: range conditions, tonight's schedule, and whether the kitchen is on.</p>
+    </div>
+    <div class="clock">
+      <span class="lbl">Local time &middot; Lewiston</span>
+      <div class="t" id="clockTime">&mdash;&mdash;:&mdash;&mdash;</div>
+      <div class="d" id="clockDate">&mdash;</div>
+    </div>
+  </div>
+
+  <div class="tiles">
+    <a class="tile ok" href="#" id="tileClub">
+      <span class="badge" id="tileClubBadge">Open</span>
+      <span class="tn">Clubhouse &amp; Bar</span>
+      <span class="det" id="tileClubDet">Closes 21:00</span>
+    </a>
+    <a class="tile ok" href="#">
+      <span class="badge">Serving</span>
+      <span class="tn">The Great Foodini</span>
+      <span class="det">Wed&ndash;Sun &middot; kitchen on</span>
+    </a>
+    <a class="tile hot" href="#">
+      <span class="badge">Range hot</span>
+      <span class="tn">Outdoor Rifle</span>
+      <span class="det">4 signed in &middot; 100 yd line</span>
+    </a>
+    <a class="tile ok" href="#">
+      <span class="badge">Cold</span>
+      <span class="tn">Indoor Pistol</span>
+      <span class="det">5 stations free</span>
+    </a>
+    <a class="tile warn" href="#">
+      <span class="badge">League</span>
+      <span class="tn">Skeet Fields</span>
+      <span class="det">Fields 1&ndash;3 reserved 18:00</span>
+    </a>
+    <a class="tile off" href="#">
+      <span class="badge">Closed</span>
+      <span class="tn">3-D Archery Course</span>
+      <span class="det">Reopens at first light</span>
+    </a>
+  </div>
+</div></div>
+
+<section id="tonight"><div class="shell">
+  <div class="sec-head">
+    <div class="hgroup"><span class="lbl">Today &middot; Saturday</span><h2>What's on</h2></div>
+    <a href="#">Full calendar &rarr;</a>
+  </div>
+  <div class="sched">
+    <div class="srow">
+      <span class="tm">12:00</span>
+      <span class="ev"><b>Clubhouse and bar open</b><span>Kitchen opens with the bar on Saturdays</span></span>
+      <span class="loc">CLUBHOUSE</span>
+      <span class="chip c-pub">Public</span>
+    </div>
+    <div class="srow">
+      <span class="tm">13:00 &ndash; 16:00</span>
+      <span class="ev"><b>Open trap shooting</b><span>Fields 6 and 7, walk-on, no reservation</span></span>
+      <span class="loc">TRAP 6&ndash;7</span>
+      <span class="chip c-open">Walk-on</span>
+    </div>
+    <div class="srow">
+      <span class="tm">14:00</span>
+      <span class="ev"><b>Kids Fishing Derby setup</b><span>Volunteers wanted at the big pond &mdash; bring a rake</span></span>
+      <span class="loc">32-ACRE POND</span>
+      <span class="chip c-mem">Members</span>
+    </div>
+    <div class="srow">
+      <span class="tm">18:00 &ndash; 20:30</span>
+      <span class="ev"><b>Summer skeet league, week 6</b><span>Fields 1 through 3 reserved for league squads</span></span>
+      <span class="loc">SKEET 1&ndash;3</span>
+      <span class="chip c-mem">League</span>
+    </div>
+    <div class="srow">
+      <span class="tm">19:00</span>
+      <span class="ev"><b>Pheasant committee, work night</b><span>Food and cover plots &mdash; meet at the equipment shed</span></span>
+      <span class="loc">FIELD SHED</span>
+      <span class="chip c-mem">Members</span>
+    </div>
+    <div class="srow">
+      <span class="tm">21:00</span>
+      <span class="ev"><b>Clubhouse closes</b><span>Last call at 20:45</span></span>
+      <span class="loc">CLUBHOUSE</span>
+      <span class="chip c-pub">Public</span>
+    </div>
+  </div>
+</div></section>
+
+<section id="members" style="padding-top:0"><div class="shell">
+  <div class="mpanel">
+    <div class="mp-head">
+      <h3>
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2.6" y="7" width="10.8" height="7.2" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M5.3 7V5a2.7 2.7 0 0 1 5.4 0v2" stroke="currentColor" stroke-width="1.4"/></svg>
+        Your member panel
+      </h3>
+      <a class="b b-solid" href="#">Sign in to unlock</a>
+      <p>Sign in with your member number to see your card, your range access, and what you owe.</p>
+    </div>
+    <div class="mgrid">
+      <div class="mcell">
+        <span class="lbl">Membership</span>
+        <span class="val">No. 0000</span>
+        <span class="note">Your card, dues status and renewal date.</span>
+      </div>
+      <div class="mcell">
+        <span class="lbl">Range key card</span>
+        <span class="val clear" style="color:var(--amber)">Action needed</span>
+        <span class="note">Rules revised 07/2025. Cards stay inactive until the new revision is signed &mdash; you can do that here instead of calling anyone.</span>
+      </div>
+      <div class="mcell">
+        <span class="lbl">Hunt sign-in</span>
+        <span class="val">Not checked in</span>
+        <span class="note">Drop a pin where your stand is, and sign out when you leave.</span>
+      </div>
+      <div class="mcell">
+        <span class="lbl">Pheasant packages</span>
+        <span class="val">0 birds booked</span>
+        <span class="note">Releases run Saturday, Sunday, Tuesday and Thursday.</span>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section id="facilities"><div class="shell">
+  <div class="sec-head">
+    <div class="hgroup"><span class="lbl">The property</span><h2>Facilities</h2></div>
+    <a href="#">All facilities &rarr;</a>
+  </div>
+  <div class="fac">
+    <a class="fcard" href="#">
+      <span class="fi"><svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="1.6"/><circle cx="16" cy="16" r="6.5" stroke="currentColor" stroke-width="1.6"/><circle cx="16" cy="16" r="2.2" fill="currentColor"/></svg></span>
+      <h3>Skeet &amp; Trap</h3>
+      <p>Five skeet fields, two trap fields. Winter league runs 20 weeks and ends in a banquet; the summer league runs 10.</p>
+      <span class="stat">7 FIELDS &middot; LEAGUES YEAR-ROUND</span>
+    </a>
+    <a class="fcard" href="#">
+      <span class="fi"><svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M4 24h24M8 24V13M14 24V17M20 24V9M26 24V19" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+      <h3>Rifle &amp; Pistol</h3>
+      <p>Concrete firing line at 100 yards, second line at 200. Sign in at the gate, red light on and the flag hung before anyone shoots.</p>
+      <span class="stat">200 YD &middot; KEY CARD ACCESS</span>
+    </a>
+    <a class="fcard" href="#">
+      <span class="fi"><svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M26 6 9 23" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M26 6h-6M26 6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="6.5" cy="25.5" r="2" stroke="currentColor" stroke-width="1.6"/></svg></span>
+      <h3>Archery</h3>
+      <p>Indoor range plus a 3-D course through pines and hardwoods, with stationary targets at 20, 30 and 40 yards.</p>
+      <span class="stat">INDOOR &middot; 3-D COURSE</span>
+    </a>
+    <a class="fcard" href="#">
+      <span class="fi"><svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M3 20c3-3 6-3 9 0s6 3 9 0 6-3 8 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M3 25c3-3 6-3 9 0s6 3 9 0 6-3 8 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M21 6c-4 0-7 2.6-7 5.6S17 17 21 17s7-2.4 7-5.4S25 6 21 6Z" stroke="currentColor" stroke-width="1.6"/></svg></span>
+      <h3>Ponds &amp; Fields</h3>
+      <p>Four ponds including a 32-acre stocked lake, plus hunting fields with a tree stand sign-in board at the gate.</p>
+      <span class="stat">4 PONDS &middot; 402 ACRES</span>
+    </a>
+  </div>
+</div></section>
+
+<section class="join" id="join"><div class="shell">
+  <div class="jrow">
+    <div>
+      <span class="lbl">Membership</span>
+      <h2>Applications are open right now</h2>
+      <p>The window runs August 1 through September 30 and does not reopen until next year. Two current members should sponsor you &mdash; or attach a letter of intent if you don't know two yet.</p>
+    </div>
+    <dl class="wgate">
+      <div><dt class="lbl">Opens</dt><dd>Aug 1</dd></div>
+      <div><dt class="lbl">Closes</dt><dd class="hot">Sep 30</dd></div>
+      <div><dt class="lbl">Reviewed</dt><dd>October</dd></div>
+      <div><dt class="lbl">Decisions</dt><dd>By Dec 1</dd></div>
+    </dl>
+  </div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:26px">
+    <a class="b b-solid" href="#">Start an application</a>
+    <a class="b b-ghost" href="#">Ask a question first</a>
+  </div>
+</div></section>
+
+<footer><div class="shell">
+  <div class="fg">
+    <div>
+      <h4>Fin, Feather &amp; Fur</h4>
+      <p>Conservation Society, Inc.<br>904 Swann Road<br>Youngstown, New York 14174</p>
+      <p><a href="tel:+17167542293">(716) 754-2293</a><br><a href="mailto:admin@3fclub.org">admin@3fclub.org</a></p>
+    </div>
+    <div>
+      <h4>The Club</h4>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#facilities">Facilities</a></li>
+        <li><a href="#">Conservation</a></li>
+        <li><a href="#">Youth Club</a></li>
+        <li><a href="#">Memorials</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Members</h4>
+      <ul>
+        <li><a href="#">Sign In</a></li>
+        <li><a href="#">Range Rules</a></li>
+        <li><a href="#">Key Card</a></li>
+        <li><a href="#">Hunt Sign-In</a></li>
+        <li><a href="#">Documents</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Hours</h4>
+      <div class="fh" id="hoursList"></div>
+    </div>
+  </div>
+  <div class="fbot">
+    <span>&copy; 2026 FIN, FEATHER AND FUR CONSERVATION SOCIETY, INC.</span>
+    <span>CLOSED MAJOR HOLIDAYS &mdash; CALL AHEAD</span>
+    <span class="sp">DIRECTION C &mdash; RANGE STATUS</span>
+  </div>
+</div></footer>
+
+<script>
+(function(){
+  // Real club hours, so the board actually computes open/closed rather than
+  // asserting it. Index 0 = Sunday. null = closed.
+  var HOURS = [
+    {d:'Sunday',    o:12, c:20},
+    {d:'Monday',    o:16, c:21},
+    {d:'Tuesday',   o:16, c:21},
+    {d:'Wednesday', o:12, c:21},
+    {d:'Thursday',  o:16, c:21},
+    {d:'Friday',    o:16, c:22},
+    {d:'Saturday',  o:12, c:21}
+  ];
+  function fmt(h){
+    var ap = h >= 12 ? 'PM' : 'AM';
+    var hh = h % 12; if(hh === 0) hh = 12;
+    return hh + ':00 ' + ap;
+  }
+  function short(h){
+    var hh = h % 12; if(hh === 0) hh = 12;
+    return hh + (h >= 12 ? 'p' : 'a');
+  }
+
+  var elWord = document.getElementById('statusWord');
+  var elUntil = document.getElementById('statusUntil');
+  var elNow = document.getElementById('statusNow');
+  var elTime = document.getElementById('clockTime');
+  var elDate = document.getElementById('clockDate');
+
+  function tick(){
+    var now = new Date();
+    var day = now.getDay();
+    var mins = now.getHours()*60 + now.getMinutes();
+    var t = HOURS[day];
+    var open = mins >= t.o*60 && mins < t.c*60;
+
+    elNow.className = 'now ' + (open ? 'st-open' : 'st-closed');
+    elWord.textContent = open ? 'Open' : 'Closed';
+
+    if(open){
+      elUntil.textContent = 'until ' + fmt(t.c);
+    } else if(mins < t.o*60){
+      elUntil.textContent = 'opens at ' + fmt(t.o) + ' today';
+    } else {
+      var nx = HOURS[(day+1)%7];
+      elUntil.textContent = 'opens ' + nx.d + ' at ' + fmt(nx.o);
+    }
+
+    // Keep the clubhouse tile consistent with the headline status.
+    var tile = document.getElementById('tileClub');
+    if(tile){
+      tile.className = 'tile ' + (open ? 'ok' : 'off');
+      document.getElementById('tileClubBadge').textContent = open ? 'Open' : 'Closed';
+      document.getElementById('tileClubDet').textContent = open
+        ? 'Closes ' + String(t.c).padStart(2,'0') + ':00'
+        : 'Opens ' + String(HOURS[mins < t.o*60 ? day : (day+1)%7].o).padStart(2,'0') + ':00';
+    }
+
+    elTime.textContent = now.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit', hour12:false});
+    elDate.textContent = now.toLocaleDateString([], {weekday:'long', month:'short', day:'numeric'}).toUpperCase();
+  }
+
+  var list = document.getElementById('hoursList');
+  if(list){
+    var today = new Date().getDay();
+    // Monday-first, the way the hours are posted at the gate
+    [1,2,3,4,5,6,0].forEach(function(i){
+      var t = HOURS[i];
+      var row = document.createElement('div');
+      if(i === today) row.className = 'today';
+      row.innerHTML = '<span>' + t.d.slice(0,3) + '</span><b>' + short(t.o) + ' &ndash; ' + short(t.c) + '</b>';
+      list.appendChild(row);
+    });
+  }
+
+  tick();
+  setInterval(tick, 20000);
+})();
+</script>

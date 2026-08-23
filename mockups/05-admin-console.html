@@ -1,0 +1,490 @@
+<title>3F Admin Console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Board and committee-chair console. Same tokens as the public site and the
+   member portal - one institution, three levels of access. */
+:root{
+  --green-900:#0C1A13; --green-800:#12241B; --green-700:#172F23; --green-600:#1E3D2D;
+  --ivory:#E9E6D9; --ivory-2:#B9B9AB; --ivory-3:#868A80;
+  --brass:#B0894A; --brass-hi:#C79E5C;
+  --rule:rgba(176,137,74,.24); --rule-soft:rgba(233,230,217,.11);
+  --ok:#5FA97C; --ok-bg:rgba(95,169,124,.13);
+  --warn:#D9A441; --warn-bg:rgba(217,164,65,.13);
+  --crit:#C4685A; --crit-bg:rgba(196,104,90,.13);
+  --info:#7BA6C4; --info-bg:rgba(123,166,196,.13);
+}
+*{box-sizing:border-box}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--green-900);color:var(--ivory);
+  font-family:"Archivo",-apple-system,"Segoe UI",sans-serif;font-size:14.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--brass);outline-offset:2px;border-radius:3px}
+.lbl{font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ivory-3)}
+.mono{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums}
+
+/* minmax(0,1fr) rather than 1fr: the wide tables must scroll inside .tw,
+   not force the whole grid column past the viewport. */
+.app{display:grid;min-height:100vh;grid-template-columns:minmax(0,1fr)}
+@media(min-width:1100px){.app{grid-template-columns:236px minmax(0,1fr)}}
+
+aside{background:var(--green-800);border-right:1px solid var(--rule);padding:18px 0;display:flex;flex-direction:column;gap:18px}
+@media(max-width:1099px){aside{border-right:0;border-bottom:1px solid var(--rule)}}
+.brand{display:flex;align-items:center;gap:10px;padding:0 18px}
+.brand .mk{width:32px;height:32px;border:1.5px solid var(--crit);border-radius:5px;display:grid;place-items:center;
+  font-family:"EB Garamond",serif;font-weight:600;font-size:13px;color:var(--crit);flex:none}
+.brand b{font-family:"EB Garamond",serif;font-weight:600;font-size:16px;line-height:1.1;display:block}
+.brand span{font-size:9px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--crit)}
+nav.side{display:flex;flex-direction:column;gap:1px;padding:0 11px;overflow-x:auto}
+@media(max-width:1099px){nav.side{flex-direction:row;gap:4px;padding:0 14px}}
+nav.side .grp{padding:14px 8px 5px}
+@media(max-width:1099px){nav.side .grp{display:none}}
+nav.side a{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:5px;font-size:13.5px;
+  color:var(--ivory-2);white-space:nowrap}
+nav.side a:hover{background:var(--green-700);color:var(--ivory)}
+nav.side a.on{background:var(--green-600);color:var(--ivory);font-weight:600}
+nav.side a .cnt{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:10.5px;font-weight:500;
+  padding:1px 7px;border-radius:20px;background:var(--brass);color:var(--green-900)}
+nav.side a .cnt.q{background:var(--crit);color:#FFF}
+.side-foot{margin-top:auto;padding:14px 18px 0;border-top:1px solid var(--rule-soft);font-size:12px;color:var(--ivory-3)}
+@media(max-width:1099px){.side-foot{display:none}}
+
+main{min-width:0;display:flex;flex-direction:column}
+.topbar{display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:15px 24px;
+  border-bottom:1px solid var(--rule);background:var(--green-800)}
+.topbar h1{margin:0;font-family:"EB Garamond",serif;font-weight:600;font-size:22px}
+.role{font-size:10px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;padding:3px 9px;
+  border-radius:20px;color:var(--crit);background:var(--crit-bg);border:1px solid var(--crit)}
+.topbar .who{margin-left:auto;display:flex;align-items:center;gap:10px}
+.avatar{width:32px;height:32px;border-radius:50%;background:var(--green-600);border:1px solid var(--rule);
+  display:grid;place-items:center;font-family:"EB Garamond",serif;font-size:13px;color:var(--brass);flex:none}
+.who .nm b{display:block;font-size:13px;font-weight:600;line-height:1.2}
+.who .nm span{font-size:11px;color:var(--ivory-3)}
+.content{padding:22px 24px 44px;display:flex;flex-direction:column;gap:18px;max-width:1440px;width:100%;min-width:0}
+
+/* window banner */
+.wbar{display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:15px 20px;border-radius:6px;
+  border:1px solid var(--ok);border-left-width:4px;background:var(--ok-bg)}
+.wbar .bi{color:var(--ok);flex:none}
+.wbar b{font-size:14.5px;font-weight:600;display:block;margin-bottom:2px}
+.wbar p{margin:0;font-size:13px;color:var(--ivory-2);max-width:70ch}
+.wbar .days{margin-left:auto;text-align:right}
+.wbar .days b{font-family:"EB Garamond",serif;font-size:28px;color:var(--ok);line-height:1}
+.wbar .days span{font-size:11px;color:var(--ivory-3);letter-spacing:.08em;text-transform:uppercase}
+
+/* kpis */
+.kpis{display:grid;gap:14px}
+@media(min-width:620px){.kpis{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1080px){.kpis{grid-template-columns:repeat(4,1fr)}}
+.kpi{background:var(--green-800);border:1px solid var(--rule-soft);border-radius:8px;padding:16px 18px;
+  display:flex;flex-direction:column;gap:7px;position:relative;overflow:hidden}
+.kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--rule)}
+.kpi.a::before{background:var(--ok)}
+.kpi.b::before{background:var(--brass)}
+.kpi.c::before{background:var(--warn)}
+.kpi.d::before{background:var(--crit)}
+.kpi .v{font-family:"EB Garamond",serif;font-size:36px;line-height:1;font-variant-numeric:tabular-nums}
+.kpi .n{font-size:13px;color:var(--ivory-2)}
+.kpi .delta{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ivory-3);letter-spacing:.03em;
+  padding-top:8px;border-top:1px solid var(--rule-soft);margin-top:auto}
+.kpi .delta em{font-style:normal;color:var(--ok)}
+.kpi .delta em.dn{color:var(--crit)}
+
+/* panels */
+.panel{background:var(--green-800);border:1px solid var(--rule-soft);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.p-head{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:13px 18px;border-bottom:1px solid var(--rule-soft)}
+.p-head h2,.p-head h3{margin:0;font-size:12.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--brass)}
+.p-head .sub{font-size:12px;color:var(--ivory-3)}
+.p-head .right{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.p-head a.lnk{font-size:12px;color:var(--ivory-3)}
+.p-head a.lnk:hover{color:var(--brass)}
+
+.btn{display:inline-flex;align-items:center;gap:7px;padding:8px 15px;border-radius:4px;cursor:pointer;
+  font-size:12px;font-weight:600;letter-spacing:.04em;border:1px solid transparent;white-space:nowrap;font-family:inherit}
+.btn-p{background:var(--brass);color:var(--green-900);border-color:var(--brass)}
+.btn-p:hover{background:var(--brass-hi)}
+.btn-s{border-color:var(--rule);color:var(--ivory);background:transparent}
+.btn-s:hover{border-color:var(--brass);color:var(--brass)}
+.btn-d{border-color:rgba(196,104,90,.5);color:var(--crit);background:transparent}
+.btn-d:hover{background:var(--crit-bg)}
+.btn-xs{padding:5px 11px;font-size:11px}
+
+/* filters */
+.filters{display:flex;gap:6px;flex-wrap:wrap}
+.chipf{font-size:11.5px;padding:5px 11px;border-radius:20px;border:1px solid var(--rule-soft);
+  color:var(--ivory-2);cursor:pointer;background:transparent;font-family:inherit}
+.chipf.on{background:var(--green-600);border-color:var(--brass);color:var(--ivory);font-weight:600}
+
+/* tables */
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:900px;font-size:13.5px}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--rule-soft);vertical-align:middle}
+thead th{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ivory-3);
+  background:var(--green-700);white-space:nowrap;position:sticky;top:0}
+tbody tr:hover{background:var(--green-700)}
+tbody tr:last-child td{border-bottom:0}
+.applicant b{display:block;font-size:14px;font-weight:600;line-height:1.25}
+.applicant span{font-size:12px;color:var(--ivory-3)}
+.spons{display:flex;gap:5px;align-items:center}
+.sp{width:19px;height:19px;border-radius:50%;display:grid;place-items:center;font-size:9.5px;font-weight:700;
+  border:1.5px solid;flex:none}
+.sp.y{color:var(--ok);border-color:var(--ok);background:var(--ok-bg)}
+.sp.n{color:var(--warn);border-color:var(--warn);background:var(--warn-bg)}
+.sp.x{color:var(--ivory-3);border-color:var(--rule-soft)}
+.spons .txt{font-size:12px;color:var(--ivory-3);margin-left:3px;white-space:nowrap}
+.tag{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 8px;border-radius:4px;white-space:nowrap;border:1px solid}
+.t-ok{color:var(--ok);background:var(--ok-bg);border-color:var(--ok)}
+.t-warn{color:var(--warn);background:var(--warn-bg);border-color:var(--warn)}
+.t-crit{color:var(--crit);background:var(--crit-bg);border-color:var(--crit)}
+.t-info{color:var(--info);background:var(--info-bg);border-color:var(--info)}
+.t-mute{color:var(--ivory-3);border-color:var(--rule-soft);background:transparent}
+.votes{display:flex;gap:3px;align-items:center}
+.votes i{width:7px;height:14px;border-radius:2px;background:var(--rule-soft);display:block}
+.votes i.y{background:var(--ok)}
+.votes i.n{background:var(--crit)}
+.votes span{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ivory-3);margin-left:5px}
+td.acts{white-space:nowrap}
+td.acts .btn{margin-right:5px}
+
+/* two col */
+.cols{display:grid;gap:18px}
+@media(min-width:1080px){.cols{grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr)}}
+
+/* compliance bars */
+.comp{padding:18px;display:flex;flex-direction:column;gap:16px}
+.crow .ct{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px}
+.crow .ct b{font-size:13.5px;font-weight:600}
+.crow .ct span{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--ivory-2)}
+.track{height:7px;border-radius:4px;background:var(--green-700);overflow:hidden;display:flex}
+.track i{display:block;height:100%}
+.crow .cn{font-size:12px;color:var(--ivory-3);margin-top:6px;display:block}
+
+/* audit */
+.audit{display:flex;flex-direction:column}
+.arow{display:flex;gap:12px;padding:12px 18px;border-bottom:1px solid var(--rule-soft);align-items:flex-start}
+.arow:last-child{border-bottom:0}
+.arow .ai{width:26px;height:26px;border-radius:5px;display:grid;place-items:center;flex:none;
+  background:var(--green-700);border:1px solid var(--rule-soft);color:var(--ivory-3)}
+.arow .ax{flex:1;min-width:0;font-size:13px;line-height:1.45}
+.arow .ax b{font-weight:600}
+.arow .ax em{font-style:normal;color:var(--brass)}
+.arow time{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ivory-3);white-space:nowrap;flex:none;padding-top:2px}
+
+/* quick publish */
+.pub{padding:18px;display:flex;flex-direction:column;gap:12px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field input,.field select,.field textarea{background:var(--green-700);border:1px solid var(--rule-soft);
+  border-radius:5px;padding:9px 12px;color:var(--ivory);font-family:inherit;font-size:13.5px;width:100%}
+.field textarea{resize:vertical;min-height:70px;line-height:1.5}
+.field input::placeholder,.field textarea::placeholder{color:var(--ivory-3)}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--brass);outline:none}
+.frow{display:flex;gap:10px;flex-wrap:wrap}
+.frow .field{flex:1;min-width:130px}
+.pubacts{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pubacts .hint{font-size:11.5px;color:var(--ivory-3);margin-left:auto}
+</style>
+
+<div class="app">
+
+<aside>
+  <div class="brand">
+    <span class="mk">3F</span>
+    <span><b>Admin Console</b><span>Board Access</span></span>
+  </div>
+  <nav class="side" aria-label="Admin">
+    <span class="grp lbl">Membership</span>
+    <a class="on" href="#">Overview</a>
+    <a href="#">Applications <span class="cnt q">14</span></a>
+    <a href="#">Member Roster</a>
+    <a href="#">Dues &amp; Payments <span class="cnt">23</span></a>
+    <span class="grp lbl">Access &amp; Safety</span>
+    <a href="#">Key Cards <span class="cnt">31</span></a>
+    <a href="#">Range Rules</a>
+    <a href="#">Hunt Sign-In Log</a>
+    <span class="grp lbl">Club</span>
+    <a href="#">News &amp; Notices</a>
+    <a href="#">Calendar</a>
+    <a href="#">Pavilion Requests <span class="cnt">2</span></a>
+    <a href="#">Pheasant Orders</a>
+    <a href="#">Apparel Orders</a>
+    <span class="grp lbl">System</span>
+    <a href="#">Audit Log</a>
+    <a href="#">Roles &amp; Settings</a>
+  </nav>
+  <div class="side-foot">Signed in as Membership Chair.<br>Actions here are logged.</div>
+</aside>
+
+<main>
+  <div class="topbar">
+    <h1>Overview</h1>
+    <span class="role">Membership Chair</span>
+    <div class="who">
+      <span class="nm"><b>Elizabeth Coffey</b><span>Board of Directors</span></span>
+      <span class="avatar">EC</span>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <div class="wbar">
+      <span class="bi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9.4" stroke="currentColor" stroke-width="1.6"/><path d="M8 12.3l2.7 2.7L16.2 9.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span>
+        <b>The application window is open</b>
+        <p>Applications close September 30 and will not reopen until August 1 next year. The board reviews everything in October; decisions must go out by December 1.</p>
+      </span>
+      <span class="days"><b>39</b><br><span>days remaining</span></span>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi a">
+        <span class="v">642</span>
+        <span class="n">Active members</span>
+        <span class="delta"><em>+18</em> since last renewal cycle</span>
+      </div>
+      <div class="kpi b">
+        <span class="v">14</span>
+        <span class="n">Applications received</span>
+        <span class="delta">9 fully sponsored &middot; 5 awaiting</span>
+      </div>
+      <div class="kpi c">
+        <span class="v">23</span>
+        <span class="n">Dues outstanding</span>
+        <span class="delta"><em class="dn">$2,760</em> uncollected</span>
+      </div>
+      <div class="kpi d">
+        <span class="v">31</span>
+        <span class="n">Key cards inactive</span>
+        <span class="delta">Pending rev. 07/2025 signature</span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="p-head">
+        <h2>Application queue</h2>
+        <span class="sub">2026 cycle &middot; sorted by date received</span>
+        <div class="right">
+          <div class="filters">
+            <button class="chipf on">All 14</button>
+            <button class="chipf">Sponsored 9</button>
+            <button class="chipf">Awaiting sponsors 5</button>
+            <button class="chipf">Flagged 1</button>
+          </div>
+          <button class="btn btn-s btn-xs">Export for meeting</button>
+        </div>
+      </div>
+      <div class="tw"><table>
+        <thead><tr>
+          <th>Applicant</th><th>Received</th><th>Sponsors</th><th>Relation</th><th>Board vote</th><th>Status</th><th></th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td class="applicant"><b>Daniel Ochab</b><span>Sanborn, NY &middot; age 34</span></td>
+            <td class="mono">Aug 12</td>
+            <td><span class="spons"><span class="sp y">&#10003;</span><span class="sp n">?</span><span class="txt">1 of 2 confirmed</span></span></td>
+            <td>Nephew of No. 0834</td>
+            <td><span class="votes"><i class="y"></i><i class="y"></i><i class="y"></i><i></i><i></i><i></i><i></i><span>3/7</span></span></td>
+            <td><span class="tag t-warn">Awaiting sponsor</span></td>
+            <td class="acts"><button class="btn btn-s btn-xs">Review</button><button class="btn btn-s btn-xs">Remind</button></td>
+          </tr>
+          <tr>
+            <td class="applicant"><b>Marissa Vandermeer</b><span>Lewiston, NY &middot; age 41</span></td>
+            <td class="mono">Aug 11</td>
+            <td><span class="spons"><span class="sp y">&#10003;</span><span class="sp y">&#10003;</span><span class="txt">Both confirmed</span></span></td>
+            <td>&mdash;</td>
+            <td><span class="votes"><i class="y"></i><i class="y"></i><i class="y"></i><i class="y"></i><i class="y"></i><i></i><i></i><span>5/7</span></span></td>
+            <td><span class="tag t-ok">Ready for vote</span></td>
+            <td class="acts"><button class="btn btn-p btn-xs">Review</button></td>
+          </tr>
+          <tr>
+            <td class="applicant"><b>Thomas Prynne</b><span>Youngstown, NY &middot; age 28</span></td>
+            <td class="mono">Aug 9</td>
+            <td><span class="spons"><span class="sp y">&#10003;</span><span class="sp y">&#10003;</span><span class="txt">Both confirmed</span></span></td>
+            <td>Son of No. 1042</td>
+            <td><span class="votes"><i class="y"></i><i class="y"></i><i class="y"></i><i class="y"></i><i class="y"></i><i class="y"></i><i class="y"></i><span>7/7</span></span></td>
+            <td><span class="tag t-ok">Ready for vote</span></td>
+            <td class="acts"><button class="btn btn-p btn-xs">Review</button></td>
+          </tr>
+          <tr>
+            <td class="applicant"><b>Grant Sobiegray</b><span>Wilson, NY &middot; age 52</span></td>
+            <td class="mono">Aug 8</td>
+            <td><span class="spons"><span class="sp x">&ndash;</span><span class="sp x">&ndash;</span><span class="txt">Letter of intent attached</span></span></td>
+            <td>&mdash;</td>
+            <td><span class="votes"><i class="y"></i><i class="y"></i><i></i><i></i><i></i><i></i><i></i><span>2/7</span></span></td>
+            <td><span class="tag t-info">Letter of intent</span></td>
+            <td class="acts"><button class="btn btn-s btn-xs">Review</button><button class="btn btn-s btn-xs">Read letter</button></td>
+          </tr>
+          <tr>
+            <td class="applicant"><b>Alicia Barnas</b><span>Ransomville, NY &middot; age 37</span></td>
+            <td class="mono">Aug 6</td>
+            <td><span class="spons"><span class="sp y">&#10003;</span><span class="sp y">&#10003;</span><span class="txt">Both confirmed</span></span></td>
+            <td>Spouse of No. 0977</td>
+            <td><span class="votes"><i class="y"></i><i class="y"></i><i class="y"></i><i class="y"></i><i></i><i></i><i></i><span>4/7</span></span></td>
+            <td><span class="tag t-ok">Ready for vote</span></td>
+            <td class="acts"><button class="btn btn-p btn-xs">Review</button></td>
+          </tr>
+          <tr>
+            <td class="applicant"><b>Kevin Ljiljanich</b><span>Niagara Falls, NY &middot; age 45</span></td>
+            <td class="mono">Aug 4</td>
+            <td><span class="spons"><span class="sp y">&#10003;</span><span class="sp n">?</span><span class="txt">Reminder sent Aug 18</span></span></td>
+            <td>&mdash;</td>
+            <td><span class="votes"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span>0/7</span></span></td>
+            <td><span class="tag t-warn">Awaiting sponsor</span></td>
+            <td class="acts"><button class="btn btn-s btn-xs">Review</button><button class="btn btn-s btn-xs">Remind</button></td>
+          </tr>
+          <tr>
+            <td class="applicant"><b>Peter Dunwoody</b><span>Lockport, NY &middot; age 31</span></td>
+            <td class="mono">Aug 2</td>
+            <td><span class="spons"><span class="sp y">&#10003;</span><span class="sp y">&#10003;</span><span class="txt">Both confirmed</span></span></td>
+            <td>&mdash;</td>
+            <td><span class="votes"><i class="y"></i><i class="n"></i><i class="y"></i><i></i><i></i><i></i><i></i><span>2/7</span></span></td>
+            <td><span class="tag t-crit">Flagged for discussion</span></td>
+            <td class="acts"><button class="btn btn-d btn-xs">Open note</button></td>
+          </tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="cols">
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <div class="panel">
+          <div class="p-head"><h3>Compliance</h3><span class="sub">Across 642 active members</span><div class="right"><a class="lnk" href="#">Manage rules &rarr;</a></div></div>
+          <div class="comp">
+            <div class="crow">
+              <div class="ct"><b>Range rules rev. 07/2025 signed</b><span>611 / 642</span></div>
+              <div class="track"><i style="width:95.2%;background:var(--ok)"></i><i style="width:4.8%;background:var(--crit)"></i></div>
+              <span class="cn">31 members have not signed. Their key cards are held inactive until they do.</span>
+            </div>
+            <div class="crow">
+              <div class="ct"><b>Annual dues paid</b><span>619 / 642</span></div>
+              <div class="track"><i style="width:96.4%;background:var(--ok)"></i><i style="width:3.6%;background:var(--warn)"></i></div>
+              <span class="cn">23 outstanding, $2,760 total. Second notices go out September 1.</span>
+            </div>
+            <div class="crow">
+              <div class="ct"><b>Pistol permit recertification on file</b><span>404 / 468</span></div>
+              <div class="track"><i style="width:86.3%;background:var(--ok)"></i><i style="width:13.7%;background:var(--warn)"></i></div>
+              <span class="cn">Voluntary. New York requires recertification every five years.</span>
+            </div>
+            <div class="crow">
+              <div class="ct"><b>Email address on file</b><span>588 / 642</span></div>
+              <div class="track"><i style="width:91.6%;background:var(--ok)"></i><i style="width:8.4%;background:var(--info)"></i></div>
+              <span class="cn">54 members are mail-only and will still need printed notices.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="p-head"><h3>Audit log</h3><div class="right"><a class="lnk" href="#">Full log &rarr;</a></div></div>
+          <div class="audit">
+            <div class="arow">
+              <span class="ai"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4 6.4 12 13 4.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span class="ax"><b>Elizabeth Coffey</b> reactivated key card <em>1204-A</em> for Marcus Deitrich after a rules signature.</span>
+              <time>17 min ago</time>
+            </div>
+            <div class="arow">
+              <span class="ai"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.4 2h6l3.4 3.4V14H3.4V2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></span>
+              <span class="ax"><b>Tim Gunther</b> published <em>Outdoor Range Rules rev. 07/2025</em>. 642 acknowledgments were reset.</span>
+              <time>2 hours ago</time>
+            </div>
+            <div class="arow">
+              <span class="ai"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2" y="3.4" width="12" height="9.4" rx="1.4" stroke="currentColor" stroke-width="1.3"/></svg></span>
+              <span class="ax"><b>Paul Siwinski</b> posted the notice <em>Kids Fishing Derby August 23rd</em> to the public site.</span>
+              <time>Yesterday</time>
+            </div>
+            <div class="arow">
+              <span class="ai"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="5.6" r="2.4" stroke="currentColor" stroke-width="1.3"/><path d="M3.4 13c0-2.3 2-4 4.6-4s4.6 1.7 4.6 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></span>
+              <span class="ax"><b>System</b> emailed a sponsor confirmation request to <em>Charles Porter</em> for applicant Daniel Ochab.</span>
+              <time>Aug 12</time>
+            </div>
+            <div class="arow">
+              <span class="ai"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+              <span class="ax"><b>System</b> opened the <em>2026 application window</em> automatically.</span>
+              <time>Aug 1</time>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <div class="panel">
+          <div class="p-head"><h3>Post a notice</h3></div>
+          <div class="pub">
+            <div class="field">
+              <label class="lbl" for="nt">Headline</label>
+              <input id="nt" type="text" placeholder="Rifle range closed Saturday for berm work">
+            </div>
+            <div class="frow">
+              <div class="field">
+                <label class="lbl" for="nc">Category</label>
+                <select id="nc">
+                  <option>Range notice</option>
+                  <option>Event</option>
+                  <option>League</option>
+                  <option>Fundraiser</option>
+                  <option>Board statement</option>
+                  <option>Youth</option>
+                </select>
+              </div>
+              <div class="field">
+                <label class="lbl" for="nv">Visible to</label>
+                <select id="nv">
+                  <option>Members only</option>
+                  <option>Everyone</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label class="lbl" for="nb">Details</label>
+              <textarea id="nb" placeholder="What members need to know, and who to contact."></textarea>
+            </div>
+            <div class="pubacts">
+              <button class="btn btn-p">Publish</button>
+              <button class="btn btn-s">Save draft</button>
+              <span class="hint">Also emails members who opted in.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="p-head"><h3>Pavilion requests</h3><div class="right"><a class="lnk" href="#">Calendar &rarr;</a></div></div>
+          <div class="audit">
+            <div class="arow">
+              <span class="ai"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 7 8 2.6 14 7" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M3.4 7v6.4h9.2V7" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></span>
+              <span class="ax"><b>Gunther / Dillen wedding reception</b><br><span style="color:var(--ivory-3);font-size:12.5px">Saturday, September 12 &middot; 140 guests &middot; requested by member No. 0451</span>
+              <span style="display:flex;gap:7px;margin-top:9px"><button class="btn btn-p btn-xs">Approve</button><button class="btn btn-s btn-xs">Ask a question</button></span></span>
+            </div>
+            <div class="arow">
+              <span class="ai"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 7 8 2.6 14 7" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M3.4 7v6.4h9.2V7" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></span>
+              <span class="ax"><b>Niagara Machine company picnic</b><br><span style="color:var(--ivory-3);font-size:12.5px">Sunday, October 4 &middot; 85 guests &middot; conflicts with the pheasant release</span>
+              <span style="display:flex;gap:7px;margin-top:9px"><button class="btn btn-p btn-xs">Approve</button><button class="btn btn-d btn-xs">Decline</button></span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="p-head"><h3>Needs attention</h3></div>
+          <div class="audit">
+            <div class="arow">
+              <span class="ai" style="color:var(--crit)"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2 15 14H1L8 2Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></span>
+              <span class="ax">One hunter has been <b>signed in since 4:40 am</b> and has not signed out. Stand marked in the northwest field.</span>
+              <time>Now</time>
+            </div>
+            <div class="arow">
+              <span class="ai" style="color:var(--warn)"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.2" stroke="currentColor" stroke-width="1.4"/><path d="M8 4.6V8l2.4 1.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+              <span class="ax"><b>5 applications</b> are still short a sponsor confirmation with 39 days left in the window.</span>
+              <time>Today</time>
+            </div>
+            <div class="arow">
+              <span class="ai" style="color:var(--warn)"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2" y="4" width="12" height="8.4" rx="1.4" stroke="currentColor" stroke-width="1.3"/></svg></span>
+              <span class="ax"><b>The restaurant menu</b> has not been updated since the November reopening.</span>
+              <time>3 days</time>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+</div>

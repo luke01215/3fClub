@@ -1,0 +1,452 @@
+<title>3F Club Rebuild Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#F4F5F2; --surface:#FFFFFF; --sunk:#EBEDE7;
+  --ink:#1A211D; --ink-2:#4A554E; --ink-3:#77837B;
+  --rule:#D8DCD4; --rule-2:#C3C9BE;
+  --green:#1F4032; --gold:#8A6E3A;
+  --crit:#A32E22; --warn:#8A6E3A; --ok:#2F5B47;
+  --crit-bg:#F7E9E6; --warn-bg:#F5EFE1; --ok-bg:#E6EFE8;
+  --on-green:#FFFFFF;
+  --shadow:0 1px 2px rgba(26,33,29,.05),0 8px 24px -12px rgba(26,33,29,.18);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#121714; --surface:#1A211D; --sunk:#212A24;
+  --ink:#E6E9E4; --ink-2:#A8B2AB; --ink-3:#7D877F;
+  --rule:#2B342E; --rule-2:#3A453D;
+  --green:#7FBFA0; --gold:#C9A567;
+  --crit:#E58275; --warn:#C9A567; --ok:#7FBFA0;
+  --crit-bg:#2A1A18; --warn-bg:#262115; --ok-bg:#16241C;
+  --on-green:#121714;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --paper:#121714; --surface:#1A211D; --sunk:#212A24;
+  --ink:#E6E9E4; --ink-2:#A8B2AB; --ink-3:#7D877F;
+  --rule:#2B342E; --rule-2:#3A453D;
+  --green:#7FBFA0; --gold:#C9A567;
+  --crit:#E58275; --warn:#C9A567; --ok:#7FBFA0;
+  --crit-bg:#2A1A18; --warn-bg:#262115; --ok-bg:#16241C;
+  --on-green:#121714;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Public Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:16.5px; line-height:1.65; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px 96px}
+@media(min-width:1000px){
+  .wrap{display:grid;grid-template-columns:minmax(0,1fr) 208px;column-gap:56px;align-items:start}
+}
+.toc{display:none}
+@media(min-width:1000px){.toc{display:block;position:sticky;top:32px;padding-top:8px}}
+.toc ol{list-style:none;margin:0;padding:0;border-left:1px solid var(--rule);display:flex;flex-direction:column}
+.toc a{display:block;padding:6px 0 6px 14px;margin-left:-1px;border-left:2px solid transparent;
+  color:var(--ink-3);text-decoration:none;font-size:13px;line-height:1.35}
+.toc a:hover{color:var(--green);border-left-color:var(--rule-2)}
+.toc .tl{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);padding-left:14px;margin-bottom:10px;display:block}
+
+header.mast{padding:64px 0 40px;border-bottom:2px solid var(--ink);margin-bottom:48px}
+.kicker{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold);display:flex;gap:24px;flex-wrap:wrap;align-items:center;margin-bottom:20px}
+h1{font-family:"Source Serif 4",Georgia,serif;font-weight:700;font-size:clamp(38px,6vw,60px);
+  line-height:1.04;letter-spacing:-.02em;margin:0 0 18px;text-wrap:balance}
+.lede{font-family:"Source Serif 4",Georgia,serif;font-size:clamp(18px,2.2vw,21px);line-height:1.55;
+  color:var(--ink-2);max-width:64ch;margin:0}
+.meta{margin:28px 0 0;display:flex;flex-wrap:wrap;border-top:1px solid var(--rule);padding-top:18px}
+.meta div{padding-right:32px;margin-right:32px;border-right:1px solid var(--rule)}
+.meta div:last-child{border-right:0;margin-right:0;padding-right:0}
+.meta dt{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin:0 0 3px}
+.meta dd{margin:0;font-size:14.5px;font-weight:600}
+
+section{scroll-margin-top:24px;padding-top:8px}
+h2{font-family:"Source Serif 4",Georgia,serif;font-weight:700;font-size:clamp(25px,3.4vw,32px);
+  line-height:1.15;letter-spacing:-.015em;margin:56px 0 8px;text-wrap:balance;
+  display:flex;align-items:baseline;gap:14px}
+h2 .n{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;color:var(--gold);
+  letter-spacing:.08em;flex:none}
+h2 + .sub{color:var(--ink-2);max-width:66ch;margin:0 0 26px;font-size:15.5px}
+h3{font-weight:700;font-size:16px;margin:34px 0 10px;color:var(--ink)}
+p{max-width:68ch;margin:0 0 16px}
+a{color:var(--green);text-underline-offset:3px;text-decoration-thickness:1px}
+a:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:3px}
+code{font-family:"IBM Plex Mono",monospace;font-size:.88em;background:var(--sunk);
+  padding:1.5px 5px;border-radius:3px;border:1px solid var(--rule)}
+
+.tw{overflow-x:auto;margin:0 0 20px;border:1px solid var(--rule);border-radius:8px;background:var(--surface);box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:14.5px}
+th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--rule);vertical-align:top}
+thead th{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:500;background:var(--sunk);border-bottom:1px solid var(--rule-2);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+.pill{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.09em;
+  text-transform:uppercase;font-weight:600;padding:3px 8px;border-radius:20px;white-space:nowrap;border:1px solid}
+.p-crit{color:var(--crit);background:var(--crit-bg);border-color:var(--crit)}
+.p-warn{color:var(--warn);background:var(--warn-bg);border-color:var(--warn)}
+.p-ok{color:var(--ok);background:var(--ok-bg);border-color:var(--ok)}
+.dim{color:var(--ink-3);font-size:13px}
+
+.alert{border:1px solid var(--crit);border-left-width:4px;background:var(--crit-bg);
+  border-radius:6px;padding:20px 22px;margin:0 0 28px;display:flex;gap:16px;align-items:flex-start}
+.alert svg{flex:none;margin-top:3px;color:var(--crit)}
+.alert h3{margin:0 0 6px;color:var(--crit);font-size:15px}
+.alert p{margin:0;font-size:14.5px;color:var(--ink);max-width:60ch}
+.alert p + p{margin-top:8px}
+
+.tiers{display:grid;gap:16px;margin:8px 0}
+@media(min-width:760px){.tiers{grid-template-columns:repeat(3,1fr)}}
+.tier{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:20px;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;gap:12px}
+.tier .th{display:flex;align-items:center;gap:9px}
+.tier .dot{width:9px;height:9px;border-radius:50%;flex:none}
+.tier h3{margin:0;font-size:14.5px}
+.tier .who{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
+.tier ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px;font-size:14px;color:var(--ink-2)}
+.tier li{padding-left:15px;position:relative;line-height:1.45}
+.tier li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:1.5px;background:var(--rule-2)}
+
+.phase{border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:var(--surface);box-shadow:var(--shadow);margin-bottom:14px}
+.phase-h{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:15px 20px;background:var(--sunk);border-bottom:1px solid var(--rule)}
+.phase-h .pn{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;letter-spacing:.1em;
+  color:var(--on-green);background:var(--green);padding:3px 9px;border-radius:4px}
+.phase-h h3{margin:0;font-size:15px}
+.phase-h .when{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-3);letter-spacing:.05em}
+.phase-b{padding:16px 20px;display:grid;gap:9px}
+@media(min-width:680px){.phase-b{grid-template-columns:1fr 1fr;column-gap:28px}}
+.phase-b div{font-size:14px;color:var(--ink-2);padding-left:18px;position:relative;line-height:1.5}
+.phase-b div::before{content:"\2192";position:absolute;left:0;top:0;color:var(--gold);font-size:12px}
+
+.note{border-left:3px solid var(--gold);background:var(--sunk);padding:16px 20px;border-radius:0 6px 6px 0;margin:0 0 22px}
+.note p{margin:0;font-size:14.5px;color:var(--ink-2);max-width:62ch}
+.note strong{color:var(--ink)}
+
+.dirs{display:grid;gap:14px}
+@media(min-width:720px){.dirs{grid-template-columns:repeat(3,1fr)}}
+.dir{border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:var(--surface);box-shadow:var(--shadow);display:flex;flex-direction:column}
+.swatch{height:74px;display:flex}
+.swatch i{flex:1}
+.dir-b{padding:16px 18px;display:flex;flex-direction:column;gap:7px}
+.dir-b .dn{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3)}
+.dir-b h3{margin:0;font-size:16px;font-family:"Source Serif 4",Georgia,serif;font-weight:700}
+.dir-b p{margin:0;font-size:13.5px;color:var(--ink-2);line-height:1.5}
+.dir-b .best{font-size:12.5px;color:var(--ink-3);border-top:1px solid var(--rule);padding-top:9px;margin-top:3px}
+
+ul.plain{padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;max-width:68ch;margin:0 0 20px}
+ul.plain li{padding-left:20px;position:relative;color:var(--ink-2);line-height:1.55}
+ul.plain li::before{content:"";position:absolute;left:2px;top:11px;width:7px;height:7px;border:1.5px solid var(--gold);border-radius:50%}
+ul.plain li strong{color:var(--ink)}
+
+footer{margin-top:64px;padding-top:22px;border-top:2px solid var(--ink);
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);
+  display:flex;flex-wrap:wrap;gap:10px 24px}
+</style>
+
+<div class="wrap">
+<div class="main">
+
+<header class="mast">
+  <div class="kicker"><span>Rebuild Brief</span><span>Fin, Feather &amp; Fur Conservation Society</span><span>August 2026</span></div>
+  <h1>Bringing 3F Club onto solid ground</h1>
+  <p class="lede">An audit of the current 3fclub.org, a proposed structure for the public, member, and administrative sides of the new site, and three visual directions for the board to choose from.</p>
+  <dl class="meta">
+    <div><dt>Property</dt><dd>402 acres, Lewiston NY</dd></div>
+    <div><dt>Current platform</dt><dd>WordPress &middot; Mantra theme</dd></div>
+    <div><dt>Content to migrate</dt><dd>27 pages, 11 posts</dd></div>
+    <div><dt>Critical issues</dt><dd>4</dd></div>
+  </dl>
+</header>
+
+<section id="s1">
+<h2><span class="n">01</span> What we found</h2>
+<p class="sub">The current site still carries good material &mdash; the club's history, the range rules, the youth program, the memorials. The problems are structural, and one of them is urgent.</p>
+
+<div class="alert">
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 2.5 18.5 17.5H1.5L10 2.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 8v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="10" cy="14.8" r="1" fill="currentColor"/></svg>
+  <div>
+    <h3>The security certificate expired on July 5, 2018</h3>
+    <p>Every visitor who types <code>https://3fclub.org</code> &mdash; which is now what every browser tries first &mdash; gets a full-page red warning saying the site may be impersonating the club. Most people turn back at that screen.</p>
+    <p>This is free to fix and takes about fifteen minutes. It should not wait for the rebuild.</p>
+  </div>
+</div>
+
+<div class="tw"><table>
+  <thead><tr><th>Finding</th><th>Why it matters</th><th>Severity</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Expired TLS certificate</strong><br><span class="dim">Issued Apr 2018, expired Jul 2018</span></td><td>Browsers block the site behind an interstitial warning. Search engines demote it. Nobody can trust a login form served this way.</td><td><span class="pill p-crit">Critical</span></td></tr>
+    <tr><td><strong>Content published as flat images</strong></td><td>The restaurant menu, the range rules, the membership application, league schedules and the pheasant FAQ are all JPGs of paper documents. They can't be searched, can't be read on a phone without pinching, and are invisible to screen readers.</td><td><span class="pill p-crit">Critical</span></td></tr>
+    <tr><td><strong>Volunteers' personal numbers are public</strong></td><td>Range committee members' cell numbers and private email addresses sit on open pages, harvestable by anyone. These belong behind the member login.</td><td><span class="pill p-crit">Critical</span></td></tr>
+    <tr><td><strong>Zoom is disabled on mobile</strong><br><span class="dim"><code>user-scalable=no</code></span></td><td>Members can't pinch to enlarge &mdash; and since the real content is images of documents, pinching is the only way to read it. An accessibility failure.</td><td><span class="pill p-crit">Critical</span></td></tr>
+    <tr><td><strong>27 pages in one flat menu</strong></td><td>Alphabetical, no grouping. "Awards" sits between "Archery" and "Bird Watching." A first-time visitor has no path through it, and a member can't find the range rules.</td><td><span class="pill p-warn">High</span></td></tr>
+    <tr><td><strong>The members area was started, never built</strong></td><td>Log In, Register, Profile, Account and Password Reset pages all exist and are completely empty. The intent was right; the work stalled.</td><td><span class="pill p-warn">High</span></td></tr>
+    <tr><td><strong>Stale and placeholder content</strong></td><td>The Ponds page reads "Need more Info and Picture here." Several sections lead with news from 2015 under a heading that says "Old News."</td><td><span class="pill p-warn">High</span></td></tr>
+    <tr><td><strong>Every post is "Uncategorized," comments open</strong></td><td>No way to separate range notices from social events. Open comment forms on a club site are a spam magnet.</td><td><span class="pill p-ok">Moderate</span></td></tr>
+  </tbody>
+</table></div>
+
+<div class="note"><p><strong>Worth saying plainly:</strong> the club's <em>information</em> is in good shape. Somebody has been diligently keeping the awards, the memorials, the Summer Classic write-ups and the youth program records current for a decade. The rebuild's job is to stop that work from being buried.</p></div>
+</section>
+
+<section id="s2">
+<h2><span class="n">02</span> Three tiers, one site</h2>
+<p class="sub">The clearest way to organize this is by who is allowed to see it. Every page belongs to exactly one tier, and that decision drives the navigation.</p>
+
+<div class="tiers">
+  <div class="tier">
+    <div class="th"><span class="dot" style="background:var(--ok)"></span><h3>Public</h3></div>
+    <div class="who">Anyone &middot; not signed in</div>
+    <ul>
+      <li>About the club and the 402 acres</li>
+      <li>Ranges, archery, ponds, pavilion</li>
+      <li>Conservation and bird banding</li>
+      <li>Youth Club overview</li>
+      <li>Restaurant hours and menu</li>
+      <li>News and the events calendar</li>
+      <li>How to join, and the application window</li>
+      <li>Public shoots &mdash; the Summer Classic</li>
+      <li>Contact form and directions</li>
+      <li>Memorials</li>
+    </ul>
+  </div>
+  <div class="tier">
+    <div class="th"><span class="dot" style="background:var(--gold)"></span><h3>Members</h3></div>
+    <div class="who">Signed in &middot; dues current</div>
+    <ul>
+      <li>Digital membership card and dues status</li>
+      <li>Range rules and signed acknowledgment</li>
+      <li>Key card status and reactivation</li>
+      <li>Tree stand map and hunt sign-in</li>
+      <li>Pheasant package ordering</li>
+      <li>League scores and standings</li>
+      <li>Event RSVPs and pavilion booking</li>
+      <li>Member directory and committee contacts</li>
+      <li>Meeting minutes, bylaws, documents</li>
+      <li>Sponsoring an application</li>
+    </ul>
+  </div>
+  <div class="tier">
+    <div class="th"><span class="dot" style="background:var(--crit)"></span><h3>Administrators</h3></div>
+    <div class="who">Board and committee chairs</div>
+    <ul>
+      <li>Application review queue (October)</li>
+      <li>Member roster and dues ledger</li>
+      <li>Key card issue and revoke</li>
+      <li>Publishing news and notices</li>
+      <li>Calendar and pavilion approvals</li>
+      <li>Pheasant order fulfillment</li>
+      <li>Range rules versioning</li>
+      <li>Restaurant hours and menu editing</li>
+      <li>Apparel orders</li>
+      <li>Audit log of who changed what</li>
+    </ul>
+  </div>
+</div>
+
+<h3>Navigation that reflects it</h3>
+<p>The 27 flat pages collapse into six public sections, with everything member-only moved behind a single sign-in link in the corner:</p>
+<div class="tw"><table>
+  <thead><tr><th>Section</th><th>Absorbs</th></tr></thead>
+  <tbody>
+    <tr><td><strong>The Club</strong></td><td>About Us, Take a Tour, Awards, Memorials, Conservation</td></tr>
+    <tr><td><strong>Shooting Sports</strong></td><td>Skeet &amp; Trap, Rifle Range, Pistol Range, Indoor Range, Archery, Pistol Safety, Hunter Safety</td></tr>
+    <tr><td><strong>Outdoors</strong></td><td>Ponds &amp; Fishing, Pheasant Program, Hunting, Bird Watching &amp; Banding, Deer Processing</td></tr>
+    <tr><td><strong>Youth</strong></td><td>Youth Club, Youth Day, marksmanship awards, mentored hunts</td></tr>
+    <tr><td><strong>Clubhouse</strong></td><td>Restaurant and hours, the bar, pavilion rental, club apparel</td></tr>
+    <tr><td><strong>News &amp; Events</strong></td><td>All posts, the calendar, fundraisers, Call to Action, Summer Classic</td></tr>
+  </tbody>
+</table></div>
+</section>
+
+<section id="s3">
+<h2><span class="n">03</span> Features worth building</h2>
+<p class="sub">These come straight out of what the club already does on paper. Each one replaces a manual process that currently runs through a volunteer's cell phone.</p>
+
+<h3>The membership application</h3>
+<p>Today: a PDF that only appears August 1 through September 30, printed, signed by two current members, and mailed or dropped off. Reviewed in October; acceptance letters by December 1.</p>
+<ul class="plain">
+  <li><strong>Keep the window, automate it.</strong> The form opens and closes itself on the right dates. Outside the window the page explains when it reopens and offers a reminder email.</li>
+  <li><strong>Sponsors verify digitally.</strong> An applicant names two current members; each gets an email and confirms with one click. No chasing signatures. Applicants without sponsors get the letter-of-intent path, exactly as today.</li>
+  <li><strong>An October review queue.</strong> The board sees every application on one screen with sponsor status, relation to existing members, and a vote tally.</li>
+  <li><strong>December 1 decisions go out from the system</strong> &mdash; and declined applicants are told plainly that they may reapply next August.</li>
+</ul>
+
+<h3>Range key cards and rules acknowledgment</h3>
+<p>Today: a notice tells members whose key card stopped working to phone Tim or Liz, sign the current range rules on paper, and wait for reactivation.</p>
+<ul class="plain">
+  <li><strong>Rules are versioned.</strong> When the range committee publishes a revision, every member's acknowledgment is marked stale automatically.</li>
+  <li><strong>Members re-sign online</strong> &mdash; read the rules, check the box, done. The card reactivates without a phone call to a volunteer's personal number.</li>
+  <li><strong>Admins see who hasn't signed</strong>, and can revoke a card the moment it matters.</li>
+</ul>
+
+<h3>Tree stand sign-in</h3>
+<p>Today: hunters place a physical sticker on a paper aerial map and sign a notebook, so the board and emergency responders know roughly where to search if someone doesn't come back.</p>
+<ul class="plain">
+  <li><strong>This is a safety system, and it should work from a phone in the parking lot.</strong> Check in, drop a pin on the property map, check out when you leave.</li>
+  <li><strong>An automatic reminder</strong> if someone is still signed in well after dark, and a board view showing everyone currently on the property.</li>
+  <li>The paper notebook stays as a backup. Nothing here replaces the sign at the gate.</li>
+</ul>
+
+<h3>Everything else that currently lives in a JPG</h3>
+<ul class="plain">
+  <li><strong>Restaurant menu and hours</strong> &mdash; real text, updated by whoever runs The Great Foodini, readable on a phone at the bar.</li>
+  <li><strong>Pheasant program</strong> &mdash; package sizes, release days (Saturday, Sunday, Tuesday, Thursday), and ordering with payment instead of arranging it in person.</li>
+  <li><strong>League scores</strong> &mdash; winter skeet's 20 weeks, the 10-week summer league, 3-D archery, and the Summer Classic results the club already writes up beautifully every year.</li>
+  <li><strong>The events calendar</strong> &mdash; with the meeting rule encoded: 7pm the third Tuesday, except November, which is the second Tuesday for hunting season.</li>
+  <li><strong>Pavilion rental</strong> &mdash; the 40&times;100 pavilion takes wedding receptions and company picnics. An availability calendar and a request form will book more of them.</li>
+</ul>
+</section>
+
+<section id="s4">
+<h2><span class="n">04</span> Three directions to choose from</h2>
+<p class="sub">Same content, same structure, three different personalities. Each is a working page rather than a picture of one &mdash; open them on a phone and they hold up.</p>
+<div class="dirs">
+  <div class="dir">
+    <div class="swatch"><i style="background:#14291F"></i><i style="background:#E9E6D9"></i><i style="background:#B0894A"></i><i style="background:#7A2E22"></i></div>
+    <div class="dir-b">
+      <div class="dn">Direction A</div>
+      <h3>Heritage Crest</h3>
+      <p>Deep hunter green, ivory and aged brass. Engraved serif headings, the club patch treated like a brass plaque. Reads as an institution that has been here a long time.</p>
+      <div class="best">Best if the board wants dignity and permanence.</div>
+    </div>
+  </div>
+  <div class="dir">
+    <div class="swatch"><i style="background:#EEF0EA"></i><i style="background:#33403B"></i><i style="background:#7C9179"></i><i style="background:#C9522B"></i></div>
+    <div class="dir-b">
+      <div class="dn">Direction B</div>
+      <h3>Field Guide</h3>
+      <p>Light, airy and editorial, built on the contour lines of the property itself. Sage and slate with a single clay-target orange. Feels like a well-made state park guide.</p>
+      <div class="best">Best for attracting new members and families.</div>
+    </div>
+  </div>
+  <div class="dir">
+    <div class="swatch"><i style="background:#101315"></i><i style="background:#1C2124"></i><i style="background:#FF5C1F"></i><i style="background:#4ADE80"></i></div>
+    <div class="dir-b">
+      <div class="dn">Direction C</div>
+      <h3>Range Status</h3>
+      <p>Dark and operational. Opens with what a member actually needs &mdash; are we open, is the range hot, what's on tonight. Safety orange on charcoal, plain utility type.</p>
+      <div class="best">Best if the site's main job is serving current members.</div>
+    </div>
+  </div>
+</div>
+<p style="margin-top:22px">The <strong>member portal</strong> and <strong>admin console</strong> are drawn in Direction A, but the private side is built from the same tokens as the public site &mdash; pick any direction and both follow.</p>
+</section>
+
+<section id="s5">
+<h2><span class="n">05</span> How I would build it</h2>
+<p class="sub">The deciding factor is that the member and admin features are software, not articles. A calendar plugin can publish an events page; it cannot run an October application review with sponsor verification. Everything below is current-generation and boring in the good way &mdash; nothing here needs replacing in three years.</p>
+
+<div class="tw"><table>
+  <thead><tr><th>Layer</th><th>Choice</th><th>Why</th></tr></thead>
+  <tbody>
+    <tr><td>Language</td><td><strong>TypeScript</strong> (strict)</td><td>A member record, a dues state, an application status &mdash; these are worth having the compiler check. Strict mode from day one, because retrofitting it is miserable.</td></tr>
+    <tr><td>Framework</td><td><strong>Next.js 15</strong><br><span class="dim">App Router, React 19, Server Components</span></td><td>Public pages render to static HTML at build time &mdash; fast, and search engines finally see real text. The member and admin areas are a real application in the same codebase. Server Actions handle form submissions without a separate API layer.</td></tr>
+    <tr><td>Styling</td><td><strong>Tailwind CSS v4</strong> + <strong>shadcn/ui</strong></td><td>The design tokens from whichever direction wins become CSS variables the whole app reads. shadcn gives accessible, unstyled-by-default components we own outright &mdash; no dependency that can restyle itself out from under us.</td></tr>
+    <tr><td>Database</td><td><strong>Postgres</strong> on <strong>Neon</strong><br><span class="dim">accessed via Drizzle ORM</span></td><td>Members, dues, applications, sign-ins, orders and scores are relational data. This is the part WordPress was never going to do well. Drizzle keeps the schema in TypeScript and generates real migrations.</td></tr>
+    <tr><td>Content editing</td><td><strong>Payload CMS 3</strong></td><td>Runs natively inside Next.js against the same Postgres database. Gives whoever updates the menu and posts the notices a plain admin screen &mdash; no code, no FTP, no theme files.</td></tr>
+    <tr><td>Accounts</td><td><strong>Auth.js v5</strong><br><span class="dim">email links + passkeys</span></td><td>No passwords for members to forget or reuse. A member number links the login to the roster. Role checks gate the admin console at the route level.</td></tr>
+    <tr><td>Payments</td><td><strong>Stripe</strong></td><td>Dues, pheasant packages, apparel, event tickets, shoot entries &mdash; money lands in the club account with a record attached. Webhooks reconcile automatically.</td></tr>
+    <tr><td>Email</td><td><strong>Resend</strong> + <strong>React Email</strong></td><td>Sponsor requests, acceptance letters, closure notices, key card confirmations &mdash; templated in the same components as the site.</td></tr>
+    <tr><td>Files</td><td><strong>Vercel Blob</strong></td><td>Photos, meeting minutes, the bylaws PDF. Member-only documents are served through signed URLs, not guessable paths.</td></tr>
+    <tr><td>Hosting &amp; CI</td><td><strong>Vercel</strong> + <strong>GitHub Actions</strong></td><td>Every change gets a preview URL the board can look at before it goes live. Certificates renew themselves, permanently &mdash; the 2018 problem cannot recur.</td></tr>
+    <tr><td>Quality gates</td><td><strong>Vitest</strong>, <strong>Playwright</strong>, <strong>Biome</strong></td><td>The date-window rules and dues logic get unit tests. Sign-in, application, and checkout get end-to-end tests, because those are the flows nobody can afford to have quietly break.</td></tr>
+    <tr><td>Monitoring</td><td><strong>Sentry</strong> + <strong>Vercel Analytics</strong></td><td>When a member hits an error at 9pm on a Friday, we know before they call someone's cell phone.</td></tr>
+  </tbody>
+</table></div>
+
+<div class="note"><p><strong>On cost:</strong> for a club this size every service above has a free or near-free tier except Stripe's per-transaction fee. Expect hosting, database and email to run under $30 a month, against whatever the current cPanel hosting costs.</p></div>
+
+<div class="note"><p><strong>On lock-in:</strong> the content lives in Postgres and the code is a standard Next.js app. If the club ever wants to move hosts, it moves &mdash; no proprietary page builder holding the site hostage, which is exactly how the current site ended up frozen in 2015.</p></div>
+</section>
+
+<section id="s6">
+<h2><span class="n">06</span> Sequence</h2>
+<p class="sub">Ordered so the club gets visible wins early and nothing sits blocked waiting on a board vote.</p>
+
+<div class="phase">
+  <div class="phase-h"><span class="pn">NOW</span><h3>Stop the bleeding</h3><span class="when">This week &middot; independent of everything else</span></div>
+  <div class="phase-b">
+    <div>Install a free auto-renewing certificate on the existing site</div>
+    <div>Remove <code>user-scalable=no</code> so members can zoom</div>
+    <div>Close comments on all posts</div>
+    <div>Pull volunteers' cell numbers off public pages</div>
+  </div>
+</div>
+<div class="phase">
+  <div class="phase-h"><span class="pn">01</span><h3>Public site</h3><span class="when">Weeks 1&ndash;4</span></div>
+  <div class="phase-b">
+    <div>Chosen direction built across all six sections</div>
+    <div>Every image-of-a-document retyped as real text</div>
+    <div>News, calendar, and the meeting-schedule rule</div>
+    <div>Contact form, directions, restaurant hours</div>
+  </div>
+</div>
+<div class="phase">
+  <div class="phase-h"><span class="pn">02</span><h3>Accounts and the member portal</h3><span class="when">Weeks 4&ndash;8</span></div>
+  <div class="phase-b">
+    <div>Roster import, member numbers, email sign-in</div>
+    <div>Digital card, dues status, document library</div>
+    <div>Range rules with versioned acknowledgment</div>
+    <div>Key card status and self-service reactivation</div>
+  </div>
+</div>
+<div class="phase">
+  <div class="phase-h"><span class="pn">03</span><h3>Admin console</h3><span class="when">Weeks 7&ndash;10 &middot; before August 1</span></div>
+  <div class="phase-b">
+    <div>Roster management and the dues ledger</div>
+    <div>Online application with sponsor verification</div>
+    <div>October review queue and December decisions</div>
+    <div>Publishing, calendar approvals, audit log</div>
+  </div>
+</div>
+<div class="phase">
+  <div class="phase-h"><span class="pn">04</span><h3>Programs</h3><span class="when">Weeks 10+ &middot; seasonally</span></div>
+  <div class="phase-b">
+    <div>Tree stand sign-in, ahead of deer season</div>
+    <div>Pheasant packages and release scheduling</div>
+    <div>League scores, standings, Summer Classic entry</div>
+    <div>Pavilion booking and the apparel store</div>
+  </div>
+</div>
+
+<div class="note" style="margin-top:24px"><p><strong>One date drives the schedule.</strong> Applications open <strong>August 1</strong> and the board reviews in <strong>October</strong>. If the online application isn't ready by late July it waits a full year for the next window &mdash; so Phase 03 is the one milestone with a hard deadline attached.</p></div>
+</section>
+
+<section id="s7">
+<h2><span class="n">07</span> What I need from the club</h2>
+<p class="sub">Things I can't decide from the outside. None of them block starting.</p>
+<ul class="plain">
+  <li><strong>Who owns the domain and the hosting account?</strong> Needed to move DNS &mdash; and to fix the certificate today.</li>
+  <li><strong>What form is the member roster in?</strong> A spreadsheet, a binder, or the treasurer's software. This determines how accounts get created.</li>
+  <li><strong>How are dues collected now, and should they move online?</strong> Some clubs deliberately keep this in person.</li>
+  <li><strong>Who will be an administrator?</strong> I'd suggest three to five: a webmaster, the membership chair, the range chair, and the treasurer.</li>
+  <li><strong>Are there photographs?</strong> There's drone footage of the grounds from 2016. Current photos of the ranges, the pavilion, the ponds and Youth Day would carry the public site enormously.</li>
+  <li><strong>Does the club have a logo file?</strong> The 3F patch exists on the site only as a 150-pixel GIF. If there's an original &mdash; embroidery art, a decal, a sign &mdash; it should be redrawn properly.</li>
+</ul>
+</section>
+
+<footer>
+  <span>Fin, Feather &amp; Fur Conservation Society, Inc.</span>
+  <span>904 Swann Road, Youngstown NY 14174</span>
+  <span>(716) 754-2293</span>
+</footer>
+
+</div>
+
+<nav class="toc" aria-label="Contents">
+  <span class="tl">Contents</span>
+  <ol>
+    <li><a href="#s1">01&nbsp;&nbsp;What we found</a></li>
+    <li><a href="#s2">02&nbsp;&nbsp;Three tiers, one site</a></li>
+    <li><a href="#s3">03&nbsp;&nbsp;Features worth building</a></li>
+    <li><a href="#s4">04&nbsp;&nbsp;Three directions</a></li>
+    <li><a href="#s5">05&nbsp;&nbsp;How I would build it</a></li>
+    <li><a href="#s6">06&nbsp;&nbsp;Sequence</a></li>
+    <li><a href="#s7">07&nbsp;&nbsp;What I need</a></li>
+  </ol>
+</nav>
+</div>
