@@ -247,6 +247,37 @@ function testFile(file) {
       'block-level flex strip leaks its background - use inline-flex');
   }
 
+  // --- native controls are fully restyled --------------------------------
+  // A bare <button> defaults to the UA's light `buttonface` background and the
+  // UA font. On a dark panel that renders as a white block with unreadable
+  // text, which is invisible in the source and obvious on screen.
+  const controls = tags.filter(t => ['button', 'select', 'textarea', 'input'].includes(t.name));
+  if (controls.length) {
+    // Element-level rules (e.g. `.field input{...}`) cover every control.
+    const elemRules = (css.match(/(^|[\s,>])(button|select|textarea|input)\s*\{[^}]*\}/gm) || []).join(' ');
+    const globalBg = /background\s*:/.test(elemRules);
+    const globalFont = /font-family\s*:/.test(elemRules);
+
+    // Checked per element: one variant setting a background must not excuse a
+    // sibling variant that does not.
+    const noBg = [], noFont = [];
+    for (const c of controls) {
+      const cls = (attr(c.attrs, 'class') || '').split(/\s+/).filter(Boolean);
+      let bg = globalBg, font = globalFont;
+      for (const k of cls) {
+        const rule = (css.match(new RegExp(`\\.${k}\\s*\\{([^}]*)\\}`)) || [])[1] || '';
+        if (/background\s*:/.test(rule)) bg = true;
+        if (/font-family\s*:/.test(rule)) font = true;
+      }
+      if (!bg) noBg.push(`<${c.name} class="${cls.join(' ')}"> line ${c.line}`);
+      if (!font) noFont.push(`<${c.name} class="${cls.join(' ')}"> line ${c.line}`);
+    }
+    check(name, 'native controls set an explicit background', noBg.length === 0,
+      `${noBg.length} control(s) fall back to the UA buttonface colour: ${noBg.slice(0, 3).join('; ')}`);
+    check(name, 'native controls set an explicit font-family', noFont.length === 0,
+      `${noFont.length} control(s) fall back to the UA font: ${noFont.slice(0, 3).join('; ')}`);
+  }
+
   // --- canvas pages ------------------------------------------------------
   if (/<canvas/.test(html)) {
     check(name, 'canvas has a bounded retry', /tries\s*>\s*\d+/.test(js),
