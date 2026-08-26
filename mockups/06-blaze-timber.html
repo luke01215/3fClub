@@ -1,0 +1,467 @@
+<title>3F Blaze &amp; Timber</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600;700&display=swap">
+<style>
+/* Direction D - Blaze & Timber. Camouflage used as texture, never as wallpaper:
+   it appears in three places, always behind a scrim, and blaze orange carries
+   every piece of information that matters. Committed to one dark world. */
+:root{
+  --bark:#1C1810;
+  --panel:#252017;
+  --panel-2:#2F2A1E;
+  --bone:#EDE7DA;
+  --bone-2:#B5AD9B;
+  --bone-3:#847C6C;
+  --blaze:#FF4F00;
+  --blaze-hi:#FF7033;
+  --rule:rgba(237,231,218,.13);
+  --rule-2:rgba(237,231,218,.24);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--bark);color:var(--bone);
+  font-family:"Barlow",-apple-system,"Segoe UI",sans-serif;font-size:16.5px;line-height:1.62;
+  -webkit-font-smoothing:antialiased}
+.shell{max-width:1200px;margin:0 auto;padding:0 26px}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--blaze);outline-offset:3px}
+h1,h2,h3,h4,.cond{font-family:"Barlow Condensed","Barlow",sans-serif;font-weight:700;
+  text-transform:uppercase;letter-spacing:.005em}
+.lbl{font-family:"Barlow Condensed",sans-serif;font-size:13px;font-weight:600;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--blaze)}
+.lbl.q{color:var(--bone-3)}
+
+/* header */
+header.top{position:sticky;top:0;z-index:40;background:rgba(28,24,16,.94);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--rule)}
+header.top .shell{display:flex;align-items:center;gap:18px;padding-top:12px;padding-bottom:12px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand .mk{width:38px;height:38px;flex:none;border:2px solid var(--blaze);display:grid;place-items:center;
+  font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:16px;color:var(--blaze);letter-spacing:.02em}
+.brand b{color:var(--bone);font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:19px;text-transform:uppercase;
+  letter-spacing:.03em;line-height:1;display:block}
+.brand span{font-size:10px;font-weight:600;letter-spacing:.17em;text-transform:uppercase;color:var(--bone-3)}
+nav.n{margin-left:auto;display:none;gap:26px}
+@media(min-width:1040px){nav.n{display:flex}}
+nav.n a{font-family:"Barlow Condensed",sans-serif;font-size:15px;font-weight:600;text-transform:uppercase;
+  letter-spacing:.09em;color:var(--bone-2);padding:5px 0;border-bottom:2px solid transparent}
+nav.n a:hover{color:var(--bone);border-bottom-color:var(--blaze)}
+.hact{margin-left:auto;display:flex;gap:9px}
+@media(min-width:1040px){.hact{margin-left:20px}}
+.btn{font-family:"Barlow Condensed",sans-serif;font-size:14.5px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.1em;padding:11px 20px;display:inline-flex;align-items:center;gap:9px;border:2px solid transparent;
+  white-space:nowrap;cursor:pointer}
+.btn-p{background:var(--blaze);color:#1A0C02;border-color:var(--blaze)}
+.btn-p:hover{background:var(--blaze-hi);border-color:var(--blaze-hi)}
+.btn-s{border-color:var(--rule-2);color:var(--bone)}
+.btn-s:hover{border-color:var(--blaze);color:var(--blaze)}
+.btn-sm{padding:8px 15px;font-size:13px}
+
+/* hero with camo */
+.hero{position:relative;overflow:hidden;border-bottom:3px solid var(--blaze)}
+#camo{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero .scrim{position:absolute;inset:0;
+  background:linear-gradient(100deg,rgba(28,24,16,.94) 0%,rgba(28,24,16,.86) 42%,rgba(28,24,16,.62) 100%)}
+.hero .shell{position:relative;padding-top:96px;padding-bottom:86px}
+.hero .lbl{display:block;margin-bottom:16px}
+.hero h1{font-size:clamp(44px,8vw,92px);line-height:.92;margin:0 0 22px;max-width:15ch;letter-spacing:-.005em}
+.hero h1 em{font-style:normal;color:var(--blaze);display:block}
+.hero p{font-size:19px;line-height:1.55;color:var(--bone-2);max-width:50ch;margin:0 0 32px}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+
+/* stat bar */
+.bar{background:var(--blaze);color:#1A0C02}
+.bar .shell{display:flex;flex-wrap:wrap;padding:0 26px}
+.bar .c{padding:16px 28px 16px 0;margin-right:28px;border-right:2px solid rgba(26,12,2,.22);
+  display:flex;align-items:baseline;gap:10px}
+.bar .c:last-child{border-right:0;margin-right:0;padding-right:0}
+.bar b{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:30px;line-height:1;
+  font-variant-numeric:tabular-nums}
+.bar span{font-family:"Barlow Condensed",sans-serif;font-size:14px;font-weight:600;text-transform:uppercase;
+  letter-spacing:.11em}
+
+/* sections */
+section{padding:82px 0}
+.sec-head{margin-bottom:42px;max-width:62ch}
+.sec-head .lbl{display:block;margin-bottom:14px}
+.sec-head h2{font-size:clamp(32px,5vw,54px);line-height:1.02;margin:0 0 16px;text-wrap:balance}
+.sec-head p{margin:0;font-size:17.5px;color:var(--bone-2);line-height:1.6}
+
+/* discipline cards */
+.disc{display:grid;gap:2px;background:var(--rule)}
+@media(min-width:640px){.disc{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1020px){.disc{grid-template-columns:repeat(3,1fr)}}
+.d{background:var(--panel);padding:30px 26px 26px;display:flex;flex-direction:column;gap:12px;
+  position:relative;min-height:230px;border-top:3px solid transparent}
+.d:hover{background:var(--panel-2);border-top-color:var(--blaze)}
+.d .ic{color:var(--blaze);height:32px;display:flex;align-items:center}
+.d h3{margin:0;font-size:25px;line-height:1}
+.d p{margin:0;font-size:15.5px;color:var(--bone-2);line-height:1.5;flex:1}
+.d .go{font-family:"Barlow Condensed",sans-serif;font-size:13px;font-weight:700;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--blaze);display:flex;align-items:center;gap:8px}
+
+/* camo band divider */
+.band{position:relative;height:132px;overflow:hidden;border-top:3px solid var(--blaze);border-bottom:3px solid var(--blaze)}
+#camoBand{position:absolute;inset:0;width:100%;height:100%;display:block}
+.band .ov{position:absolute;inset:0;background:rgba(28,24,16,.5);display:grid;place-items:center}
+.band .ov p{margin:0;font-family:"Barlow Condensed",sans-serif;font-weight:700;text-transform:uppercase;
+  font-size:clamp(19px,3.2vw,32px);letter-spacing:.09em;text-align:center;padding:0 24px;
+  text-shadow:0 2px 14px rgba(28,24,16,.9)}
+.band .ov p em{font-style:normal;color:var(--blaze)}
+
+/* safety block */
+.safety{background:var(--panel)}
+.sgrid{display:grid;gap:34px}
+@media(min-width:940px){.sgrid{grid-template-columns:1fr 1fr;gap:56px}}
+.rules{border:2px solid var(--rule-2);padding:0}
+.rules .rh{background:var(--blaze);color:#1A0C02;padding:13px 20px;display:flex;align-items:center;gap:11px}
+.rules .rh h3{margin:0;font-size:19px;letter-spacing:.05em}
+.rules .rh .rev{margin-left:auto;font-family:"Barlow Condensed",sans-serif;font-size:13px;font-weight:600;
+  letter-spacing:.09em}
+.rules ol{margin:0;padding:6px 0;list-style:none;counter-reset:r}
+.rules li{counter-increment:r;display:flex;gap:15px;padding:13px 20px;border-bottom:1px solid var(--rule);
+  font-size:15.5px;color:var(--bone-2);line-height:1.45}
+.rules li:last-child{border-bottom:0}
+.rules li::before{content:counter(r,decimal-leading-zero);font-family:"Barlow Condensed",sans-serif;
+  font-weight:700;font-size:14px;color:var(--blaze);flex:none;padding-top:2px;letter-spacing:.06em}
+.rules li b{color:var(--bone);font-weight:600}
+
+/* seasons strip */
+.hunt{display:grid;gap:2px;background:var(--rule);border:1px solid var(--rule)}
+@media(min-width:700px){.hunt{grid-template-columns:repeat(4,1fr)}}
+.h4{background:var(--panel);padding:22px 20px;display:flex;flex-direction:column;gap:8px}
+.h4 .mo{font-family:"Barlow Condensed",sans-serif;font-size:13px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--blaze)}
+.h4 h3{margin:0;font-size:21px;line-height:1.05}
+.h4 p{margin:0;font-size:14.5px;color:var(--bone-2);line-height:1.45}
+
+/* join */
+.join{position:relative;overflow:hidden;border-top:3px solid var(--blaze)}
+#camoJoin{position:absolute;inset:0;width:100%;height:100%;display:block}
+.join .scrim{position:absolute;inset:0;background:rgba(28,24,16,.9)}
+.join .shell{position:relative;padding-top:76px;padding-bottom:76px}
+.join .lbl{display:block;margin-bottom:14px}
+.join h2{font-size:clamp(32px,5.4vw,58px);line-height:1;margin:0 0 18px;max-width:17ch;text-wrap:balance}
+.join > .shell > p{font-size:18px;color:var(--bone-2);max-width:52ch;margin:0 0 30px;line-height:1.6}
+.gates{display:inline-flex;flex-wrap:wrap;gap:2px;background:var(--rule-2);border:2px solid var(--rule-2);margin-bottom:32px}
+.gates div{background:var(--bark);padding:15px 24px;min-width:130px}
+.gates dt{font-family:"Barlow Condensed",sans-serif;font-size:12px;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--bone-3);margin-bottom:4px}
+.gates dd{margin:0;font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:22px;
+  text-transform:uppercase;letter-spacing:.03em;white-space:nowrap}
+.gates dd.on{color:var(--blaze)}
+
+/* footer */
+footer{background:var(--panel);border-top:1px solid var(--rule);padding:56px 0 26px;font-size:15px}
+.fg{display:grid;gap:34px;padding-bottom:36px;border-bottom:1px solid var(--rule)}
+@media(min-width:780px){.fg{grid-template-columns:1.5fr 1fr 1fr 1.2fr}}
+.fg h4{margin:0 0 15px;font-size:14px;letter-spacing:.18em;color:var(--blaze)}
+.fg ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+.fg a{color:var(--bone-2)}
+.fg a:hover{color:var(--blaze)}
+.fg p{margin:0 0 10px;color:var(--bone-2);line-height:1.55}
+.fh{display:flex;flex-direction:column;gap:6px;font-variant-numeric:tabular-nums}
+.fh div{display:flex;justify-content:space-between;gap:16px;color:var(--bone-2);font-size:14.5px}
+.fh b{color:var(--bone);font-weight:600}
+.fbot{padding-top:22px;display:flex;flex-wrap:wrap;gap:10px 22px;font-family:"Barlow Condensed",sans-serif;
+  font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--bone-3)}
+.fbot .sp{margin-left:auto}
+</style>
+
+<header class="top"><div class="shell">
+  <a class="brand" href="#"><span class="mk">3F</span>
+    <span><b>Fin, Feather &amp; Fur</b><span>Conservation Society &middot; Lewiston NY</span></span></a>
+  <nav class="n" aria-label="Main">
+    <a href="#disciplines">Disciplines</a>
+    <a href="#safety">Range Safety</a>
+    <a href="#season">The Season</a>
+    <a href="#join">Join</a>
+  </nav>
+  <div class="hact">
+    <a class="btn btn-s btn-sm" href="#">Sign In</a>
+    <a class="btn btn-p btn-sm" href="#join">Apply</a>
+  </div>
+</div></header>
+
+<div class="hero">
+  <canvas id="camo" aria-hidden="true"></canvas>
+  <div class="scrim"></div>
+  <div class="shell">
+    <span class="lbl">402 Acres &middot; Town of Lewiston, New York</span>
+    <h1>Know your target<em>and what's beyond it</em></h1>
+    <p>A private conservation club where safety is taught before anything else &mdash; and where the people who hunt and fish this ground are the ones who look after it.</p>
+    <div class="cta">
+      <a class="btn btn-p" href="#join">Apply for Membership</a>
+      <a class="btn btn-s" href="#disciplines">What We Offer</a>
+    </div>
+  </div>
+</div>
+
+<div class="bar"><div class="shell">
+  <div class="c"><b>402</b><span>Acres</span></div>
+  <div class="c"><b>7</b><span>Skeet &amp; Trap Fields</span></div>
+  <div class="c"><b>200</b><span>Yard Rifle Line</span></div>
+  <div class="c"><b>4</b><span>Ponds</span></div>
+</div></div>
+
+<section id="disciplines"><div class="shell">
+  <div class="sec-head">
+    <span class="lbl">Disciplines</span>
+    <h2>Seven ways to spend a Saturday</h2>
+    <p>Every discipline here is run by a committee of members. Nobody is paid, the ranges are maintained by the people who shoot them, and instruction is free to anyone who asks.</p>
+  </div>
+  <div class="disc">
+    <a class="d" href="#">
+      <span class="ic"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12.5" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="16" r="6.5" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="16" r="2" fill="currentColor"/></svg></span>
+      <h3>Skeet &amp; Trap</h3>
+      <p>Five skeet fields, two trap fields. Winter league runs twenty weeks and finishes with a banquet; summer runs ten and mixes both.</p>
+      <span class="go">Leagues &amp; Schedule <span aria-hidden="true">&rarr;</span></span>
+    </a>
+    <a class="d" href="#">
+      <span class="ic"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M4 25h24M8 25V13M15 25V17M22 25V8M28 25V19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      <h3>Rifle Range</h3>
+      <p>Concrete firing line at 100 yards, second line at 200. Red light on, flag hung, everyone acknowledges before the range goes live.</p>
+      <span class="go">Range Rules <span aria-hidden="true">&rarr;</span></span>
+    </a>
+    <a class="d" href="#">
+      <span class="ic"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="3" y="8" width="26" height="17" stroke="currentColor" stroke-width="2"/><path d="M10 8v17M17 8v17M24 8v17" stroke="currentColor" stroke-width="1.4" opacity=".5"/></svg></span>
+      <h3>Indoor Pistol</h3>
+      <p>Fifty feet, five stations, mechanical target carriers so nobody walks downrange. Well lit, well ventilated, open year round.</p>
+      <span class="go">Hours &amp; Access <span aria-hidden="true">&rarr;</span></span>
+    </a>
+    <a class="d" href="#">
+      <span class="ic"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M27 5 9 23" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M27 5h-7M27 5v7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="6.5" cy="25.5" r="2.5" stroke="currentColor" stroke-width="2"/></svg></span>
+      <h3>Archery</h3>
+      <p>Indoor range for the off season, and a 3-D course through pines and hardwoods with stationary targets at 20, 30 and 40 yards.</p>
+      <span class="go">3-D League <span aria-hidden="true">&rarr;</span></span>
+    </a>
+    <a class="d" href="#">
+      <span class="ic"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 3c5.5 4.5 8.5 8.5 8.5 13S21 25.5 16 25.5 7.5 21.5 7.5 16 10.5 7.5 16 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16 11v18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      <h3>Pheasant Program</h3>
+      <p>Buy a package, birds are released before your hunt. Releases Saturday, Sunday, Tuesday and Thursday. Non-profit, so packages stay affordable.</p>
+      <span class="go">Packages <span aria-hidden="true">&rarr;</span></span>
+    </a>
+    <a class="d" href="#">
+      <span class="ic"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M3 20c3-3.2 6.2-3.2 9.2 0s6.2 3.2 9.2 0 6-3.2 8.6 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M3 26c3-3.2 6.2-3.2 9.2 0s6.2 3.2 9.2 0 6-3.2 8.6 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M21 5c-4.4 0-7.6 2.9-7.6 6.1S16.6 17 21 17s7.6-2.6 7.6-5.9S25.4 5 21 5Z" stroke="currentColor" stroke-width="2"/></svg></span>
+      <h3>Ponds &amp; Fishing</h3>
+      <p>Four ponds, the largest a 32-acre lake stocked with largemouth bass and pan fish. Waterfowl, dog training and the kids' derby too.</p>
+      <span class="go">The Water <span aria-hidden="true">&rarr;</span></span>
+    </a>
+  </div>
+</div></section>
+
+<div class="band">
+  <canvas id="camoBand" aria-hidden="true"></canvas>
+  <div class="ov"><p>Defend from waste our country's air, soil, minerals,<br>forests, water and <em>wildlife</em></p></div>
+</div>
+
+<section class="safety" id="safety"><div class="shell">
+  <div class="sgrid">
+    <div>
+      <span class="lbl">Range Safety</span>
+      <h2 style="font-size:clamp(30px,4.4vw,46px);line-height:1.03;margin:14px 0 18px">The rules are short, and they are not negotiable</h2>
+      <p style="color:var(--bone-2);font-size:17px;margin:0 0 16px;max-width:52ch">Every member signs off on the current range rules before their gate key card is activated. When the range committee issues a revision, everybody signs again.</p>
+      <p style="color:var(--bone-2);font-size:17px;margin:0 0 26px;max-width:52ch">That sounds strict. It is why this club has the record it does.</p>
+      <a class="btn btn-s" href="#">Read the Full Rules</a>
+    </div>
+    <div class="rules">
+      <div class="rh">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 1.8 17.4 5v5.4c0 4-3.1 6.9-7.4 7.8-4.3-.9-7.4-3.8-7.4-7.8V5L10 1.8Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        <h3>Outdoor Range</h3>
+        <span class="rev">Rev. 07/2025</span>
+      </div>
+      <ol>
+        <li><span><b>Sign in on entering.</b> The book is in the mailbox on the storage container. Eye and ear protection required.</span></li>
+        <li><span><b>Red light on, red flag up</b> at the 100-yard line before anyone shoots.</span></li>
+        <li><span><b>Muzzles downrange at all times.</b> Benched guns: action open, chamber empty, magazine well empty.</span></li>
+        <li><span><b>Nobody goes forward</b> until a cease fire is called and acknowledged by every person on the range.</span></li>
+        <li><span><b>Shooters 18 or older</b>, or accompanied by an adult.</span></li>
+        <li><span><b>Paper and cardboard targets only</b>, on the provided stands. No steel, no spinners, no cans.</span></li>
+        <li><span><b>Drills are fine.</b> Indiscriminate rapid fire and magazine dumps are not.</span></li>
+        <li><span><b>Guests $5</b>, signed in, and they read these rules first.</span></li>
+      </ol>
+    </div>
+  </div>
+</div></section>
+
+<section id="season"><div class="shell">
+  <div class="sec-head">
+    <span class="lbl">The Season</span>
+    <h2>The club year, start to finish</h2>
+    <p>Membership is not a summer thing. There is a reason to be here in every month of the calendar.</p>
+  </div>
+  <div class="hunt">
+    <div class="h4"><span class="mo">Mar &ndash; May</span><h3>Spring</h3><p>Martin houses go back up. Songbird banding through the migration. Youth Club Mondays and Thursdays. 3-D archery opens.</p></div>
+    <div class="h4"><span class="mo">Jun &ndash; Aug</span><h3>Summer</h3><p>The 3F Summer Classic. Purple martin banding before the birds leave for Brazil. Kids Fishing Derby. Applications open August 1.</p></div>
+    <div class="h4"><span class="mo">Sep &ndash; Nov</span><h3>Fall</h3><p>Pheasant releases four days a week. Deer season, stands signed in and mapped. Youth Day. Fall gun raffle and deer processing.</p></div>
+    <div class="h4"><span class="mo">Dec &ndash; Feb</span><h3>Winter</h3><p>Twenty weeks of skeet league, then the banquet. Cross-country skiing. Indoor archery and pistol. The Christmas party.</p></div>
+  </div>
+</div></section>
+
+<section class="join" id="join">
+  <canvas id="camoJoin" aria-hidden="true"></canvas>
+  <div class="scrim"></div>
+  <div class="shell">
+    <span class="lbl">Membership</span>
+    <h2>The gate opens once a year</h2>
+    <p>Applications are accepted August 1 through September 30 and not one day outside it. The board reviews every one in October, and accepted members hear back by December 1.</p>
+    <dl class="gates">
+      <div><dt>Opens</dt><dd class="on">Aug 1</dd></div>
+      <div><dt>Closes</dt><dd>Sep 30</dd></div>
+      <div><dt>Reviewed</dt><dd>October</dd></div>
+      <div><dt>Decisions</dt><dd>By Dec 1</dd></div>
+    </dl>
+    <p style="max-width:52ch;margin:0 0 30px">Two current members should sponsor your application. If you don't know two yet, attach a letter of intent &mdash; and tell us if you're related to a member.</p>
+    <div class="cta" style="display:flex;gap:12px;flex-wrap:wrap">
+      <a class="btn btn-p" href="#">Start an Application</a>
+      <a class="btn btn-s" href="#">Ask a Question</a>
+    </div>
+  </div>
+</section>
+
+<footer><div class="shell">
+  <div class="fg">
+    <div>
+      <h4>Fin, Feather &amp; Fur</h4>
+      <p>Conservation Society, Inc.<br>904 Swann Road<br>Youngstown, New York 14174</p>
+      <p><a href="tel:+17167542293">(716) 754-2293</a><br><a href="mailto:admin@3fclub.org">admin@3fclub.org</a></p>
+    </div>
+    <div>
+      <h4>Disciplines</h4>
+      <ul>
+        <li><a href="#">Skeet &amp; Trap</a></li>
+        <li><a href="#">Rifle Range</a></li>
+        <li><a href="#">Indoor Pistol</a></li>
+        <li><a href="#">Archery</a></li>
+        <li><a href="#">Pheasant Program</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Members</h4>
+      <ul>
+        <li><a href="#">Sign In</a></li>
+        <li><a href="#">Range Rules</a></li>
+        <li><a href="#">Key Card</a></li>
+        <li><a href="#">Hunt Sign-In</a></li>
+        <li><a href="#">Documents</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Club Hours</h4>
+      <div class="fh">
+        <div><span>Mon &ndash; Tue</span><b>4 &ndash; 9 pm</b></div>
+        <div><span>Wednesday</span><b>Noon &ndash; 9 pm</b></div>
+        <div><span>Thursday</span><b>4 &ndash; 9 pm</b></div>
+        <div><span>Friday</span><b>4 &ndash; 10 pm</b></div>
+        <div><span>Saturday</span><b>Noon &ndash; 9 pm</b></div>
+        <div><span>Sunday</span><b>Noon &ndash; 8 pm</b></div>
+      </div>
+    </div>
+  </div>
+  <div class="fbot">
+    <span>&copy; 2026 Fin, Feather and Fur Conservation Society, Inc.</span>
+    <span>Closed major holidays</span>
+    <span class="sp">Direction D &mdash; Blaze &amp; Timber</span>
+  </div>
+</div></footer>
+
+<script>
+(function(){
+  // Seeded PRNG so the pattern is identical on every load and every device.
+  function rng(seed){
+    return function(){
+      seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+      var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+
+  // Woodland camo: irregular organic patches layered darkest-last, the way
+  // real disruptive pattern is printed. Not a tiled texture.
+  function blob(ctx, r, cx, cy, rad){
+    var pts = 18, h1 = r()*6.28, h2 = r()*6.28, h3 = r()*6.28;
+    ctx.beginPath();
+    for(var i=0;i<=pts;i++){
+      var a = i/pts*Math.PI*2;
+      var wob = 1 + 0.34*Math.sin(a*2 + h1) + 0.22*Math.sin(a*3 + h2) + 0.13*Math.sin(a*5 + h3);
+      var rr = rad*wob;
+      var x = cx + Math.cos(a)*rr, y = cy + Math.sin(a)*rr*0.72;
+      if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    }
+    ctx.closePath(); ctx.fill();
+  }
+
+  // sizeFactor sets patch size relative to the panel; countMul keeps coverage
+  // full as patches shrink. Small patches read as camouflage; large ones just
+  // read as abstract blobs, which is the trap this pattern has to avoid.
+  function paint(canvas, seed, sizeFactor, countMul){
+    if(!canvas) return false;
+    var host = canvas.parentElement || canvas;
+    var w = Math.round(host.clientWidth || window.innerWidth);
+    var h = Math.round(host.clientHeight);
+    if(!w || !h) return false;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = w*dpr; canvas.height = h*dpr;
+    var ctx = canvas.getContext('2d');
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+
+    ctx.fillStyle = '#4A5138'; ctx.fillRect(0,0,w,h);          // field
+    var base = Math.max(w,h);
+    var layers = [
+      {c:'#6E6247', n:16, s:[0.55,1.0]},   // tan
+      {c:'#39412C', n:14, s:[0.45,0.9]},   // deep moss
+      {c:'#241F14', n:11, s:[0.30,0.7]}    // bark, on top
+    ];
+    layers.forEach(function(L, li){
+      var r = rng(seed + li*977);
+      ctx.fillStyle = L.c;
+      var count = Math.round(L.n * countMul);
+      for(var i=0;i<count;i++){
+        var rad = base*(L.s[0] + r()*(L.s[1]-L.s[0]))*sizeFactor;
+        // Bleed past the edges so patches are cut off by the frame, the way
+        // printed pattern is, rather than floating inside it.
+        blob(ctx, r, (-0.1 + r()*1.2)*w, (-0.15 + r()*1.3)*h, rad);
+      }
+    });
+    return true;
+  }
+
+  //             id           seed      sizeFactor  countMul
+  var TARGETS = [['camo',     20260801, 0.075,      2.2],
+                 ['camoBand', 774293,   0.030,      5.0],   // thin strip, fine pattern
+                 ['camoJoin', 41187,    0.065,      2.4]];
+
+  function all(){
+    // Repaint every canvas that still has no real size. Each is independent -
+    // one succeeding must not stop the others from being retried.
+    var pending = 0;
+    TARGETS.forEach(function(t){
+      if(!paint(document.getElementById(t[0]), t[1], t[2], t[3])) pending++;
+    });
+    return pending === 0;
+  }
+
+  // Layout can settle late (webfonts, snapshot rendering, a hidden pane gaining
+  // size). Retry on a bounded schedule rather than giving up after one frame.
+  var tries = 0;
+  (function boot(){
+    if(all() || ++tries > 24) return;
+    setTimeout(function(){ requestAnimationFrame(boot); }, 80);
+  })();
+  window.addEventListener('load', all);
+  if(window.ResizeObserver){
+    var t;
+    var ro = new ResizeObserver(function(){ clearTimeout(t); t = setTimeout(all, 130); });
+    ['camo','camoBand','camoJoin'].forEach(function(id){
+      var el = document.getElementById(id);
+      if(el && el.parentElement) ro.observe(el.parentElement);
+    });
+  } else {
+    var t2;
+    window.addEventListener('resize', function(){ clearTimeout(t2); t2 = setTimeout(all, 150); });
+  }
+})();
+</script>

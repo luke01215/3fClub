@@ -303,7 +303,10 @@ footer{margin-top:64px;padding-top:22px;border-top:2px solid var(--ink);
 
 <section id="s4">
 <h2><span class="n">04</span> Three directions to choose from</h2>
-<p class="sub">Same content, same structure, three different personalities. Each is a working page rather than a picture of one &mdash; open them on a phone and they hold up.</p>
+<p class="sub">Same content, same structure, six different personalities. Each is a working page rather than a picture of one &mdash; open them on a phone and they hold up.</p>
+
+<div class="note"><p><strong>Six is too many to put to a vote.</strong> Boards asked to choose from six columns tend to split evenly and decide nothing. Pick two or three to bring to the meeting &mdash; ideally ones that represent genuinely different <em>strategies</em>, not just different colors, since that is the real decision underneath.</p></div>
+
 <div class="dirs">
   <div class="dir">
     <div class="swatch"><i style="background:#14291F"></i><i style="background:#E9E6D9"></i><i style="background:#B0894A"></i><i style="background:#7A2E22"></i></div>
@@ -332,8 +335,48 @@ footer{margin-top:64px;padding-top:22px;border-top:2px solid var(--ink);
       <div class="best">Best if the site's main job is serving current members.</div>
     </div>
   </div>
+  <div class="dir">
+    <div class="swatch"><i style="background:#1C1810"></i><i style="background:#4A5138"></i><i style="background:#7A6B4F"></i><i style="background:#FF4F00"></i></div>
+    <div class="dir-b">
+      <div class="dn">Direction D</div>
+      <h3>Blaze &amp; Timber</h3>
+      <p>Camouflage as texture, never wallpaper &mdash; generated woodland pattern behind a scrim, with blaze orange carrying every piece of information that matters. Condensed type, hard edges, safety-first copy.</p>
+      <div class="best">Best if the club wants to look like what it is.</div>
+    </div>
+  </div>
+  <div class="dir">
+    <div class="swatch"><i style="background:#FAFAF7"></i><i style="background:#101114"></i><i style="background:#E2542B"></i><i style="background:#9C7A16"></i></div>
+    <div class="dir-b">
+      <div class="dn">Direction E</div>
+      <h3>Clay Break</h3>
+      <p>A competition sheet rather than a brochure. Leads with the Summer Classic scoreboard, class winners and league standings. Heavy condensed display type and real numbers.</p>
+      <div class="best">Best for competitive shooters and shoot entries.</div>
+    </div>
+  </div>
+  <div class="dir">
+    <div class="swatch"><i style="background:#1B3A4B"></i><i style="background:#2E6F7E"></i><i style="background:#E8DCC8"></i><i style="background:#C2573A"></i></div>
+    <div class="dir-b">
+      <div class="dn">Direction F</div>
+      <h3>Still Water</h3>
+      <p>The lake, the kitchen, the pavilion and the Saturday night. Warm humanist type on deep water blue &mdash; the only direction that leads with the "Fin" in the club's name.</p>
+      <div class="best">Best for families, and for the pavilion rental business.</div>
+    </div>
+  </div>
 </div>
 <p style="margin-top:22px">The <strong>member portal</strong> and <strong>admin console</strong> are drawn in Direction A, but the private side is built from the same tokens as the public site &mdash; pick any direction and both follow.</p>
+
+<h3>The strategic question underneath</h3>
+<p>The six directions are really three arguments about who the site is <em>for</em>. That is the decision worth putting to the board; the colors follow from it.</p>
+<div class="tw"><table>
+  <thead><tr><th>If the site's first job is&hellip;</th><th>Then look at</th><th>Because</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Recruiting new members</strong></td><td>B &mdash; Field Guide<br>F &mdash; Still Water</td><td>Both lead with what an outsider would want to know, and F actively counters the assumption that this is only a gun club.</td></tr>
+    <tr><td><strong>Serving the 640 members you have</strong></td><td>C &mdash; Range Status<br>E &mdash; Clay Break</td><td>Both open with live, useful information: what is open right now, and where you stand in the league.</td></tr>
+    <tr><td><strong>Representing the institution</strong></td><td>A &mdash; Heritage Crest<br>D &mdash; Blaze &amp; Timber</td><td>Two different answers to the same question &mdash; A says the club is old and dignified, D says it is serious and unapologetic.</td></tr>
+  </tbody>
+</table></div>
+
+<div class="note"><p><strong>One thing to apply whichever wins.</strong> This club has members in their late eighties still competing. Whatever direction is chosen should ship with a larger base type size than a typical site, generous tap targets, and genuinely high contrast. That is an accessibility constraint on the winner, not a seventh direction to vote on.</p></div>
 </section>
 
 <section id="s5">
@@ -361,6 +404,20 @@ footer{margin-top:64px;padding-top:22px;border-top:2px solid var(--ink);
 <div class="note"><p><strong>On cost:</strong> for a club this size every service above has a free or near-free tier except Stripe's per-transaction fee. Expect hosting, database and email to run under $30 a month, against whatever the current cPanel hosting costs.</p></div>
 
 <div class="note"><p><strong>On lock-in:</strong> the content lives in Postgres and the code is a standard Next.js app. If the club ever wants to move hosts, it moves &mdash; no proprietary page builder holding the site hostage, which is exactly how the current site ended up frozen in 2015.</p></div>
+
+<h3>If it runs on Azure instead</h3>
+<p>Nothing above is tied to Vercel &mdash; only the last two rows change. Infrastructure for this option is written and sitting in the repository.</p>
+<div class="tw"><table>
+  <thead><tr><th>Layer</th><th>Azure equivalent</th><th>Note</th></tr></thead>
+  <tbody>
+    <tr><td>App</td><td><strong>App Service B1 Linux</strong>, Node 22</td><td>One core is two to three orders of magnitude more than this traffic needs. B1 is the floor for a different reason: <strong>Always On</strong>. Below Basic, the app unloads after 20 minutes idle, and on a site this quiet nearly every visitor would pay a 10&ndash;30 second cold start.</td></tr>
+    <tr><td>Database</td><td><strong>Postgres Flexible Server</strong>, B1ms burstable</td><td>Same Postgres, same Drizzle schema. New Azure accounts get twelve months of B1ms free.</td></tr>
+    <tr><td>Files</td><td><strong>Azure Blob Storage</strong></td><td>Private containers; member-only documents served through signed URLs.</td></tr>
+    <tr><td>Certificates</td><td><strong>App Service Managed Certificate</strong></td><td>Free and self-renewing &mdash; which is the whole point. Verify apex-domain coverage for <code>3fclub.org</code> early, or plan on <code>www</code> as canonical.</td></tr>
+    <tr><td>CI/CD</td><td><strong>GitHub Actions</strong>, OIDC</td><td>No long-lived publish profile stored in the repository.</td></tr>
+  </tbody>
+</table></div>
+<p><strong>Roughly $32 a month</strong> &mdash; about $12 more than the Vercel path, and still likely at or below what the current cPanel hosting costs. Scale-to-zero options such as Container Apps are the wrong shape here: low traffic means almost every visitor would absorb the cold start.</p>
 </section>
 
 <section id="s6">

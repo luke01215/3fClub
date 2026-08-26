@@ -100,14 +100,14 @@ main{min-width:0;display:flex;flex-direction:column}
   border:1px solid var(--rule);pointer-events:none}
 .mcard::before{content:"";position:absolute;right:-16px;top:-16px;width:118px;height:118px;border-radius:50%;
   border:1px solid var(--rule-soft);pointer-events:none}
-.mcard .top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:26px;position:relative}
+.mcard .top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:26px;position:relative;z-index:1}
 .mcard .crest{width:40px;height:40px;border:1.5px solid var(--brass);border-radius:50%;display:grid;place-items:center;
   font-family:"EB Garamond",serif;font-size:17px;font-weight:600;color:var(--brass)}
 .mcard .status{font-size:10px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
   padding:4px 10px;border-radius:20px;color:var(--ok);background:var(--ok-bg);border:1px solid var(--ok)}
-.mcard .nmx{font-family:"EB Garamond",serif;font-size:27px;font-weight:600;line-height:1.1;margin-bottom:3px;position:relative}
-.mcard .role{font-size:12px;color:var(--ivory-2);margin-bottom:22px;position:relative}
-.mcard .rows{display:flex;gap:26px;flex-wrap:wrap;position:relative}
+.mcard .nmx{font-family:"EB Garamond",serif;font-size:27px;font-weight:600;line-height:1.1;margin-bottom:3px;position:relative;z-index:1}
+.mcard .role{font-size:12px;color:var(--ivory-2);margin-bottom:22px;position:relative;z-index:1}
+.mcard .rows{display:flex;gap:26px;flex-wrap:wrap;position:relative;z-index:1}
 .mcard .rows div dt{margin:0 0 3px}
 .mcard .rows div dd{margin:0;font-family:"EB Garamond",serif;font-size:18px;letter-spacing:.02em}
 

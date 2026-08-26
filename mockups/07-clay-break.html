@@ -1,0 +1,439 @@
+<title>3F Clay Break</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<style>
+/* Direction E - Clay Break. A competition sheet, not a brochure. Committed to
+   a bright single world: scoreboards are printed on white and read at a glance. */
+:root{
+  --paper:#FAFAF7;
+  --paper-2:#EFEEE9;
+  --card:#FFFFFF;
+  --ink:#101114;
+  --ink-2:#4B4E55;
+  --ink-3:#83878E;
+  --line:#DCDBD4;
+  --line-2:#C2C1B8;
+  --clay:#C9451E;
+  --clay-br:#E2542B;
+  --gold:#9C7A16;
+  --gold-bg:#FBF3DC;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Work Sans",-apple-system,"Segoe UI",sans-serif;font-size:16.5px;line-height:1.6;
+  -webkit-font-smoothing:antialiased}
+.shell{max-width:1180px;margin:0 auto;padding:0 26px}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--clay);outline-offset:3px}
+h1,h2,h3,.anton{font-family:"Anton","Work Sans",sans-serif;font-weight:400;text-transform:uppercase;
+  letter-spacing:.005em;line-height:.95}
+.lbl{font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--clay)}
+.lbl.q{color:var(--ink-3)}
+.tab{font-variant-numeric:tabular-nums}
+
+/* header */
+header.top{background:var(--ink);color:var(--paper);position:sticky;top:0;z-index:40}
+header.top .shell{display:flex;align-items:center;gap:18px;padding-top:12px;padding-bottom:12px}
+.brand{display:flex;align-items:center;gap:11px}
+.brand .mk{width:34px;height:34px;flex:none;background:var(--clay-br);display:grid;place-items:center;
+  font-family:"Anton",sans-serif;font-size:15px;color:#fff;border-radius:50%}
+.brand b{font-family:"Anton",sans-serif;font-size:19px;text-transform:uppercase;letter-spacing:.02em;display:block;line-height:1;color:var(--paper)}
+.brand span{font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(250,250,247,.55)}
+nav.n{margin-left:auto;display:none;gap:24px}
+@media(min-width:1000px){nav.n{display:flex}}
+nav.n a{font-size:13px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:rgba(250,250,247,.7);
+  padding:5px 0;border-bottom:2px solid transparent}
+nav.n a:hover{color:#fff;border-bottom-color:var(--clay-br)}
+.hact{margin-left:auto;display:flex;gap:8px}
+@media(min-width:1000px){.hact{margin-left:20px}}
+.btn{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:11px 20px;
+  display:inline-flex;align-items:center;gap:8px;border:2px solid transparent;white-space:nowrap;cursor:pointer}
+.btn-p{background:var(--clay-br);color:#fff;border-color:var(--clay-br)}
+.btn-p:hover{background:var(--clay);border-color:var(--clay)}
+.btn-d{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn-d:hover{background:#000}
+.btn-o{border-color:currentColor}
+.btn-o.lt{color:rgba(250,250,247,.75)}
+.btn-o.lt:hover{color:#fff}
+.btn-o.dk{color:var(--ink)}
+.btn-o.dk:hover{color:var(--clay)}
+.btn-sm{padding:8px 15px;font-size:12px}
+
+/* hero */
+.hero{background:var(--ink);color:var(--paper);position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-90px;top:-90px;width:420px;height:420px;border-radius:50%;
+  border:64px solid rgba(226,84,43,.13);pointer-events:none}
+/* z-index needed: ::after is the last child of .hero, so without it the
+   decorative ring paints on top of the headline instead of behind it. */
+.hero .shell{position:relative;z-index:1;padding-top:66px;padding-bottom:60px}
+.hgrid{display:grid;gap:36px;align-items:end}
+@media(min-width:920px){.hgrid{grid-template-columns:1.25fr .75fr;gap:56px}}
+.hero .lbl{display:block;margin-bottom:16px;color:var(--clay-br)}
+.hero h1{font-size:clamp(46px,9vw,104px);margin:0 0 20px;max-width:12ch}
+.hero h1 em{font-style:normal;color:var(--clay-br)}
+.hero p{font-size:18.5px;color:rgba(250,250,247,.76);max-width:46ch;margin:0 0 28px;line-height:1.55}
+.hero .cta{display:flex;gap:11px;flex-wrap:wrap}
+.headline{border-left:4px solid var(--clay-br);padding:4px 0 4px 20px}
+.headline .n{font-family:"Anton",sans-serif;font-size:clamp(56px,9vw,84px);line-height:.88;color:#fff;
+  font-variant-numeric:tabular-nums;display:block}
+.headline .w{font-size:17px;font-weight:600;color:#fff;display:block;margin-top:6px}
+.headline .s{font-size:14px;color:rgba(250,250,247,.6);display:block;margin-top:2px}
+
+/* meta strip */
+.meta{background:var(--clay-br);color:#fff}
+.meta .shell{display:flex;flex-wrap:wrap;padding:0 26px}
+.meta .c{padding:15px 26px 15px 0;margin-right:26px;border-right:2px solid rgba(255,255,255,.24);
+  display:flex;align-items:baseline;gap:9px}
+.meta .c:last-child{border-right:0;margin-right:0;padding-right:0}
+.meta b{font-family:"Anton",sans-serif;font-size:26px;font-variant-numeric:tabular-nums;line-height:1}
+.meta span{font-size:12.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase}
+
+/* sections */
+section{padding:76px 0}
+.sec-head{display:flex;flex-wrap:wrap;align-items:flex-end;gap:16px 28px;margin-bottom:34px;
+  padding-bottom:16px;border-bottom:3px solid var(--ink)}
+.sec-head .hg{margin-right:auto}
+.sec-head .lbl{display:block;margin-bottom:9px}
+.sec-head h2{font-size:clamp(32px,5.2vw,56px);margin:0;max-width:20ch}
+.sec-head p{margin:0;font-size:16px;color:var(--ink-2);max-width:40ch}
+
+/* leaderboard */
+.board{border:1px solid var(--line);background:var(--card)}
+.bh{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:15px 20px;background:var(--paper-2);
+  border-bottom:1px solid var(--line)}
+.bh h3{margin:0;font-size:21px}
+.bh .ev{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-left:auto}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:600px;font-size:15px}
+th,td{text-align:left;padding:13px 20px;border-bottom:1px solid var(--line)}
+thead th{font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);
+  background:var(--card);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--paper-2)}
+td.pl{font-family:"Anton",sans-serif;font-size:22px;color:var(--line-2);width:56px;line-height:1}
+tr.win td.pl{color:var(--clay-br)}
+tr.win td.nm{font-weight:700}
+td.sc{text-align:right;font-family:"Anton",sans-serif;font-size:22px;font-variant-numeric:tabular-nums;line-height:1}
+td.nm b{display:block;font-weight:600}
+td.nm span{font-size:13.5px;color:var(--ink-3)}
+.badge{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;
+  padding:3px 9px;border:1.5px solid;white-space:nowrap}
+.b-ch{color:var(--clay);border-color:var(--clay)}
+.b-ru{color:var(--ink-2);border-color:var(--line-2)}
+.b-st{color:var(--gold);border-color:var(--gold);background:var(--gold-bg)}
+
+/* class winners */
+.classes{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:22px}
+@media(min-width:560px){.classes{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:960px){.classes{grid-template-columns:repeat(6,1fr)}}
+.cl{background:var(--card);padding:16px 15px;display:flex;flex-direction:column;gap:4px}
+.cl .k{font-family:"Anton",sans-serif;font-size:19px;color:var(--clay-br);line-height:1}
+.cl .v{font-size:14.5px;font-weight:600;line-height:1.3}
+
+/* feature story */
+.story{background:var(--ink);color:var(--paper)}
+.sgrid{display:grid;gap:36px;align-items:center}
+@media(min-width:900px){.sgrid{grid-template-columns:.9fr 1.1fr;gap:56px}}
+.story .lbl{color:var(--clay-br);display:block;margin-bottom:14px}
+.story h2{font-size:clamp(34px,5.4vw,62px);margin:0 0 20px;max-width:14ch}
+.story p{color:rgba(250,250,247,.78);font-size:17.5px;margin:0 0 16px;max-width:52ch;line-height:1.6}
+.story .big{font-family:"Anton",sans-serif;font-size:clamp(90px,17vw,190px);line-height:.82;color:var(--clay-br);
+  font-variant-numeric:tabular-nums}
+.story .cap{font-size:15px;color:rgba(250,250,247,.6);border-top:1px solid rgba(250,250,247,.2);
+  padding-top:14px;margin-top:16px;max-width:34ch}
+
+/* leagues */
+.lg{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+@media(min-width:640px){.lg{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1000px){.lg{grid-template-columns:repeat(4,1fr)}}
+.lgc{background:var(--card);padding:24px 22px;display:flex;flex-direction:column;gap:11px}
+.lgc h3{margin:0;font-size:24px}
+.lgc .wk{font-size:11.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--clay)}
+.lgc p{margin:0;font-size:15px;color:var(--ink-2);line-height:1.5;flex:1}
+.lgc .st{display:flex;align-items:baseline;gap:8px;padding-top:12px;border-top:1px solid var(--line)}
+.lgc .st b{font-family:"Anton",sans-serif;font-size:26px;line-height:1;font-variant-numeric:tabular-nums}
+.lgc .st span{font-size:13px;color:var(--ink-3)}
+
+/* youth */
+.youth{background:var(--paper-2)}
+.ygrid{display:grid;gap:34px;align-items:center}
+@media(min-width:900px){.ygrid{grid-template-columns:1fr 1fr;gap:56px}}
+.ylist{background:var(--card);border:1px solid var(--line)}
+.yr{display:flex;align-items:center;gap:15px;padding:16px 20px;border-bottom:1px solid var(--line)}
+.yr:last-child{border-bottom:0}
+.yr .md{width:34px;height:34px;flex:none;border:2px solid var(--gold);border-radius:50%;display:grid;
+  place-items:center;color:var(--gold);background:var(--gold-bg)}
+.yr .w{flex:1;min-width:0}
+.yr .w b{display:block;font-weight:600;font-size:15.5px}
+.yr .w span{font-size:13.5px;color:var(--ink-2)}
+
+/* join */
+.join{background:var(--clay-br);color:#fff}
+.jgrid{display:grid;gap:28px;align-items:center}
+@media(min-width:880px){.jgrid{grid-template-columns:1fr auto;gap:48px}}
+.join h2{font-size:clamp(34px,5.4vw,60px);margin:12px 0 16px;max-width:15ch}
+.join .lbl{color:#fff;display:block}
+.join p{margin:0;font-size:17.5px;color:rgba(255,255,255,.88);max-width:50ch;line-height:1.55}
+.win{display:inline-flex;flex-wrap:wrap;gap:2px;background:rgba(255,255,255,.3);border:2px solid rgba(255,255,255,.3)}
+.win div{background:var(--clay-br);padding:14px 22px;min-width:124px}
+.win dt{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.72);margin-bottom:4px}
+.win dd{margin:0;font-family:"Anton",sans-serif;font-size:22px;line-height:1;white-space:nowrap}
+
+/* footer */
+footer{background:var(--ink);color:var(--paper);padding:56px 0 26px;font-size:15px}
+.fg{display:grid;gap:34px;padding-bottom:36px;border-bottom:1px solid rgba(250,250,247,.16)}
+@media(min-width:780px){.fg{grid-template-columns:1.5fr 1fr 1fr 1.2fr}}
+.fg h4{margin:0 0 15px;font-family:"Anton",sans-serif;font-size:15px;text-transform:uppercase;
+  letter-spacing:.09em;color:var(--clay-br)}
+.fg ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+.fg a{color:rgba(250,250,247,.72)}
+.fg a:hover{color:#fff}
+.fg p{margin:0 0 10px;color:rgba(250,250,247,.72);line-height:1.55}
+.fh{display:flex;flex-direction:column;gap:6px;font-variant-numeric:tabular-nums}
+.fh div{display:flex;justify-content:space-between;gap:16px;color:rgba(250,250,247,.72);font-size:14.5px}
+.fh b{color:#fff;font-weight:600}
+.fbot{padding-top:22px;display:flex;flex-wrap:wrap;gap:10px 22px;font-size:12px;letter-spacing:.06em;
+  text-transform:uppercase;color:rgba(250,250,247,.45)}
+.fbot .sp{margin-left:auto}
+</style>
+
+<header class="top"><div class="shell">
+  <a class="brand" href="#"><span class="mk">3F</span>
+    <span><b>Fin, Feather &amp; Fur</b><span>Lewiston, New York</span></span></a>
+  <nav class="n" aria-label="Main">
+    <a href="#classic">Summer Classic</a>
+    <a href="#leagues">Leagues</a>
+    <a href="#youth">Youth</a>
+    <a href="#join">Join</a>
+  </nav>
+  <div class="hact">
+    <a class="btn btn-o lt btn-sm" href="#">Sign In</a>
+    <a class="btn btn-p btn-sm" href="#join">Apply</a>
+  </div>
+</div></header>
+
+<div class="hero"><div class="shell">
+  <div class="hgrid">
+    <div>
+      <span class="lbl">14th 3F Summer Classic &middot; July 11&ndash;13</span>
+      <h1>One of New York's <em>top money shoots</em></h1>
+      <p>Fifty-six shooters, three days, ninety-five degrees, and over $3,000 in added money. Two squads drove down from Canada. Nobody left early.</p>
+      <div class="cta">
+        <a class="btn btn-p" href="#classic">Full Results</a>
+        <a class="btn btn-o lt" href="#leagues">League Standings</a>
+      </div>
+    </div>
+    <div class="headline">
+      <span class="n tab">398</span>
+      <span class="w">Charlie Peacock</span>
+      <span class="s">High overall &middot; 3-gun champion, 2025</span>
+    </div>
+  </div>
+</div></div>
+
+<div class="meta"><div class="shell">
+  <div class="c"><b class="tab">56</b><span>Shooters</span></div>
+  <div class="c"><b class="tab">15%</b><span>Up on 2024</span></div>
+  <div class="c"><b class="tab">$3K</b><span>Added money</span></div>
+  <div class="c"><b class="tab">9</b><span>Straight 100s</span></div>
+</div></div>
+
+<section id="classic"><div class="shell">
+  <div class="sec-head">
+    <div class="hg">
+      <span class="lbl">2025 Results</span>
+      <h2>Saturday 12 gauge</h2>
+    </div>
+    <p>Four shooters broke 100 straight before the smoke cleared. Team USA took both top spots.</p>
+  </div>
+
+  <div class="board">
+    <div class="bh"><h3>Championship</h3><span class="ev">100 targets &middot; 12 ga</span></div>
+    <div class="tw"><table>
+      <thead><tr><th>Pl</th><th>Shooter</th><th>Class</th><th>Result</th><th style="text-align:right">Score</th></tr></thead>
+      <tbody>
+        <tr class="win"><td class="pl">1</td><td class="nm"><b>Matt Kelley</b><span>Team USA</span></td><td>AA</td><td><span class="badge b-ch">Champion</span></td><td class="sc tab">100</td></tr>
+        <tr class="win"><td class="pl">2</td><td class="nm"><b>Clay Tietjen</b><span>Team USA</span></td><td>AA</td><td><span class="badge b-ru">Runner-up</span></td><td class="sc tab">100</td></tr>
+        <tr><td class="pl">3</td><td class="nm"><b>Charlie Peacock</b></td><td>AA</td><td><span class="badge b-st">100 straight</span></td><td class="sc tab">100</td></tr>
+        <tr><td class="pl">4</td><td class="nm"><b>Steve Malcolm</b><span>Cambridge, Ontario</span></td><td>AA</td><td><span class="badge b-st">100 straight</span></td><td class="sc tab">100</td></tr>
+        <tr><td class="pl">5</td><td class="nm"><b>Marc Mastriano</b></td><td>A</td><td><span class="badge b-ru">A1</span></td><td class="sc tab">98</td></tr>
+        <tr><td class="pl">6</td><td class="nm"><b>Fritz Ochab</b></td><td>B</td><td><span class="badge b-ru">B1</span></td><td class="sc tab">96</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="classes">
+    <div class="cl"><span class="k">AA1</span><span class="v">Steve Malcolm</span></div>
+    <div class="cl"><span class="k">A1</span><span class="v">Marc Mastriano</span></div>
+    <div class="cl"><span class="k">B1</span><span class="v">Fritz Ochab</span></div>
+    <div class="cl"><span class="k">C1</span><span class="v">Charlie Lombardo</span></div>
+    <div class="cl"><span class="k">D1</span><span class="v">Paul Barnas</span></div>
+    <div class="cl"><span class="k">E1</span><span class="v">Scott Korzenski</span></div>
+  </div>
+
+  <div style="display:grid;gap:22px;margin-top:22px">
+    <div class="board">
+      <div class="bh"><h3>Other events</h3><span class="ev">Doubles &middot; 28 ga &middot; 20 ga</span></div>
+      <div class="tw"><table>
+        <thead><tr><th>Event</th><th>Champion</th><th>Runner-up</th><th style="text-align:right">Score</th></tr></thead>
+        <tbody>
+          <tr><td class="nm"><b>Friday doubles</b></td><td>Clay Tietjen</td><td>Charlie Peacock &mdash; 99</td><td class="sc tab">100</td></tr>
+          <tr><td class="nm"><b>28 gauge</b></td><td>Dave Cooley</td><td>Hugo Sousa &mdash; 99</td><td class="sc tab">100</td></tr>
+          <tr><td class="nm"><b>20 gauge</b></td><td>Charlie Peacock</td><td>Steve Wood</td><td class="sc tab">100</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="story"><div class="shell">
+  <div class="sgrid">
+    <div>
+      <span class="big tab">42</span>
+      <div class="cap">Consecutive years Al Morris has driven down from Cambridge, Ontario for the 3F shoots.</div>
+    </div>
+    <div>
+      <span class="lbl">Worth mentioning</span>
+      <h2>He turns 89 in a couple of weeks</h2>
+      <p>Al Morris has been coming to this shoot for forty-two years. He was still on the line through a ninety-five degree weekend in 2025, still competing, still breaking them.</p>
+      <p>Our hats off to Al. Keep breaking them, and enjoy.</p>
+      <a class="btn btn-o lt" href="#">More from the Classic</a>
+    </div>
+  </div>
+</div></section>
+
+<section id="leagues"><div class="shell">
+  <div class="sec-head">
+    <div class="hg">
+      <span class="lbl">Leagues</span>
+      <h2>Something to shoot every week of the year</h2>
+    </div>
+    <p>Open to every member. Classes mean you shoot against people at your own level, not against the champions.</p>
+  </div>
+  <div class="lg">
+    <div class="lgc">
+      <span class="wk">Dec &ndash; Apr</span>
+      <h3>Winter Skeet</h3>
+      <p>The long one. Twenty weeks through the cold, finishing with an awards banquet in the clubhouse.</p>
+      <span class="st"><b class="tab">20</b><span>weeks</span></span>
+    </div>
+    <div class="lgc">
+      <span class="wk">Jun &ndash; Aug</span>
+      <h3>Summer League</h3>
+      <p>Ten weeks, mixing skeet and trap week to week so nobody gets too comfortable on one discipline.</p>
+      <span class="st"><b class="tab">10</b><span>weeks</span></span>
+    </div>
+    <div class="lgc">
+      <span class="wk">May &ndash; Sep</span>
+      <h3>3-D Archery</h3>
+      <p>Through the pines and hardwoods. Full schedule posted each March, sign-up at the clubhouse.</p>
+      <span class="st"><b class="tab">3D</b><span>course</span></span>
+    </div>
+    <div class="lgc">
+      <span class="wk">Travelling</span>
+      <h3>Genesee County</h3>
+      <p>Our travelling skeet squad took top honors in the Genesee County Traveling Skeet League.</p>
+      <span class="st"><b>1st</b><span>league champions</span></span>
+    </div>
+  </div>
+</div></section>
+
+<section class="youth" id="youth"><div class="shell">
+  <div class="ygrid">
+    <div>
+      <span class="lbl">Youth Club</span>
+      <h2 style="font-size:clamp(32px,5vw,52px);margin:14px 0 20px;max-width:15ch">Distinguished Expert is not a participation award</h2>
+      <p style="color:var(--ink-2);font-size:17px;margin:0 0 16px;max-width:48ch">It means a score of at least 190 out of 200, at fifty feet, ten separate times. Each bullseye is worth ten points. That is a lot of bullseyes.</p>
+      <p style="color:var(--ink-2);font-size:17px;margin:0 0 26px;max-width:48ch">The Youth Club meets Mondays and Thursdays. Instruction is free, and members do the teaching.</p>
+      <a class="btn btn-d" href="#">About the Youth Club</a>
+    </div>
+    <div class="ylist">
+      <div class="yr">
+        <span class="md"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></span>
+        <span class="w"><b>Stella Cooper</b><span>Distinguished Expert &mdash; prone position</span></span>
+      </div>
+      <div class="yr">
+        <span class="md"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></span>
+        <span class="w"><b>Cole Hardy</b><span>Distinguished Expert &mdash; three positions</span></span>
+      </div>
+      <div class="yr">
+        <span class="md"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></span>
+        <span class="w"><b>Trent Hess</b><span>Distinguished Expert &mdash; light rifle</span></span>
+      </div>
+      <div class="yr">
+        <span class="md"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></span>
+        <span class="w"><b>Julian Hardy</b><span>NYS lifetime hunting license &mdash; Youth Day</span></span>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section class="join" id="join"><div class="shell">
+  <div class="jgrid">
+    <div>
+      <span class="lbl">Membership</span>
+      <h2>You can only get in once a year</h2>
+      <p>Applications open August 1 and close September 30. Reviewed in October, decisions by December 1. Two current members should sponsor you &mdash; or send a letter of intent.</p>
+    </div>
+    <dl class="win">
+      <div><dt>Opens</dt><dd>Aug 1</dd></div>
+      <div><dt>Closes</dt><dd>Sep 30</dd></div>
+      <div><dt>Reviewed</dt><dd>Oct</dd></div>
+      <div><dt>Decisions</dt><dd>Dec 1</dd></div>
+    </dl>
+  </div>
+  <div style="display:flex;gap:11px;flex-wrap:wrap;margin-top:28px">
+    <a class="btn btn-d" href="#">Start an Application</a>
+    <a class="btn btn-o" style="color:#fff" href="#">Ask a Question</a>
+  </div>
+</div></section>
+
+<footer><div class="shell">
+  <div class="fg">
+    <div>
+      <h4>Fin, Feather &amp; Fur</h4>
+      <p>Conservation Society, Inc.<br>904 Swann Road<br>Youngstown, New York 14174</p>
+      <p><a href="tel:+17167542293">(716) 754-2293</a><br><a href="mailto:admin@3fclub.org">admin@3fclub.org</a></p>
+    </div>
+    <div>
+      <h4>Compete</h4>
+      <ul>
+        <li><a href="#classic">Summer Classic</a></li>
+        <li><a href="#leagues">Leagues</a></li>
+        <li><a href="#">Standings</a></li>
+        <li><a href="#">Records</a></li>
+        <li><a href="#youth">Youth Club</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Members</h4>
+      <ul>
+        <li><a href="#">Sign In</a></li>
+        <li><a href="#">Range Rules</a></li>
+        <li><a href="#">Key Card</a></li>
+        <li><a href="#">Hunt Sign-In</a></li>
+        <li><a href="#">Documents</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Club Hours</h4>
+      <div class="fh">
+        <div><span>Mon &ndash; Tue</span><b>4 &ndash; 9 pm</b></div>
+        <div><span>Wednesday</span><b>Noon &ndash; 9 pm</b></div>
+        <div><span>Thursday</span><b>4 &ndash; 9 pm</b></div>
+        <div><span>Friday</span><b>4 &ndash; 10 pm</b></div>
+        <div><span>Saturday</span><b>Noon &ndash; 9 pm</b></div>
+        <div><span>Sunday</span><b>Noon &ndash; 8 pm</b></div>
+      </div>
+    </div>
+  </div>
+  <div class="fbot">
+    <span>&copy; 2026 Fin, Feather and Fur Conservation Society, Inc.</span>
+    <span>Results from the 2025 Summer Classic, reported by Dave Sobiegray</span>
+    <span class="sp">Direction E &mdash; Clay Break</span>
+  </div>
+</div></footer>

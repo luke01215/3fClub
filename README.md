@@ -11,16 +11,65 @@ mockups only. There is no application code, database, or running site yet.
 
 ## Contents
 
+### Planning
+
 | File | What it is |
 |---|---|
-| [`mockups/00-brief.html`](mockups/00-brief.html) | Audit of the current site, proposed public/member/admin structure, technology stack, and build sequence |
-| [`mockups/01-heritage-crest.html`](mockups/01-heritage-crest.html) | Public site, Direction A — hunter green, ivory and aged brass |
-| [`mockups/02-field-guide.html`](mockups/02-field-guide.html) | Public site, Direction B — light editorial park-guide |
-| [`mockups/03-range-status.html`](mockups/03-range-status.html) | Public site, Direction C — dark operational status board |
-| [`mockups/04-member-portal.html`](mockups/04-member-portal.html) | Members-only area |
-| [`mockups/05-admin-console.html`](mockups/05-admin-console.html) | Board and committee-chair console |
+| [`mockups/00-brief.html`](mockups/00-brief.html) | Audit of the current site, proposed public/member/admin structure, technology stack, hosting options, and build sequence |
 
-Each file is self-contained — open it in a browser, no build step.
+### Public site directions
+
+| File | Direction | Character |
+|---|---|---|
+| [`01-heritage-crest.html`](mockups/01-heritage-crest.html) | A — Heritage Crest | Hunter green, ivory and aged brass |
+| [`02-field-guide.html`](mockups/02-field-guide.html) | B — Field Guide | Light editorial park-guide on contour lines |
+| [`03-range-status.html`](mockups/03-range-status.html) | C — Range Status | Dark operational board, live open/closed state |
+| [`06-blaze-timber.html`](mockups/06-blaze-timber.html) | D — Blaze & Timber | Generated woodland camo with blaze orange |
+| [`07-clay-break.html`](mockups/07-clay-break.html) | E — Clay Break | Competition scoreboard, Summer Classic results |
+| [`08-still-water.html`](mockups/08-still-water.html) | F — Still Water | Lake blue and warm sand, the family side |
+
+### Private areas
+
+| File | What it is |
+|---|---|
+| [`04-member-portal.html`](mockups/04-member-portal.html) | Members-only area |
+| [`05-admin-console.html`](mockups/05-admin-console.html) | Board and committee-chair console |
+
+### Tests
+
+```bash
+node tests/run.mjs
+```
+
+156 checks across all nine mockups, no dependencies. Covers markup balance, unique
+ids, dead internal links, undefined and unused CSS variables, webfonts that are
+declared but never loaded, accessibility (pinch zoom, focus styles, reduced
+motion, SVG labelling), and canvas rendering — the drawing scripts are executed
+against a stubbed DOM to confirm they size their canvas and actually paint.
+
+It also carries regression tests for four bugs found during review: the grid
+column that let wide tables push the page sideways, the block-level flex strip
+that leaked its background, the `::after` decoration that painted over content,
+and canvases that gave up if layout settled late.
+
+The suite is verified by mutation testing — nine deliberate defects were
+introduced and all nine were caught.
+
+### Hosting
+
+| File | What it is |
+|---|---|
+| [`deploy/README.md`](deploy/README.md) | Azure hosting plan, costs, and first-deployment steps |
+| [`deploy/main.bicep`](deploy/main.bicep) | App Service B1, Postgres Flexible Server, Blob Storage |
+| [`deploy/github-workflow.yml`](deploy/github-workflow.yml) | CI/CD template — **not** yet in `.github/workflows/` |
+
+Each mockup is self-contained — open it in a browser, no build step. The camo,
+contour and water backgrounds are generated on a `<canvas>` from a fixed seed, so
+they look identical on every device without shipping an image.
+
+**The Azure infrastructure has not been deployed or validated** — there was no
+Azure CLI available when it was written. See the warning in
+[`deploy/README.md`](deploy/README.md).
 
 ## About the content in these mockups
 

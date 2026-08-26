@@ -1,0 +1,500 @@
+<title>3F Still Water</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700;800&family=Alegreya:ital,wght@0,400;0,500;1,400&display=swap">
+<style>
+/* Direction F - Still Water. The family and water side of the club, in a palette
+   nobody else here uses. Committed to one calm daylight world. */
+:root{
+  --ground:#F7F5F0;
+  --ground-2:#EDE9E0;
+  --card:#FFFFFF;
+  --ink:#1E2A30;
+  --ink-2:#4C5C64;
+  --ink-3:#7E8C93;
+  --line:#DCD8CE;
+  --line-2:#C4C0B4;
+  --lake:#1B3A4B;
+  --teal:#2E6F7E;
+  --sand:#E8DCC8;
+  --coral:#C2573A;
+  --coral-lt:#F6E7E1;
+  --shadow:0 1px 2px rgba(30,42,48,.05),0 10px 28px -14px rgba(30,42,48,.22);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--ground);color:var(--ink);
+  font-family:"Alegreya",Georgia,serif;font-size:18px;line-height:1.64;-webkit-font-smoothing:antialiased}
+.shell{max-width:1160px;margin:0 auto;padding:0 26px}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:4px}
+h1,h2,h3,h4,.sans{font-family:"Alegreya Sans",-apple-system,"Segoe UI",sans-serif;font-weight:800;letter-spacing:-.015em}
+.lbl{font-family:"Alegreya Sans",sans-serif;font-size:13px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--teal)}
+.lbl.c{color:var(--coral)}
+
+/* header */
+header.top{background:var(--ground);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:40}
+header.top .shell{display:flex;align-items:center;gap:18px;padding-top:14px;padding-bottom:14px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand .mk{width:38px;height:38px;flex:none;border-radius:50%;background:var(--lake);display:grid;place-items:center;
+  font-family:"Alegreya Sans",sans-serif;font-weight:800;font-size:15px;color:var(--sand)}
+.brand b{font-family:"Alegreya Sans",sans-serif;font-weight:800;font-size:19px;display:block;line-height:1.05;letter-spacing:-.02em;color:var(--ink)}
+.brand span{font-family:"Alegreya Sans",sans-serif;font-size:12px;font-weight:500;color:var(--ink-3)}
+nav.n{margin-left:auto;display:none;gap:26px}
+@media(min-width:1020px){nav.n{display:flex}}
+nav.n a{font-family:"Alegreya Sans",sans-serif;font-size:16px;font-weight:700;color:var(--ink-2);
+  padding:4px 0;border-bottom:2px solid transparent}
+nav.n a:hover{color:var(--lake);border-bottom-color:var(--coral)}
+.hact{margin-left:auto;display:flex;gap:9px}
+@media(min-width:1020px){.hact{margin-left:22px}}
+.btn{font-family:"Alegreya Sans",sans-serif;font-size:16px;font-weight:700;padding:11px 22px;border-radius:999px;
+  display:inline-flex;align-items:center;gap:9px;border:2px solid transparent;white-space:nowrap;cursor:pointer}
+.btn-p{background:var(--lake);color:var(--ground)}
+.btn-p:hover{background:var(--teal)}
+.btn-c{background:var(--coral);color:#fff}
+.btn-c:hover{background:#A8462C}
+.btn-s{border-color:var(--line-2);color:var(--ink)}
+.btn-s:hover{border-color:var(--lake);background:rgba(27,58,75,.05)}
+.btn-lt{border-color:rgba(247,245,240,.4);color:var(--ground)}
+.btn-lt:hover{border-color:var(--ground);background:rgba(247,245,240,.1)}
+.btn-sm{padding:8px 16px;font-size:15px}
+
+/* hero */
+.hero{position:relative;overflow:hidden;background:var(--lake);color:var(--ground)}
+#water{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero .shell{position:relative;padding-top:82px;padding-bottom:76px}
+.hgrid{display:grid;gap:38px;align-items:center}
+@media(min-width:940px){.hgrid{grid-template-columns:1.1fr .9fr;gap:58px}}
+.hero .lbl{color:var(--sand);display:block;margin-bottom:16px}
+.hero h1{font-size:clamp(40px,6.6vw,72px);line-height:1.02;margin:0 0 22px;max-width:15ch;text-wrap:balance;color:var(--ground)}
+.hero h1 em{font-family:"Alegreya",serif;font-style:italic;font-weight:400;letter-spacing:0;color:var(--sand)}
+.hero p{font-size:20px;line-height:1.55;color:rgba(247,245,240,.85);max-width:44ch;margin:0 0 30px}
+.hero .cta{display:flex;gap:11px;flex-wrap:wrap}
+.today{background:rgba(247,245,240,.1);border:1px solid rgba(247,245,240,.22);border-radius:14px;padding:24px 26px;
+  backdrop-filter:blur(3px)}
+.today h3{margin:0 0 16px;font-size:19px;color:var(--ground);display:flex;align-items:center;gap:10px}
+.today h3 .dot{width:9px;height:9px;border-radius:50%;background:#7FD0A8;flex:none}
+.today .row{display:flex;justify-content:space-between;gap:16px;padding:10px 0;
+  border-bottom:1px solid rgba(247,245,240,.16);font-size:16.5px}
+.today .row:last-child{border-bottom:0;padding-bottom:0}
+.today .row span{color:rgba(247,245,240,.72)}
+.today .row b{font-family:"Alegreya Sans",sans-serif;font-weight:700;color:var(--ground);white-space:nowrap}
+
+/* welcome band */
+.welcome{background:var(--sand)}
+.welcome .shell{padding-top:34px;padding-bottom:34px;text-align:center}
+.welcome p{margin:0 auto;max-width:56ch;font-size:21px;line-height:1.5;color:var(--lake);font-style:italic}
+.welcome cite{display:block;margin-top:12px;font-family:"Alegreya Sans",sans-serif;font-size:13px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;font-style:normal;color:rgba(27,58,75,.65)}
+
+/* sections */
+section{padding:82px 0}
+.sec-head{text-align:center;margin-bottom:46px}
+.sec-head .lbl{display:block;margin-bottom:14px}
+.sec-head h2{font-size:clamp(32px,4.6vw,48px);line-height:1.08;margin:0 auto 16px;max-width:19ch;text-wrap:balance}
+.sec-head p{margin:0 auto;max-width:54ch;font-size:19px;color:var(--ink-2);line-height:1.55}
+
+/* family cards */
+.fam{display:grid;gap:20px}
+@media(min-width:660px){.fam{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1000px){.fam{grid-template-columns:repeat(3,1fr)}}
+.fc{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;
+  box-shadow:var(--shadow);display:flex;flex-direction:column}
+.fc .top{height:104px;display:grid;place-items:center;position:relative;overflow:hidden}
+.fc .top svg{position:relative;color:rgba(255,255,255,.92)}
+.fc.a .top{background:linear-gradient(140deg,#2E6F7E,#1B3A4B)}
+.fc.b .top{background:linear-gradient(140deg,#C2573A,#8E3A24)}
+.fc.c .top{background:linear-gradient(140deg,#3F7A5E,#1F4A38)}
+.fc.d .top{background:linear-gradient(140deg,#8A6E3A,#5A4620)}
+.fc.e .top{background:linear-gradient(140deg,#4A6E8A,#243F55)}
+.fc.f .top{background:linear-gradient(140deg,#7E5A7A,#432E44)}
+.fc .body{padding:22px 24px 24px;display:flex;flex-direction:column;gap:10px;flex:1}
+.fc h3{margin:0;font-size:24px;line-height:1.1}
+.fc p{margin:0;font-size:17px;color:var(--ink-2);line-height:1.5;flex:1}
+.fc .when{font-family:"Alegreya Sans",sans-serif;font-size:13px;font-weight:700;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--teal);padding-top:10px;border-top:1px solid var(--line)}
+
+/* saturday timeline */
+.sat{background:var(--ground-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.tl{max-width:760px;margin:0 auto;position:relative}
+.tl::before{content:"";position:absolute;left:78px;top:12px;bottom:12px;width:2px;background:var(--line-2)}
+@media(max-width:620px){.tl::before{left:14px}}
+.tp{display:grid;gap:6px 26px;padding:16px 0;position:relative;grid-template-columns:1fr}
+@media(min-width:621px){.tp{grid-template-columns:64px 1fr;padding-left:0}}
+@media(max-width:620px){.tp{padding-left:44px}}
+.tp .tm{font-family:"Alegreya Sans",sans-serif;font-weight:700;font-size:16px;color:var(--lake);
+  text-align:right;font-variant-numeric:tabular-nums}
+@media(max-width:620px){.tp .tm{text-align:left}}
+.tp .ct{position:relative}
+.tp .ct::before{content:"";position:absolute;left:-38px;top:8px;width:12px;height:12px;border-radius:50%;
+  background:var(--ground-2);border:2.5px solid var(--teal)}
+@media(max-width:620px){.tp .ct::before{left:-37px}}
+.tp.hi .ct::before{background:var(--coral);border-color:var(--coral)}
+.tp .ct b{display:block;font-family:"Alegreya Sans",sans-serif;font-weight:700;font-size:19px;line-height:1.2}
+.tp .ct span{font-size:16.5px;color:var(--ink-2)}
+
+/* restaurant + pavilion */
+.two{display:grid;gap:22px}
+@media(min-width:880px){.two{grid-template-columns:1fr 1fr}}
+.big{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);
+  display:flex;flex-direction:column}
+.big .hd{padding:26px 28px 0}
+.big .lbl{display:block;margin-bottom:10px}
+.big h3{margin:0 0 10px;font-size:28px;line-height:1.1}
+.big p{margin:0 0 18px;font-size:17px;color:var(--ink-2);line-height:1.55}
+.big .list{border-top:1px solid var(--line);margin-top:auto}
+.big .li{display:flex;justify-content:space-between;gap:16px;padding:13px 28px;border-bottom:1px solid var(--line);
+  font-size:16.5px}
+.big .li:last-child{border-bottom:0}
+.big .li span{color:var(--ink-2)}
+.big .li b{font-family:"Alegreya Sans",sans-serif;font-weight:700;white-space:nowrap}
+.big .foot{padding:20px 28px 26px}
+.pill{display:inline-flex;align-items:center;gap:7px;font-family:"Alegreya Sans",sans-serif;font-size:13px;
+  font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:5px 12px;border-radius:999px}
+.p-open{color:#1F5C3F;background:#DFF0E5}
+.p-book{color:var(--coral);background:var(--coral-lt)}
+
+/* conservation */
+.cons{background:var(--lake);color:var(--ground)}
+.cgrid{display:grid;gap:38px;align-items:center}
+@media(min-width:900px){.cgrid{grid-template-columns:1.05fr .95fr;gap:58px}}
+.cons .lbl{color:var(--sand);display:block;margin-bottom:14px}
+.cons h2{font-size:clamp(30px,4.4vw,46px);line-height:1.06;margin:0 0 20px;max-width:17ch;color:var(--ground)}
+.cons p{color:rgba(247,245,240,.82);font-size:18px;margin:0 0 16px;max-width:50ch}
+.stats{display:grid;gap:2px;background:rgba(247,245,240,.2);border:1px solid rgba(247,245,240,.2);border-radius:14px;overflow:hidden}
+@media(min-width:520px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--lake);padding:22px 24px}
+.stat b{display:block;font-family:"Alegreya Sans",sans-serif;font-weight:800;font-size:40px;line-height:1;
+  color:var(--sand);font-variant-numeric:tabular-nums;margin-bottom:6px}
+.stat span{font-size:16px;color:rgba(247,245,240,.72);line-height:1.35;display:block}
+
+/* join */
+.join{text-align:center}
+.join .shell{max-width:760px}
+.join h2{font-size:clamp(32px,4.8vw,50px);line-height:1.06;margin:14px 0 18px;text-wrap:balance}
+.join > .shell > p{font-size:19.5px;color:var(--ink-2);margin:0 auto 30px;max-width:50ch;line-height:1.55}
+.steps{display:grid;gap:2px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;
+  margin-bottom:32px;text-align:left}
+@media(min-width:640px){.steps{grid-template-columns:repeat(4,1fr)}}
+.step{background:var(--card);padding:20px 22px}
+.step dt{font-family:"Alegreya Sans",sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+.step dd{margin:0;font-family:"Alegreya Sans",sans-serif;font-weight:800;font-size:21px;line-height:1.1}
+.step.now dd{color:var(--coral)}
+
+/* footer */
+footer{background:var(--ground-2);border-top:1px solid var(--line);padding:58px 0 28px;font-size:16.5px}
+.fg{display:grid;gap:34px;padding-bottom:38px;border-bottom:1px solid var(--line)}
+@media(min-width:780px){.fg{grid-template-columns:1.5fr 1fr 1fr 1.2fr}}
+.fg h4{margin:0 0 15px;font-family:"Alegreya Sans",sans-serif;font-size:13px;font-weight:700;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--teal)}
+.fg ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+.fg a{color:var(--ink-2)}
+.fg a:hover{color:var(--lake)}
+.fg p{margin:0 0 10px;color:var(--ink-2);line-height:1.55}
+.fh{display:flex;flex-direction:column;gap:6px;font-variant-numeric:tabular-nums}
+.fh div{display:flex;justify-content:space-between;gap:16px;color:var(--ink-2);font-size:16px}
+.fh b{font-family:"Alegreya Sans",sans-serif;font-weight:700;color:var(--ink)}
+.fbot{padding-top:22px;display:flex;flex-wrap:wrap;gap:10px 22px;font-family:"Alegreya Sans",sans-serif;
+  font-size:14px;color:var(--ink-3)}
+.fbot .sp{margin-left:auto}
+</style>
+
+<header class="top"><div class="shell">
+  <a class="brand" href="#"><span class="mk">3F</span>
+    <span><b>Fin, Feather &amp; Fur</b><span>Conservation Society &middot; Lewiston, NY</span></span></a>
+  <nav class="n" aria-label="Main">
+    <a href="#family">For Families</a>
+    <a href="#saturday">A Saturday Here</a>
+    <a href="#clubhouse">Clubhouse</a>
+    <a href="#conservation">Conservation</a>
+    <a href="#join">Join</a>
+  </nav>
+  <div class="hact">
+    <a class="btn btn-s btn-sm" href="#">Sign In</a>
+    <a class="btn btn-c btn-sm" href="#join">Apply</a>
+  </div>
+</div></header>
+
+<div class="hero">
+  <canvas id="water" aria-hidden="true"></canvas>
+  <div class="shell">
+    <div class="hgrid">
+      <div>
+        <span class="lbl">Four ponds &middot; 402 acres &middot; Town of Lewiston</span>
+        <h1>Bring the whole family for a <em>total outdoor experience</em></h1>
+        <p>A thirty-two acre lake stocked with bass. A kitchen that opens Wednesday. A pavilion big enough for a wedding. There is more here than the ranges.</p>
+        <div class="cta">
+          <a class="btn btn-c" href="#family">What Families Do Here</a>
+          <a class="btn btn-lt" href="#saturday">A Saturday Here</a>
+        </div>
+      </div>
+      <div class="today">
+        <h3><span class="dot" aria-hidden="true"></span> Open today</h3>
+        <div class="row"><span>Clubhouse &amp; bar</span><b>Noon &ndash; 9 pm</b></div>
+        <div class="row"><span>The Great Foodini</span><b>Wed &ndash; Sun</b></div>
+        <div class="row"><span>Kids Fishing Derby</span><b>Aug 23</b></div>
+        <div class="row"><span>Next general meeting</span><b>Sep 15, 7 pm</b></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="welcome"><div class="shell">
+  <p>&ldquo;Our facility invites you to bring your entire family to enjoy a total outdoor experience.&rdquo;</p>
+  <cite>From the club's own description, and it has been true for a long time</cite>
+</div></div>
+
+<section id="family"><div class="shell">
+  <div class="sec-head">
+    <span class="lbl">For Families</span>
+    <h2>Not everything here involves a firearm</h2>
+    <p>Membership covers the whole household. Plenty of families join for the water, the birds and the Saturday nights, and never pick up a shotgun.</p>
+  </div>
+  <div class="fam">
+    <div class="fc a">
+      <div class="top"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M4 25c4-4 8-4 12 0s8 4 12 0 7-4 8 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M4 31c4-4 8-4 12 0s8 4 12 0 7-4 8 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M26 7c-5.5 0-9.5 3.6-9.5 7.6S21 22 26.5 22 36 18.8 36 14.6 31.5 7 26 7Z" stroke="currentColor" stroke-width="2"/><circle cx="30" cy="13" r="1.4" fill="currentColor"/></svg></div>
+      <div class="body">
+        <h3>Fishing the big pond</h3>
+        <p>Thirty-two acres, stocked with largemouth bass and pan fish. Three smaller ponds besides. Bring a chair and a thermos.</p>
+        <span class="when">Open year round</span>
+      </div>
+    </div>
+    <div class="fc b">
+      <div class="top"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true"><circle cx="20" cy="13" r="5.5" stroke="currentColor" stroke-width="2"/><path d="M8 33c0-5.8 5.4-10 12-10s12 4.2 12 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <div class="body">
+        <h3>Kids Fishing Derby</h3>
+        <p>For the children and grandchildren of members. Prizes, lunch, and the whole lake to themselves for a morning.</p>
+        <span class="when">August 23 &middot; 8 am</span>
+      </div>
+    </div>
+    <div class="fc c">
+      <div class="top"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M8 25c0-6.2 5-11 11-11 5 0 8.8 2.5 10 6.2l5 2.5-5 1.9c-1.2 3.7-5 6.2-10 6.2H8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="24" cy="20" r="1.5" fill="currentColor"/></svg></div>
+      <div class="body">
+        <h3>Bird banding days</h3>
+        <p>Purple martins every summer, plus owls and songbirds. Data recorded, band fitted, bird released &mdash; and you stand right there watching.</p>
+        <span class="when">Spring &amp; summer</span>
+      </div>
+    </div>
+    <div class="fc d">
+      <div class="top"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M4 18 20 7l16 11" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8 18v15h24V18" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8 33h24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <div class="body">
+        <h3>The pavilion</h3>
+        <p>Forty by a hundred feet, next to the clubhouse. Wedding receptions, company picnics, graduation parties, anniversaries.</p>
+        <span class="when">Members may book</span>
+      </div>
+    </div>
+    <div class="fc e">
+      <div class="top"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M12 8v10a8 8 0 0 0 16 0V8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M20 26v6M14 32h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <div class="body">
+        <h3>Saturday night</h3>
+        <p>The bar, the kitchen, a Christmas party, dances, wine and cheese. The social calendar is half the reason people stay members for forty years.</p>
+        <span class="when">Wed &ndash; Sun</span>
+      </div>
+    </div>
+    <div class="fc f">
+      <div class="top"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M6 30c2-8 7-14 14-14s12 6 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M20 16V7M14 11l6-4 6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="body">
+        <h3>Cross-country skiing</h3>
+        <p>When the snow comes, the trails and fields are yours. Four hundred acres and usually nobody else on them.</p>
+        <span class="when">Winter</span>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section class="sat" id="saturday"><div class="shell">
+  <div class="sec-head">
+    <span class="lbl c">A Saturday Here</span>
+    <h2>What a day actually looks like</h2>
+    <p>Nobody does all of this in one day. But any of it is available on an ordinary Saturday in August.</p>
+  </div>
+  <div class="tl">
+    <div class="tp"><span class="tm">7:00</span><span class="ct"><b>The pond, before anyone else</b><span>Bass are on. The mist is still sitting on the water.</span></span></div>
+    <div class="tp"><span class="tm">10:00</span><span class="ct"><b>Youth Club on the line</b><span>Prone position first &mdash; the steadiest, and the hardest to learn properly.</span></span></div>
+    <div class="tp"><span class="tm">Noon</span><span class="ct"><b>Clubhouse and kitchen open</b><span>The Great Foodini starts serving. The bar opens with it.</span></span></div>
+    <div class="tp hi"><span class="tm">1:00</span><span class="ct"><b>Open trap, walk-on</b><span>Fields six and seven. No reservation, no league, just show up.</span></span></div>
+    <div class="tp"><span class="tm">3:00</span><span class="ct"><b>Walk the 3-D archery course</b><span>Through the pines and hardwoods. Targets at 20, 30 and 40 yards.</span></span></div>
+    <div class="tp hi"><span class="tm">6:00</span><span class="ct"><b>Summer skeet league</b><span>Fields one through three. Squads go out, everyone else watches from the shade.</span></span></div>
+    <div class="tp"><span class="tm">8:00</span><span class="ct"><b>Still at the bar</b><span>This is the part the website never manages to explain.</span></span></div>
+  </div>
+</div></section>
+
+<section id="clubhouse"><div class="shell">
+  <div class="sec-head">
+    <span class="lbl">The Clubhouse</span>
+    <h2>A kitchen, a bar, and room for a hundred and forty</h2>
+  </div>
+  <div class="two">
+    <div class="big">
+      <div class="hd">
+        <span class="lbl">Member Restaurant</span>
+        <h3>The Great Foodini</h3>
+        <p>Hosted by Donna and Mike, open Wednesday through Sunday during normal club hours. Members and their guests.</p>
+      </div>
+      <div class="list">
+        <div class="li"><span>Wednesday</span><b>Noon &ndash; 9 pm</b></div>
+        <div class="li"><span>Thursday</span><b>4 &ndash; 9 pm</b></div>
+        <div class="li"><span>Friday</span><b>4 &ndash; 10 pm</b></div>
+        <div class="li"><span>Saturday</span><b>Noon &ndash; 9 pm</b></div>
+        <div class="li"><span>Sunday</span><b>Noon &ndash; 8 pm</b></div>
+      </div>
+      <div class="foot"><span class="pill p-open">Serving today</span></div>
+    </div>
+    <div class="big">
+      <div class="hd">
+        <span class="lbl c">Events</span>
+        <h3>The Pavilion</h3>
+        <p>Forty by one hundred feet, newly built and set beside the clubhouse. Members may book it for private events.</p>
+      </div>
+      <div class="list">
+        <div class="li"><span>Wedding receptions</span><b>Up to 140</b></div>
+        <div class="li"><span>Company picnics</span><b>Available</b></div>
+        <div class="li"><span>Graduations &amp; anniversaries</span><b>Available</b></div>
+        <div class="li"><span>Club events</span><b>Priority</b></div>
+        <div class="li"><span>Next open Saturday</span><b>Sep 19</b></div>
+      </div>
+      <div class="foot"><span class="pill p-book">Request a date</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="cons" id="conservation"><div class="shell">
+  <div class="cgrid">
+    <div>
+      <span class="lbl">Conservation</span>
+      <h2>The society exists to look after the ground it sits on</h2>
+      <p>Members plant pine, wildflower and clover to build habitat. Ponds were dug and are maintained for nesting waterfowl. Birds are caught in mist nets, measured, banded and released for future study.</p>
+      <p>The people doing that work are the same people who fish and hunt here. That is not a coincidence &mdash; it is the whole idea.</p>
+      <a class="btn btn-lt" href="#">More on the conservation work</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>36</b><span>Nesting gourds for purple martins</span></div>
+      <div class="stat"><b>149</b><span>Young banded in the 2017 season</span></div>
+      <div class="stat"><b>921</b><span>Banded across ten seasons</span></div>
+      <div class="stat"><b>4</b><span>Ponds created and maintained</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="join" id="join"><div class="shell">
+  <span class="lbl c">Membership</span>
+  <h2>Applications open once a year</h2>
+  <p>The window runs August 1 through September 30. Two current members should sponsor you &mdash; and if you don't know two yet, a letter of intent works instead.</p>
+  <dl class="steps">
+    <div class="step now"><dt>Apply</dt><dd>Aug 1 &ndash; Sep 30</dd></div>
+    <div class="step"><dt>Sponsors confirm</dt><dd>By email</dd></div>
+    <div class="step"><dt>Board reviews</dt><dd>October</dd></div>
+    <div class="step"><dt>You hear back</dt><dd>By Dec 1</dd></div>
+  </dl>
+  <div style="display:flex;gap:11px;flex-wrap:wrap;justify-content:center">
+    <a class="btn btn-c" href="#">Start an Application</a>
+    <a class="btn btn-s" href="#">Come Visit First</a>
+  </div>
+</div></section>
+
+<footer><div class="shell">
+  <div class="fg">
+    <div>
+      <h4>Fin, Feather &amp; Fur</h4>
+      <p>Conservation Society, Inc.<br>904 Swann Road<br>Youngstown, New York 14174</p>
+      <p><a href="tel:+17167542293">(716) 754-2293</a><br><a href="mailto:admin@3fclub.org">admin@3fclub.org</a></p>
+    </div>
+    <div>
+      <h4>Visit</h4>
+      <ul>
+        <li><a href="#family">For Families</a></li>
+        <li><a href="#clubhouse">Restaurant</a></li>
+        <li><a href="#clubhouse">Pavilion</a></li>
+        <li><a href="#conservation">Conservation</a></li>
+        <li><a href="#">Directions</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Members</h4>
+      <ul>
+        <li><a href="#">Sign In</a></li>
+        <li><a href="#">Range Rules</a></li>
+        <li><a href="#">Book the Pavilion</a></li>
+        <li><a href="#">Hunt Sign-In</a></li>
+        <li><a href="#">Documents</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Club Hours</h4>
+      <div class="fh">
+        <div><span>Mon &ndash; Tue</span><b>4 &ndash; 9 pm</b></div>
+        <div><span>Wednesday</span><b>Noon &ndash; 9 pm</b></div>
+        <div><span>Thursday</span><b>4 &ndash; 9 pm</b></div>
+        <div><span>Friday</span><b>4 &ndash; 10 pm</b></div>
+        <div><span>Saturday</span><b>Noon &ndash; 9 pm</b></div>
+        <div><span>Sunday</span><b>Noon &ndash; 8 pm</b></div>
+      </div>
+    </div>
+  </div>
+  <div class="fbot">
+    <span>&copy; 2026 Fin, Feather and Fur Conservation Society, Inc.</span>
+    <span>Closed major holidays &mdash; please call ahead.</span>
+    <span class="sp">Direction F &mdash; Still Water</span>
+  </div>
+</div></footer>
+
+<script>
+(function(){
+  // Slow water: layered sine bands, drawn once. Suggests the surface of the
+  // big pond without pretending to be a photograph.
+  var c = document.getElementById('water');
+  if(!c) return;
+  var ctx = c.getContext('2d');
+
+  function draw(){
+    var host = c.parentElement || c;
+    var w = Math.round(host.clientWidth || window.innerWidth);
+    var h = Math.round(host.clientHeight);
+    if(!w || !h) return false;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    c.width = w*dpr; c.height = h*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,w,h);
+
+    var bands = 22;
+    for(var i=0;i<bands;i++){
+      var t = i/bands;
+      var y = h*(0.30 + t*0.82);
+      var amp = 5 + t*17;
+      var ph = i*0.85;
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      for(var x=0;x<=w;x+=7){
+        var yy = y
+          + Math.sin(x/168 + ph)*amp
+          + Math.sin(x/61 - ph*1.5)*amp*0.34;
+        ctx.lineTo(x, yy);
+      }
+      ctx.strokeStyle = 'rgba(232,220,200,' + (0.05 + t*0.09).toFixed(3) + ')';
+      ctx.lineWidth = 1 + t*0.7;
+      ctx.stroke();
+    }
+    return true;
+  }
+
+  // Layout can settle late (webfonts, a pane gaining size). Retry on a bounded
+  // schedule rather than giving up after a single frame.
+  var tries = 0;
+  (function boot(){
+    if(draw() || ++tries > 24) return;
+    setTimeout(function(){ requestAnimationFrame(boot); }, 80);
+  })();
+  window.addEventListener('load', draw);
+  if(window.ResizeObserver){
+    var t;
+    new ResizeObserver(function(){ clearTimeout(t); t = setTimeout(draw, 130); })
+      .observe(c.parentElement || c);
+  } else {
+    var t2;
+    window.addEventListener('resize', function(){ clearTimeout(t2); t2 = setTimeout(draw, 150); });
+  }
+})();
+</script>
